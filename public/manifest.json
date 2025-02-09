@@ -1,0 +1,10 @@
+{
+  "name": "Training Journal PWA",
+  "short_name": "TrainingJournalPWA",
+  "display": "standalone",
+  "theme_color": "#8936FF",
+  "background_color": "#2EC6FE",
+  "orientation": "any",
+  "lang": "ru",
+  "start_url": "."
+}
