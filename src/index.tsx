@@ -1,9 +1,7 @@
-import React from 'react';
-import { createRoot } from 'react-dom/client';
+import { createRoot } from "react-dom/client";
 
-import { App } from "./App";
+import { App } from "./app/App";
 
-// Clear the existing HTML content
 document.body.innerHTML = '<div id="app"></div>';
 
 // if ('serviceWorker' in navigator) {
@@ -19,5 +17,5 @@ document.body.innerHTML = '<div id="app"></div>';
 // }
 
 // Render your React component instead
-const root = createRoot(document.getElementById('app') as HTMLElement);
+const root = createRoot(document.getElementById("app") as HTMLElement);
 root.render(<App />);

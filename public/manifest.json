@@ -6,5 +6,12 @@
   "background_color": "#2EC6FE",
   "orientation": "any",
   "lang": "ru",
-  "start_url": "."
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "icon512_r.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
 }
