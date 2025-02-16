@@ -1,3 +1,5 @@
+@use '@styles/mixins';
+
 @font-face {
   font-family: 'SFProText';
   src: url('../assets/fonts/SFProText-Regular.woff2') format('woff2');
@@ -10,4 +12,24 @@
   src: url('../assets/fonts/SFProText-Semibold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'SFProText', Arial, serif;
+  font-size: 16px;
+}
+
+body {
+  margin: 0;
+  @include mixins.container_main;
+}
+
+button {
+  background-color: transparent;
+  border: none;
+  padding: 0;
 }

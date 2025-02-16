@@ -1,0 +1,6 @@
+@use '@styles/colors';
+
+.text {
+  font-weight: 400;
+  color: colors.$text_secondary;
+}

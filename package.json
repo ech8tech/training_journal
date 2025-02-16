@@ -4,8 +4,9 @@
   "description": "Training Journal",
   "scripts": {
     "start": "webpack serve --mode=development --config webpack/webpack.dev.babel.js",
-    "build": "webpack --mode=production --config webpack/webpack.prod.babel.js && cp -R dist /opt/homebrew/var/www",
-    "serve": "npm run build && http-server -c-1 dist",
+    "build": "webpack --mode=production --config webpack/webpack.prod.babel.js",
+    "build:local": "npm run build && cp -R dist /opt/homebrew/var/www",
+    "build:serve": "npm run build && http-server dist",
     "build:stats": "webpack --mode=production --stat=true --config webpack/webpack.prod.babel.js --profile --json > stats.json"
   },
   "private": true,
@@ -19,6 +20,7 @@
     "@babel/preset-typescript": "^7.26.0",
     "@babel/register": "^7.25.9",
     "@eslint/js": "^9.19.0",
+    "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.17.15",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
@@ -55,9 +57,11 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.5"
+    "react-router-dom": "^7.1.5",
+    "src": "^1.1.2"
   }
 }

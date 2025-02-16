@@ -1,0 +1,38 @@
+@use '@styles/fn';
+@use '@styles/colors';
+
+.button {
+  display: flex;
+  align-items: center;
+  font-size: fn.sz(14);
+  height: fn.sz(40);
+  padding: fn.sz(6);
+  border-radius: fn.sz(10);
+
+  &__primary {
+    background-color: colors.$accent_primary;
+
+    div {
+      color: colors.$white;
+    }
+  }
+
+  &__ghost {
+    div {
+      color: colors.$accent_secondary;
+    }
+  }
+
+  &__danger {
+    background-color: colors.$accent_tertiary;
+
+    div {
+      color: colors.$white;
+    }
+  }
+
+  &__full {
+    border-radius: 0;
+    width: 100%;
+  }
+}

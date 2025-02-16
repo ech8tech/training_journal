@@ -1,0 +1,6 @@
+@use "sass:math";
+@use './common';
+
+@function sz($n) {
+  @return math.div($n, common.$base_size) * 1rem;
+}

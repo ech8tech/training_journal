@@ -26,6 +26,16 @@ export default (env, argv) => {
     },
     resolve: {
       extensions: [".tsx", ".ts", ".js", ".scss"],
+      alias: {
+        "@src": `${paths.src}`,
+        "@app": `${paths.src}/app`,
+        "@components": `${paths.src}/components`,
+        "@assets": `${paths.src}/assets`,
+        "@pages": `${paths.src}/pages`,
+        "@styles": `${paths.src}/styles`,
+        "@constants": `${paths.src}/constants`,
+        "@utils": `${paths.src}/utils`,
+      },
     },
     optimization: {
       usedExports: true,
@@ -101,7 +111,11 @@ export default (env, argv) => {
           ],
         },
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          test: /\.svg$/,
+          use: ["@svgr/webpack"],
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif)$/i,
           type: "asset",
         },
         {
