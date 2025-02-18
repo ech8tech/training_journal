@@ -5,7 +5,9 @@
   "scripts": {
     "start": "webpack serve --mode=development --config webpack/webpack.dev.babel.js",
     "build": "webpack --mode=production --config webpack/webpack.prod.babel.js",
-    "serve": "http-server -c-1 dist"
+    "build:local": "npm run build && cp -R dist /opt/homebrew/var/www",
+    "build:serve": "npm run build && http-server dist",
+    "build:stats": "webpack --mode=production --stat=true --config webpack/webpack.prod.babel.js --profile --json > stats.json"
   },
   "private": true,
   "keywords": [],
@@ -18,10 +20,13 @@
     "@babel/preset-typescript": "^7.26.0",
     "@babel/register": "^7.25.9",
     "@eslint/js": "^9.19.0",
+    "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.17.15",
     "@types/react": "^19.0.8",
     "@types/react-dom": "^19.0.3",
     "babel-loader": "^9.2.1",
+    "compression-webpack-plugin": "^11.1.0",
+    "copy-webpack-plugin": "^12.0.2",
     "css-loader": "^7.1.2",
     "eslint": "^9.19.0",
     "eslint-config-prettier": "^10.0.1",
@@ -40,19 +45,23 @@
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
     "style-loader": "^4.0.0",
+    "terser-webpack-plugin": "^5.3.11",
     "ts-loader": "^9.5.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.22.0",
     "webpack": "^5.97.1",
+    "webpack-bundle-analyzer": "^4.10.2",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.0",
     "webpack-merge": "^6.0.1",
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "classnames": "^2.5.1",
     "lodash": "^4.17.21",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.1.5"
+    "react-router-dom": "^7.1.5",
+    "src": "^1.1.2"
   }
 }

@@ -1,0 +1,5 @@
+@use './spacing';
+
+@mixin container_main {
+  padding: spacing.$space_20;
+}

@@ -1,0 +1,31 @@
+@use '@styles/colors';
+@use '@styles/fonts';
+
+.title {
+  font-weight: 600;
+  color: colors.$text_primary;
+
+  &__h1 {
+    @include fonts.font(24);
+  }
+
+  &__h2 {
+    @include fonts.font(22);
+  }
+
+  &__h3 {
+    @include fonts.font(20);
+  }
+
+  &__h4 {
+    @include fonts.font(18);
+  }
+
+  &__h5 {
+    @include fonts.font(16);
+  }
+
+  &__h6 {
+    @include fonts.font(14);
+  }
+}

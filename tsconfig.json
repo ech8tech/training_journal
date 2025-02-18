@@ -1,12 +1,11 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es5",
     "module": "ESNext",
     "lib": ["DOM", "ESNext"],
     "moduleResolution": "Node",
-    "rootDir": "./src",
-    "baseUrl": ".",
+    "baseUrl": "./",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "strict": true,
@@ -15,7 +14,17 @@
     "jsx": "react-jsx",
     "removeComments": true,
     "sourceMap": true,
-    "noEmit": true
+    "noEmit": true,
+    "paths": {
+      "@src/*": ["./src/*"],
+      "@app/*": ["./src/app/*"],
+      "@components/*": ["./src/components/*"],
+      "@assets/*": ["./src/assets/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@styles/*": ["./src/styles/*"],
+      "@constants/*": ["./src/constants/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
   },
   "exclude": ["node_modules"],
   "include": ["src"]

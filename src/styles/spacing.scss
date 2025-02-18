@@ -1,0 +1,13 @@
+@use 'sass:math';
+@use './common';
+
+$space_4: math.div(4 ,common.$base_size) * common.$base_size_rem;
+$space_8: math.div(8 ,common.$base_size) * common.$base_size_rem;
+$space_12: math.div(12, common.$base_size) * common.$base_size_rem;
+$space_16: math.div(16, common.$base_size) * common.$base_size_rem;
+$space_20: math.div(20, common.$base_size) * common.$base_size_rem;
+$space_24: math.div(24, common.$base_size) * common.$base_size_rem;
+$space_28: math.div(28, common.$base_size) * common.$base_size_rem;
+$space_32: math.div(32, common.$base_size) * common.$base_size_rem;
+$space_36: math.div(36, common.$base_size) * common.$base_size_rem;
+$space_40: math.div(40, common.$base_size) * common.$base_size_rem;

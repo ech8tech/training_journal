@@ -1,0 +1,8 @@
+@use 'sass:math';
+
+$base_size: 16;
+$base_size_rem: 1rem;
+
+$base_border_size: math.div(10, $base_size) * $base_size_rem;
+
+$base_transition: .1s ease-in-out;

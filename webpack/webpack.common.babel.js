@@ -1,29 +1,57 @@
+import CopyWebpackPlugin from "copy-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
+import TerserPlugin from "terser-webpack-plugin";
 
-// import WorkBox from "workbox-webpack-plugin";
 import PKG from "../package.json";
 import paths from "./paths.babel";
 
 export default (env, argv) => {
   const isProduction = argv.mode === "production";
+  // const isStats = env.stats;
+  console.log(argv.mode);
 
   return {
     entry: {
       app: paths.src,
     },
     output: {
-      filename: isProduction ? "[name].[contenthash].js" : "[name].bundle.js",
+      filename: isProduction
+        ? "js/[name].[contenthash].js"
+        : "js/[name].bundle.js",
       path: paths.build,
       publicPath: "/",
       clean: true,
     },
     resolve: {
       extensions: [".tsx", ".ts", ".js", ".scss"],
+      alias: {
+        "@src": `${paths.src}`,
+        "@app": `${paths.src}/app`,
+        "@components": `${paths.src}/components`,
+        "@assets": `${paths.src}/assets`,
+        "@pages": `${paths.src}/pages`,
+        "@styles": `${paths.src}/styles`,
+        "@constants": `${paths.src}/constants`,
+        "@utils": `${paths.src}/utils`,
+      },
     },
     optimization: {
       usedExports: true,
+      minimize: true,
+      minimizer: [new TerserPlugin()],
+      splitChunks: {
+        chunks: "all",
+        // Дополнительные параметры для более тонкой настройки:
+        cacheGroups: {
+          vendors: {
+            test: /[\\/]node_modules[\\/]/,
+            name: "vendors",
+            chunks: "all",
+          },
+        },
+      },
     },
     plugins: [
       new HtmlWebpackPlugin({
@@ -38,8 +66,23 @@ export default (env, argv) => {
       }),
       new ForkTsCheckerWebpackPlugin(),
       new MiniCssExtractPlugin({
-        filename: "[name].[contenthash].css",
+        filename: "css/[name].[contenthash].css",
+        chunkFilename: "css/[id].[contenthash].css",
       }),
+      new CopyWebpackPlugin({
+        patterns: [
+          {
+            from: paths.public,
+            to: paths.build,
+            // Игнорируем index.html, чтобы не перезаписывать его плагином HtmlWebpackPlugin
+            globOptions: {
+              ignore: ["**/index.html"],
+            },
+          },
+        ],
+      }),
+      // isStats ? new BundleAnalyzerPlugin() : undefined,
+      // new CompressionPlugin(),
     ],
     module: {
       rules: [
@@ -68,12 +111,19 @@ export default (env, argv) => {
           ],
         },
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
+          test: /\.svg$/,
+          use: ["@svgr/webpack"],
+        },
+        {
+          test: /\.(png|jpg|jpeg|gif)$/i,
           type: "asset",
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/i,
           type: "asset/resource",
+          generator: {
+            filename: "fonts/[hash][ext][query]",
+          },
         },
       ],
     },

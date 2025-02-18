@@ -1,0 +1,65 @@
+@use 'sass:color';
+@use '@styles/fonts';
+@use '@styles/spacing';
+@use '@styles/colors';
+@use '@styles/common';
+
+.button {
+  display: flex;
+  align-items: center;
+  padding: spacing.$space_12;
+  border-radius: common.$base_border_size;
+  transition: common.$base_transition;
+  cursor: pointer;
+
+  // types
+  &__primary {
+    background-color: colors.$accent_primary;
+
+    &:hover,
+    &:active {
+      background-color: color.adjust(colors.$accent_primary, $saturation: -30%);
+    }
+
+    div {
+      color: colors.$white;
+    }
+  }
+
+  &__ghost {
+    div {
+      color: colors.$accent_primary;
+    }
+
+    &:hover,
+    &:active {
+      background-color: colors.$base_foreground;
+    }
+  }
+
+  &__danger {
+    background-color: colors.$accent_danger;
+
+    &:hover,
+    &:active {
+      background-color: color.adjust(colors.$accent_danger, $saturation: -30%);
+    }
+
+    div {
+      color: colors.$white;
+    }
+  }
+
+  // variant
+  &__full {
+    justify-content: center;
+    border-radius: 0;
+    width: 100%;
+  }
+
+  // icon
+  &__icon {
+    display: flex;
+    margin-left: spacing.$space_8;
+  }
+}
