@@ -1,13 +1,8 @@
 import { PropsWithChildren } from "react";
 
-type SizeTypes = "md" | "sm";
+type TextSize = "md" | "sm";
 
 export type TextProps = PropsWithChildren<{
-  size: SizeTypes;
+  size: TextSize;
   className?: string;
 }>;
-
-export enum SizeValues {
-  md = 14,
-  sm = 12,
-}

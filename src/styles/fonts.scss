@@ -1,10 +1,7 @@
 @use 'sass:math';
 @use './common';
 
-$font_12: math.div(12, common.$base_size) * 1rem;
-$font_14: math.div(14, common.$base_size) * 1rem;
-$font_16: math.div(16, common.$base_size) * 1rem;
-$font_18: math.div(18, common.$base_size) * 1rem;
-$font_20: math.div(20, common.$base_size) * 1rem;
-$font_22: math.div(22, common.$base_size) * 1rem;
-$font_24: math.div(24, common.$base_size) * 1rem;
+@mixin font($font_size) {
+  font-size: math.div($font_size, common.$base_size) * common.$base_size_rem;
+  line-height: math.div($font_size + 4, common.$base_size) * common.$base_size_rem;
+}

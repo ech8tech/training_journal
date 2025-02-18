@@ -1,6 +1,15 @@
 @use '@styles/colors';
+@use '@styles/fonts';
 
 .text {
   font-weight: 400;
-  color: colors.$text_secondary;
+  color: colors.$text_primary;
+
+  &__sm {
+    @include fonts.font(12);
+  }
+
+  &__md {
+    @include fonts.font(14);
+  }
 }

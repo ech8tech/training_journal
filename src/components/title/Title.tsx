@@ -1,16 +1,20 @@
-import { BASE_SIZE } from "@constants/spacing";
+import cn from "classnames";
 
 import * as styles from "./Title.scss";
-import { SizeValues, TitleProps } from "./types";
+import { TitleProps } from "./types";
 
 export function Title({ size, children }: TitleProps) {
-  const stylesInline = {
-    fontSize: `${SizeValues[size] / BASE_SIZE}rem`,
-    lineHeight: `${(SizeValues[size] + 4) / BASE_SIZE}rem`,
-  };
-
   return (
-    <div className={styles.title} style={stylesInline}>
+    <div
+      className={cn(styles.title, {
+        [styles.title__h1]: size === "h1",
+        [styles.title__h2]: size === "h2",
+        [styles.title__h3]: size === "h3",
+        [styles.title__h4]: size === "h4",
+        [styles.title__h5]: size === "h5",
+        [styles.title__h6]: size === "h6",
+      })}
+    >
       {children}
     </div>
   );

@@ -1,11 +1,11 @@
-import Icon from "@assets/icons/other/plus.svg";
 import { Button } from "@components/button";
+import { IconPlus } from "@components/icons/IconPlus";
+import { Input } from "@components/input/Input";
 import { Spacing } from "@components/spacing/Spacing";
 import { Text } from "@components/text/Text";
 import { Title } from "@components/title/Title";
 
 export default function Components() {
-  console.log(Icon);
   return (
     <div>
       <Spacing space={24}>
@@ -53,10 +53,17 @@ export default function Components() {
       <Spacing space={16}>
         <Button type="danger">Danger</Button>
       </Spacing>
-      <Spacing space={16}>
-        <Button type="primary" variant="full" icon={<Icon />}>
+      <Spacing space={24}>
+        <Button type="primary" variant="full" icon={<IconPlus />}>
           Full Button
         </Button>
+      </Spacing>
+
+      <Spacing space={24}>
+        <Title size="h1">Input</Title>
+      </Spacing>
+      <Spacing space={16}>
+        <Input />
       </Spacing>
     </div>
   );

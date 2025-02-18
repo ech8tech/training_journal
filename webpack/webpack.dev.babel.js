@@ -7,7 +7,7 @@ export default (env, argv) => {
   return {
     ...config,
     mode: "development",
-    devtool: "inline-source-map",
+    devtool: "source-map",
     devServer: {
       static: paths.public,
       historyApiFallback: true,
