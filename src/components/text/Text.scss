@@ -12,4 +12,12 @@
   &__md {
     @include fonts.font(14);
   }
+
+  &__primary {
+    color: colors.$text_primary;
+  }
+
+  &__secondary {
+    color: colors.$text_secondary;
+  }
 }

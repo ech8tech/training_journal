@@ -10,9 +10,10 @@
   transition: common.$base_transition;
   background-color: colors.$base_background;
   color: colors.$text_primary;
+}
 
-  &__thin {
-    background-color: transparent;
-    border-bottom: 1px solid colors.$accent_primary;
-  }
+.label {
+  display: block;
+  margin-bottom: spacing.$space_4;
+  color: colors.$text_secondary;
 }

@@ -63,7 +63,7 @@ export default function Components() {
         <Title size="h1">Input</Title>
       </Spacing>
       <Spacing space={16}>
-        <Input />
+        <Input label="Label" />
       </Spacing>
     </div>
   );
