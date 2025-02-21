@@ -1,11 +1,18 @@
+import IconBackTop from "@assets/icons/muscles_parts/back_top.svg";
+import IconBiceps from "@assets/icons/muscles_parts/biceps.svg";
+import IconShouldersFront from "@assets/icons/muscles_parts/shoulder_front.svg";
 import { Button } from "@components/button";
 import { IconPlus } from "@components/icons/IconPlus";
 import { Input } from "@components/input/Input";
+import { Select } from "@components/select/Select";
 import { Spacing } from "@components/spacing/Spacing";
 import { Text } from "@components/text/Text";
 import { Title } from "@components/title/Title";
+import { useForm } from "react-hook-form";
 
 export default function Components() {
+  const { register, watch, formState } = useForm();
+  console.log(watch());
   return (
     <div>
       <Spacing space={24}>
@@ -41,6 +48,24 @@ export default function Components() {
         <Text size="sm">Text Sm</Text>
       </Spacing>
 
+      <Spacing space={16}>
+        <Select
+          register={register("input-select")}
+          placeholder="Выберите"
+          label="Область мышц"
+          defaultOptionId={2}
+          options={[
+            {
+              id: 1,
+              name: "Back Top",
+              icon: <IconBackTop />,
+            },
+            { id: 2, name: "Biceps", icon: <IconBiceps /> },
+            { id: 3, name: "Shoulders Front", icon: <IconShouldersFront /> },
+          ]}
+        />
+      </Spacing>
+
       <Spacing space={24}>
         <Title size="h1">Buttons</Title>
       </Spacing>
@@ -63,7 +88,11 @@ export default function Components() {
         <Title size="h1">Input</Title>
       </Spacing>
       <Spacing space={16}>
-        <Input label="Label" />
+        <Input
+          placeholder="Input text"
+          label="Label"
+          register={register("input-field")}
+        />
       </Spacing>
     </div>
   );

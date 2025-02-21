@@ -1,0 +1,68 @@
+@use 'sass:color';
+@use '@styles/fonts';
+@use '@styles/spacing';
+@use '@styles/colors';
+@use '@styles/common';
+
+.container {
+  max-width: 170px;
+}
+
+.label {
+  display: block;
+  color: colors.$text_secondary;
+  margin-bottom: spacing.$space_4;
+}
+
+.select {
+  @include fonts.font(14);
+  padding: spacing.$space_12;
+  border-radius: common.$base_border_size;
+  transition: common.$transition_fast;
+  background-color: colors.$base_background;
+  color: colors.$text_primary;
+  cursor: pointer;
+
+  &:hover {
+    background-color: colors.$base_background_hover;
+  }
+
+  &__opened {
+    border-radius: common.$base_border_size common.$base_border_size 0 0;
+  }
+}
+
+.value {
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+
+  &_icon {
+    transition: common.$transition_slow;
+
+    &__opened {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.options {
+  @include fonts.font(14);
+  position: absolute;
+  overflow: hidden;
+  border-radius: 0 0 common.$base_border_size common.$base_border_size;
+}
+
+.option {
+  display: flex;
+  align-content: center;
+  gap: common.$gap_8;
+  cursor: pointer;
+  background-color: colors.$base_background;
+  transition: common.$transition_fast;
+  padding: spacing.$space_12;
+
+  &:hover {
+    background-color: colors.$base_background_hover;
+  }
+}

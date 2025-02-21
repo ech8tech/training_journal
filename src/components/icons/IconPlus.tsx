@@ -1,14 +1,12 @@
-import { SVGProps } from "react";
+import { TEXT_SECONDARY } from "@constants/colors";
 
-export function IconPlus({
-  width = 18,
-  height = 18,
-  color = "white",
-}: SVGProps<SVGSVGElement>) {
+import { IconProps } from "./types";
+
+export function IconPlus({ size = 18, color = TEXT_SECONDARY }: IconProps) {
   return (
     <svg
-      width={width}
-      height={height}
+      width={size}
+      height={size}
       viewBox="0 0 20 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

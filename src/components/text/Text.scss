@@ -5,19 +5,19 @@
   font-weight: 400;
   color: colors.$text_primary;
 
-  &__sm {
+  &_sm {
     @include fonts.font(12);
   }
 
-  &__md {
+  &_md {
     @include fonts.font(14);
   }
 
-  &__primary {
+  &_primary {
     color: colors.$text_primary;
   }
 
-  &__secondary {
+  &_secondary {
     color: colors.$text_secondary;
   }
 }

@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $text_primary: #012030;
 $text_secondary: #828282;
 
@@ -6,5 +8,5 @@ $accent_danger: #FF004F;
 
 $white: #FFFFFF;
 
-$base_background: #F1F1F1; // dark more
-$base_foreground: #F6F6F6; // dark less
+$base_background: #F6F6F6;
+$base_background_hover: color.adjust($base_background, $lightness: -5%);
