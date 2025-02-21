@@ -56,10 +56,9 @@
     border-radius: 0;
     width: 100%;
   }
+}
 
-  // icon
-  &__icon {
-    display: flex;
-    margin-left: spacing.$space_8;
-  }
+.icon {
+  display: flex;
+  margin-left: spacing.$space_8;
 }

@@ -1,6 +1,7 @@
 import IconBackTop from "@assets/icons/muscles_parts/back_top.svg";
 import IconBiceps from "@assets/icons/muscles_parts/biceps.svg";
 import IconShouldersFront from "@assets/icons/muscles_parts/shoulder_front.svg";
+import { Accordion } from "@components/accordion/Accordion";
 import { Button } from "@components/button";
 import { IconPlus } from "@components/icons/IconPlus";
 import { Input } from "@components/input/Input";
@@ -48,24 +49,6 @@ export default function Components() {
         <Text size="sm">Text Sm</Text>
       </Spacing>
 
-      <Spacing space={16}>
-        <Select
-          register={register("input-select")}
-          placeholder="Выберите"
-          label="Область мышц"
-          defaultOptionId={2}
-          options={[
-            {
-              id: 1,
-              name: "Back Top",
-              icon: <IconBackTop />,
-            },
-            { id: 2, name: "Biceps", icon: <IconBiceps /> },
-            { id: 3, name: "Shoulders Front", icon: <IconShouldersFront /> },
-          ]}
-        />
-      </Spacing>
-
       <Spacing space={24}>
         <Title size="h1">Buttons</Title>
       </Spacing>
@@ -93,6 +76,40 @@ export default function Components() {
           label="Label"
           register={register("input-field")}
         />
+      </Spacing>
+
+      <Spacing space={24}>
+        <Select
+          register={register("input-select")}
+          placeholder="Выберите"
+          label="Область мышц"
+          defaultOptionId={2}
+          options={[
+            {
+              id: 1,
+              name: "Back Top",
+              icon: <IconBackTop />,
+            },
+            { id: 2, name: "Biceps", icon: <IconBiceps /> },
+            { id: 3, name: "Shoulders Front", icon: <IconShouldersFront /> },
+          ]}
+        />
+      </Spacing>
+
+      <Spacing space={24}>
+        <Accordion title="Some text content" icon={<IconBiceps />}>
+          <Text size="sm">
+            Lorem Ipsum is simply dummy text of the printing and typesetting
+            industry. Lorem Ipsum has been the industry standard dummy text ever
+            since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book. It has survived not only
+            five centuries, but also the leap into electronic typesetting,
+            remaining essentially unchanged. It was popularised in the 1960s
+            with the release of Letraset sheets containing Lorem Ipsum passages,
+            and more recently with desktop publishing software like Aldus
+            PageMaker including versions of Lorem Ipsum.
+          </Text>
+        </Accordion>
       </Spacing>
     </div>
   );

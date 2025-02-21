@@ -1,0 +1,28 @@
+@use 'sass:color';
+@use '@styles/common';
+@use '@styles/spacing';
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: common.$gap_12;
+  cursor: pointer;
+}
+
+.title {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+
+  &_icon {
+    transition: common.$transition_slow;
+
+    &__opened {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.content {
+  margin-top: spacing.$space_16;
+}

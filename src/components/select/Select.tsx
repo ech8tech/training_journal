@@ -1,13 +1,13 @@
 import { IconArrow } from "@components/icons/IconArrow";
 import { Text } from "@components/text/Text";
 import { TEXT_PRIMARY } from "@constants/colors";
+import { getSvgElement } from "@utils/elements";
 import cn from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
 import * as styles from "./Select.scss";
 import { Option, SelectProps } from "./types";
-import { getIcon } from "./utils";
 
 export function Select({
   label,
@@ -109,7 +109,7 @@ export function Select({
                   className={styles.option}
                   key={option.id}
                 >
-                  {getIcon(option?.icon)}
+                  {getSvgElement(option?.icon, 20, 20)}
                   <Text size="md">{option.name}</Text>
                 </div>
               ))}

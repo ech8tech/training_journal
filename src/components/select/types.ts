@@ -1,10 +1,10 @@
-import { SVGElementProps } from "@src/types/common";
+import { SVGElement } from "@src/types/common";
 import { UseFormRegisterReturn } from "react-hook-form";
 
 export type Option = {
   id: string | number;
   name: string | number;
-  icon?: SVGElementProps;
+  icon?: SVGElement;
 };
 
 export type SelectProps = {

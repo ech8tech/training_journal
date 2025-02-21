@@ -20,7 +20,7 @@ export function Button({
       })}
     >
       <Text size="md">{children}</Text>
-      {icon && <div className={styles.button__icon}>{icon}</div>}
+      {icon && <div className={styles.icon}>{icon}</div>}
     </button>
   );
 }
