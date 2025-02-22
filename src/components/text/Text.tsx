@@ -18,6 +18,7 @@ export function Text({
         [styles.text_md]: size === "md",
         [styles.text_primary]: type === "primary",
         [styles.text_secondary]: type === "secondary",
+        [styles.text_ghost]: type === "ghost",
       })}
     >
       {children}

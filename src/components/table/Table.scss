@@ -1,0 +1,18 @@
+@use 'sass:math';
+@use '@styles/common';
+@use '@styles/colors';
+
+.container {
+  background-color: colors.$base_background;
+  border-radius: common.$base_border_radius common.$base_border_radius 0 0;
+}
+
+.table {
+  border-spacing: math.div(12, common.$base_size) * common.$base_size_rem;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.button {
+  border-radius: 0 0 common.$base_border_radius common.$base_border_radius;
+}

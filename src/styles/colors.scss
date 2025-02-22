@@ -2,11 +2,11 @@
 
 $text_primary: #012030;
 $text_secondary: #828282;
+$text_ghost: #FFF;
 
 $accent_primary: #13678A;
 $accent_danger: #FF004F;
 
-$white: #FFFFFF;
-
+$base_background_layout: #FFFFFF;
 $base_background: #F6F6F6;
 $base_background_hover: color.adjust($base_background, $lightness: -5%);

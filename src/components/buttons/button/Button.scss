@@ -8,7 +8,7 @@
   display: flex;
   align-items: center;
   padding: spacing.$space_12;
-  border-radius: common.$base_border_size;
+  border-radius: common.$base_border_radius;
   transition: common.$transition_fast;
   cursor: pointer;
 
@@ -21,8 +21,8 @@
       background-color: color.adjust(colors.$accent_primary, $lightness: -10%);
     }
 
-    div {
-      color: colors.$white;
+    &_icon {
+      color: colors.$text_ghost;
     }
   }
 
@@ -35,6 +35,10 @@
     &:active {
       background-color: colors.$base_background_hover;
     }
+
+    &_icon {
+      color: colors.$text_primary;
+    }
   }
 
   &__danger {
@@ -45,8 +49,8 @@
       background-color: color.adjust(colors.$accent_danger, $lightness: -10%);
     }
 
-    div {
-      color: colors.$white;
+    &_icon {
+      color: colors.$text_ghost;
     }
   }
 

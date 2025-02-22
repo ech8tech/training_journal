@@ -16,7 +16,7 @@ export function Accordion({ icon, title, children }: AccordionProps) {
   };
 
   return (
-    <div className={styles.accordion}>
+    <div>
       <div className={styles.header} onClick={handleOpen}>
         {icon && getSvgElement(icon, 28, 28)}
         <div className={styles.title}>

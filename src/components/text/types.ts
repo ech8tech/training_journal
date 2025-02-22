@@ -1,7 +1,7 @@
 import { MouseEvent, PropsWithChildren } from "react";
 
 type TextSize = "md" | "sm";
-type TextType = "primary" | "secondary";
+type TextType = "primary" | "secondary" | "ghost";
 
 export type TextProps = PropsWithChildren<{
   size: TextSize;

@@ -6,7 +6,7 @@
 .input {
   @include fonts.font(14);
   padding: spacing.$space_12;
-  border-radius: common.$base_border_size;
+  border-radius: common.$base_border_radius;
   transition: common.$transition_fast;
   background-color: colors.$base_background;
   color: colors.$text_primary;

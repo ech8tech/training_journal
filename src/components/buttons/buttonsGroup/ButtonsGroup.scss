@@ -1,0 +1,7 @@
+@use "@styles/spacing";
+
+.buttonsGroup {
+  display: flex;
+  align-items: center;
+  gap: spacing.$gap_8;
+}
