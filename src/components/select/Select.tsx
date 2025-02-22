@@ -1,4 +1,4 @@
-import { IconArrow } from "@components/icons/IconArrow";
+import IconArrow from "@assets/icons/other/IconArrow.svg";
 import { Text } from "@components/text/Text";
 import { TEXT_PRIMARY } from "@constants/colors";
 import { getSvgElement } from "@utils/elements";
@@ -24,8 +24,6 @@ export function Select({
   const refSelect = useRef<HTMLDivElement>(null);
   const refOptions = useRef<HTMLDivElement>(null);
   const [coords, setCoords] = useState<Partial<DOMRect>>();
-
-  console.log(selected);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (!(event.target instanceof Node)) return;
@@ -60,10 +58,10 @@ export function Select({
   }, []);
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [handleClickOutside]);
 
@@ -85,6 +83,8 @@ export function Select({
         <div className={styles.value}>
           <div>{selected?.name || placeholder}</div>
           <IconArrow
+            width={18}
+            height={18}
             className={cn(styles.value_icon, {
               [styles.value_icon__opened]: isOpened,
             })}

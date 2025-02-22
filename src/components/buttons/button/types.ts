@@ -8,6 +8,7 @@ export type ButtonConfig = {
   type?: ButtonType;
   className?: string;
   variant?: ButtonVariant;
+  isLoading?: boolean;
   icon?: SVGElement;
   onClick?(): void;
 };

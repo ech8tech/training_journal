@@ -5,6 +5,5 @@ export type ModalProps = {
   title: string;
   content: ReactNode;
   buttonsConfig: ButtonConfig[];
-  isOpened?: boolean;
   onClose?(): void;
 };

@@ -7,11 +7,7 @@ export function ButtonsGroup({ buttonsConfig }: ButtonsGroupProps) {
   return (
     <div className={styles.buttonsGroup}>
       {buttonsConfig.map((button, i) => (
-        <Button
-          key={i}
-          type={i === 0 ? "primary" : "ghost"}
-          text={button.text}
-        />
+        <Button key={i} {...button} type={i === 0 ? "primary" : "ghost"} />
       ))}
     </div>
   );

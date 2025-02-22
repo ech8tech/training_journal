@@ -1,0 +1,7 @@
+@use '@styles/spacing';
+
+.text {
+  display: flex;
+  align-items: center;
+  gap: spacing.$gap_8;
+}

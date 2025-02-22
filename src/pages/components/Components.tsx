@@ -5,8 +5,9 @@ import IconEdit from "@assets/icons/other/IconEdit.svg";
 import IconPlus from "@assets/icons/other/IconPlus.svg";
 import { Accordion } from "@components/accordion/Accordion";
 import { Button } from "@components/buttons";
+import { Field } from "@components/field/Field";
 import { Input } from "@components/input/Input";
-import { useModal } from "@components/modal/utils";
+import { useModal } from "@components/modal/hook";
 import { Select } from "@components/select/Select";
 import { Spacing } from "@components/spacing/Spacing";
 import { Table } from "@components/table/Table";
@@ -16,7 +17,7 @@ import { SPACE_CONTAINER, SPACE_INNER } from "@constants/spacing";
 import { useForm } from "react-hook-form";
 
 export default function Components() {
-  const { register, watch, formState } = useForm();
+  const { register } = useForm();
 
   const { openModal, modal } = useModal();
 
@@ -81,9 +82,9 @@ export default function Components() {
       </Spacing>
       <Spacing space={SPACE_INNER}>
         <Input
-          placeholder="Input text"
-          label="Label"
-          register={register("input-field")}
+          placeholder="Наименование упражнения"
+          label="Наименование"
+          register={register("name_exercise")}
         />
       </Spacing>
 
@@ -101,6 +102,25 @@ export default function Components() {
           buttonConfig={{
             title: "Edit",
             icon: <IconEdit />,
+            onClick: () => {
+              openModal({
+                title: "Редактирование упражнения",
+                content: (
+                  <div>
+                    <Field
+                      label="Наименование"
+                      text="Поднятие гантелей над головой"
+                      icon={<IconBiceps />}
+                    />
+                  </div>
+                ),
+                buttonsConfig: [
+                  {
+                    text: "Создать",
+                  },
+                ],
+              });
+            },
           }}
         />
       </Spacing>

@@ -1,4 +1,4 @@
-import { IconArrow } from "@components/icons/IconArrow";
+import IconArrow from "@assets/icons/other/IconArrow.svg";
 import { Text } from "@components/text/Text";
 import { TEXT_PRIMARY } from "@constants/colors";
 import { getSvgElement } from "@utils/elements";
@@ -22,6 +22,8 @@ export function Accordion({ icon, title, children }: AccordionProps) {
         <div className={styles.title}>
           <Text size="md">{title}</Text>
           <IconArrow
+            width={28}
+            height={28}
             className={cn(styles.title_icon, {
               [styles.title_icon__opened]: isOpened,
             })}

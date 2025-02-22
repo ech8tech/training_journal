@@ -18,13 +18,18 @@
 
 .title {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
 .iconClose {
   color: colors.$text_primary;
   cursor: pointer;
+}
+
+.controls {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .overlay {

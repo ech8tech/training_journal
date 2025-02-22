@@ -41,7 +41,7 @@ export function Table<T>({
         <Button
           className={styles.button}
           type="primary"
-          text="buttonConfig.title"
+          text="Редактировать"
           variant="full"
           icon={buttonConfig.icon}
           onClick={buttonConfig?.onClick}

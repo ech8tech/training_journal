@@ -1,0 +1,12 @@
+@keyframes animateRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  animation: animateRotate .8s infinite ease-in-out;
+}

@@ -18,7 +18,7 @@ export function useModal() {
   const modal =
     modalProps &&
     createPortal(
-      <Modal {...modalProps} isOpened onClose={handleClose} />,
+      <Modal {...modalProps} onClose={handleClose} />,
       document.body,
     );
 
