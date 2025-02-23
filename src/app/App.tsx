@@ -1,5 +1,6 @@
 import "./App.scss";
 
+import { Registration } from "@pages/registration/Registration";
 import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -14,6 +15,7 @@ export function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/exercise" element={<Exercise />} />
         <Route path="/components" element={<Components />} />
+        <Route path="/registration" element={<Registration />} />
       </Routes>
     </BrowserRouter>
   );

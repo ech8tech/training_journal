@@ -1,7 +1,7 @@
 import { SVGElement } from "@src/types/common";
 
-type ButtonType = "primary" | "ghost" | "danger";
-type ButtonVariant = "default" | "full";
+export type ButtonVariant = "default" | "full";
+export type ButtonType = "primary" | "ghost" | "danger";
 
 export type ButtonConfig = {
   text: string;
