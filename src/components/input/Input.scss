@@ -6,13 +6,18 @@
 .input {
   @include fonts.font(14);
   padding: spacing.$space_12;
-  border-radius: common.$base_border_size;
-  transition: common.$base_transition;
+  border-radius: common.$base_border_radius;
+  transition: common.$transition_fast;
   background-color: colors.$base_background;
   color: colors.$text_primary;
 
-  &__thin {
-    background-color: transparent;
-    border-bottom: 1px solid colors.$accent_primary;
+  &:focus,
+  &:hover {
+    background-color: colors.$base_background_hover;
   }
+}
+
+.label {
+  display: block;
+  color: colors.$text_secondary;
 }

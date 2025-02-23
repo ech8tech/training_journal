@@ -24,8 +24,10 @@ html {
 }
 
 body {
-  margin: 0;
+  margin: 0 auto;
   @include mixins.container_main;
+  max-width: 393px;
+  border: 1px solid;
 }
 
 button {

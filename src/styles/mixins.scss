@@ -1,5 +1,9 @@
 @use './spacing';
 
 @mixin container_main {
-  padding: spacing.$space_20;
+  padding: spacing.$space_28;
+}
+
+@mixin container_inner {
+  padding: spacing.$space_24;
 }

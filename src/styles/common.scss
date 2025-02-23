@@ -1,8 +1,11 @@
 @use 'sass:math';
+@use 'sass:color';
+@use './colors';
 
 $base_size: 16;
 $base_size_rem: 1rem;
 
-$base_border_size: math.div(10, $base_size) * $base_size_rem;
+$base_border_radius: math.div(10, $base_size) * $base_size_rem;
 
-$base_transition: .1s ease-in-out;
+$transition_fast: .1s;
+$transition_slow: .3s;

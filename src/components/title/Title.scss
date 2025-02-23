@@ -5,27 +5,27 @@
   font-weight: 600;
   color: colors.$text_primary;
 
-  &__h1 {
+  &_h1 {
     @include fonts.font(24);
   }
 
-  &__h2 {
+  &_h2 {
     @include fonts.font(22);
   }
 
-  &__h3 {
+  &_h3 {
     @include fonts.font(20);
   }
 
-  &__h4 {
+  &_h4 {
     @include fonts.font(18);
   }
 
-  &__h5 {
+  &_h5 {
     @include fonts.font(16);
   }
 
-  &__h6 {
+  &_h6 {
     @include fonts.font(14);
   }
 }
