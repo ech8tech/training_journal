@@ -1,3 +1,4 @@
+import { getConfigClass } from "@components/buttons/button/utils";
 import { Spinner } from "@components/spinner/Spinner";
 import { Text } from "@components/text/Text";
 import { getSvgElement } from "@utils/elements";
@@ -15,45 +16,24 @@ export function Button({
   isLoading,
   onClick,
 }: ButtonProps) {
+  const configClass = getConfigClass(type, variant);
+  const textIsGhost = type === "primary" || type === "danger";
+
   return (
     <button
       onClick={onClick}
-      className={cn(className, styles.button, {
-        [styles.button__primary]: type === "primary",
-        [styles.button__ghost]: type === "ghost",
-        [styles.button__danger]: type === "danger",
-        [styles.button__full]: variant === "full",
-      })}
+      className={cn(className, styles.button, configClass.button)}
     >
       {isLoading ? (
-        <Spinner
-          className={cn({
-            [styles.button__primary_icon]: type === "primary",
-            [styles.button__danger_icon]: type === "danger",
-            [styles.button__ghost_icon]: type === "ghost",
-          })}
-          size={18}
-        />
+        <Spinner className={configClass.spinner} size={18} />
       ) : (
         <>
-          <Text
-            type={type === "primary" || type === "danger" ? "ghost" : "primary"}
-            size="md"
-          >
+          <Text type={textIsGhost ? "ghost" : "primary"} size="md">
             {text}
           </Text>
           {icon && (
             <div className={styles.icon}>
-              {getSvgElement(
-                icon,
-                18,
-                18,
-                cn({
-                  [styles.button__primary_icon]: type === "primary",
-                  [styles.button__danger_icon]: type === "danger",
-                  [styles.button__ghost_icon]: type === "ghost",
-                }),
-              )}
+              {getSvgElement(icon, 18, 18, configClass.icon)}
             </div>
           )}
         </>

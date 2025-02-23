@@ -8,6 +8,7 @@ import { Button } from "@components/buttons";
 import { Field } from "@components/field/Field";
 import { Input } from "@components/input/Input";
 import { useModal } from "@components/modal/hook";
+import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select/Select";
 import { Spacing } from "@components/spacing/Spacing";
 import { Table } from "@components/table/Table";
@@ -22,11 +23,7 @@ export default function Components() {
   const { openModal, modal } = useModal();
 
   return (
-    <div>
-      <Spacing space={SPACE_CONTAINER}>
-        <Title size="h1">COMPONENTS</Title>
-      </Spacing>
-
+    <PageLayout title="Components">
       <Spacing space={SPACE_INNER}>
         <Title size="h1">Typography</Title>
       </Spacing>
@@ -189,6 +186,6 @@ export default function Components() {
         />
         {modal}
       </Spacing>
-    </div>
+    </PageLayout>
   );
 }
