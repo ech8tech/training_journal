@@ -11,8 +11,8 @@ export function PageLayout({ title, buttonConfig, children }: PageLayoutProps) {
     <div className={styles.pageLayout}>
       <Spacing space={SPACE_CONTAINER}>
         <Title size="h1">{title}</Title>
-        {children}
       </Spacing>
+      {children}
       {buttonConfig && (
         <Button
           className={styles.button}

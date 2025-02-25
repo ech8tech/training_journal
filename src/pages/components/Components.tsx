@@ -6,7 +6,7 @@ import IconPlus from "@assets/icons/other/IconPlus.svg";
 import { Accordion } from "@components/accordion/Accordion";
 import { Button } from "@components/buttons";
 import { Field } from "@components/field/Field";
-import { Input } from "@components/input/Input";
+import { InputText } from "@components/inputs";
 import { useModal } from "@components/modal/hook";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select/Select";
@@ -78,10 +78,11 @@ export default function Components() {
         <Title size="h1">Input</Title>
       </Spacing>
       <Spacing space={SPACE_INNER}>
-        <Input
+        <InputText
+          onChange={() => {}}
           placeholder="Наименование упражнения"
           label="Наименование"
-          register={register("name_exercise")}
+          name={register("name_exercise").name}
         />
       </Spacing>
 
@@ -169,9 +170,10 @@ export default function Components() {
               title: "Создание упражнения",
               content: (
                 <div>
-                  <Input
+                  <InputText
+                    onChange={() => {}}
                     label="Наименование"
-                    register={register("exercise_name")}
+                    name={register("exercise_name").name}
                     placeholder="Наименование упражнения"
                   />
                 </div>

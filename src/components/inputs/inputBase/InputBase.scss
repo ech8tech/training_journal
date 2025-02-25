@@ -10,6 +10,7 @@
   transition: common.$transition_fast;
   background-color: colors.$base_background;
   color: colors.$text_primary;
+  width: 100%;
 
   &:focus,
   &:hover {
