@@ -10,6 +10,5 @@ export type InputCommonProps = {
 export type InputBaseProps = InputCommonProps & {
   displayValue: string;
   inputMode?: HTMLAttributes<HTMLInputElement>["inputMode"];
-  type?: string;
   onChange(e: ChangeEvent<HTMLInputElement>): void;
 };

@@ -4,6 +4,9 @@
 @use '@styles/colors';
 @use '@styles/common';
 
+.container {
+}
+
 .label {
   display: block;
   color: colors.$text_secondary;
@@ -15,12 +18,12 @@
   padding: spacing.$space_12;
   border-radius: common.$base_border_radius;
   transition: common.$transition_fast;
-  background-color: colors.$background_layout;
+  background-color: colors.$base_background;
   color: colors.$text_primary;
   cursor: pointer;
 
   &:hover {
-    background-color: colors.$background_layout_action;
+    background-color: colors.$base_background_hover;
   }
 
   &__opened {
@@ -34,7 +37,6 @@
   justify-content: space-between;
 
   &_icon {
-    color: colors.$text_primary;
     transition: common.$transition_slow;
 
     &__opened {
@@ -60,10 +62,6 @@
   padding: spacing.$space_12;
 
   &:hover {
-    background-color: colors.$background_layout_action;
-  }
-
-  &__selected {
-    background-color: colors.$background_layout_action;
+    background-color: colors.$base_background_hover;
   }
 }

@@ -18,7 +18,7 @@ import { SPACE_CONTAINER, SPACE_INNER } from "@constants/spacing";
 import { useForm } from "react-hook-form";
 
 export default function Components() {
-  const { register, control } = useForm();
+  const { register } = useForm();
 
   const { openModal, modal } = useModal();
 
@@ -69,7 +69,7 @@ export default function Components() {
         <Button
           type="primary"
           text="Full Button"
-          variant="wide"
+          variant="full"
           icon={<IconPlus />}
         />
       </Spacing>
@@ -83,14 +83,6 @@ export default function Components() {
           placeholder="Наименование упражнения"
           label="Наименование"
           name={register("name_exercise").name}
-        />
-      </Spacing>
-      <Spacing space={SPACE_INNER}>
-        <InputText
-          onChange={() => {}}
-          placeholder="Календарь"
-          label="Выберите дату"
-          name={register("date").name}
         />
       </Spacing>
 
@@ -133,21 +125,19 @@ export default function Components() {
 
       <Spacing space={SPACE_CONTAINER}>
         <Select
-          onChange={() => {}}
-          control={control}
-          name={register("input-select").name}
+          register={register("input-select")}
           placeholder="Выберите"
           label="Область мышц"
-          defaultOptionId={"2"}
+          defaultOptionId={2}
           options={[
             {
-              id: "1",
+              id: 1,
               name: "Поясница",
               icon: <IconBackTop />,
             },
-            { id: "2", name: "Бицепс", icon: <IconBiceps /> },
+            { id: 2, name: "Бицепс", icon: <IconBiceps /> },
             {
-              id: "3",
+              id: 3,
               name: "Передние и средние дельты",
               icon: <IconShouldersFront />,
             },

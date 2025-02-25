@@ -7,7 +7,9 @@
 }
 
 .button {
-  position: sticky;
-  left: 0;
+  position: fixed;
   bottom: 0;
+  width: 393px;
+  left: 50%;
+  transform: translateX(-50%);
 }

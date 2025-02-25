@@ -1,35 +1,21 @@
-import {
-  InputNumber,
-  InputPassword,
-  InputTel,
-  InputText,
-} from "@components/inputs";
+import { InputNumber } from "@components/inputs/inputNumber/InputNumber";
+import { InputText } from "@components/inputs/inputText/InputText";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
 import { SPACE_CONTAINER } from "@constants/spacing";
+import { optionsSex } from "@pages/registration/consts";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
-import { optionsSex } from "./consts";
 import * as styles from "./Registration.scss";
-import { RegistrationFormProps } from "./types";
 
-export default function Registration() {
-  const navigate = useNavigate();
-
+export function Registration() {
   const handleRegistration = () => {
-    navigate("/authentication");
+    console.log("registration clicked");
   };
 
-  const { control, register, watch, getValues, setValue } =
-    useForm<RegistrationFormProps>({
-      defaultValues: {
-        sex: "male",
-      },
-    });
-
-  const { sex } = getValues();
+  const { register, watch, setValue } = useForm();
+  console.log(watch());
 
   return (
     <PageLayout
@@ -48,15 +34,15 @@ export default function Registration() {
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
-        <InputTel
-          name={register("tel").name}
+        <InputText
+          name={register("phone").name}
           label="Ваш телефон"
           placeholder="Введите телефон"
           onChange={(value) => setValue("tel", value)}
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
-        <InputPassword
+        <InputText
           name={register("password").name}
           label="Ваш пароль"
           placeholder="Введите пароль"
@@ -68,32 +54,28 @@ export default function Registration() {
         <InputNumber
           name={register("age").name}
           label="Возраст"
-          placeholder="напр. 27"
+          placeholder="Ваш возраст"
           onChange={(value) => setValue("age", value)}
         />
         <InputNumber
           name={register("weight").name}
           label="Вес"
-          placeholder="напр. 75"
+          placeholder="Ваш вес"
           onChange={(value) => setValue("weight", value)}
         />
         <InputNumber
           name={register("height").name}
           label="Рост"
-          placeholder="напр. 173"
+          placeholder="Ваш рост"
           onChange={(value) => setValue("height", value)}
         />
       </Spacing>
 
       <Spacing>
         <Select
-          label="Ваш пол"
-          placeholder="Ваш пол"
-          name={register("sex").name}
-          control={control}
-          onChange={(option) => setValue("sex", option.id)}
+          register={register("sex")}
           options={optionsSex}
-          defaultOptionId={sex}
+          placeholder="Ваш пол"
         />
       </Spacing>
     </PageLayout>
