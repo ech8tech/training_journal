@@ -5,13 +5,14 @@ import * as styles from "./InputBase.scss";
 import { InputBaseProps } from "./types";
 
 export function InputBase({
-  displayValue,
-  className,
-  placeholder,
-  inputMode,
-  label,
-  onChange,
   name,
+  label,
+  placeholder,
+  className,
+  displayValue,
+  inputMode,
+  type,
+  onChange,
 }: InputBaseProps) {
   return (
     <div className={className}>
@@ -31,6 +32,8 @@ export function InputBase({
         placeholder={placeholder}
         inputMode={inputMode}
         className={styles.input}
+        type={type}
+        autoComplete={type === "password" ? "new-password" : "off"}
       />
     </div>
   );
