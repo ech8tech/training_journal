@@ -71,6 +71,51 @@ export function Registration() {
         />
       </Spacing>
 
+      <Spacing space={SPACE_CONTAINER}>
+        <InputText
+          name={register("password").name}
+          label="Ваш пароль"
+          placeholder="Введите пароль"
+          onChange={(value) => setValue("password", value)}
+        />
+      </Spacing>
+
+      <Spacing space={SPACE_CONTAINER}>
+        <InputText
+          name={register("password").name}
+          label="Ваш пароль"
+          placeholder="Введите пароль"
+          onChange={(value) => setValue("password", value)}
+        />
+      </Spacing>
+
+      <Spacing space={SPACE_CONTAINER}>
+        <InputText
+          name={register("password").name}
+          label="Ваш пароль"
+          placeholder="Введите пароль"
+          onChange={(value) => setValue("password", value)}
+        />
+      </Spacing>
+
+      <Spacing space={SPACE_CONTAINER}>
+        <InputText
+          name={register("password").name}
+          label="Ваш пароль"
+          placeholder="Введите пароль"
+          onChange={(value) => setValue("password", value)}
+        />
+      </Spacing>
+
+      <Spacing space={SPACE_CONTAINER}>
+        <InputText
+          name={register("password").name}
+          label="Ваш пароль"
+          placeholder="Введите пароль"
+          onChange={(value) => setValue("password", value)}
+        />
+      </Spacing>
+
       <Spacing>
         <Select
           register={register("sex")}

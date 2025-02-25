@@ -8,11 +8,13 @@ import { PageLayoutProps } from "./types";
 
 export function PageLayout({ title, buttonConfig, children }: PageLayoutProps) {
   return (
-    <div className={styles.pageLayout}>
-      <Spacing space={SPACE_CONTAINER}>
-        <Title size="h1">{title}</Title>
-      </Spacing>
-      {children}
+    <>
+      <div className={styles.pageLayout}>
+        <Spacing space={SPACE_CONTAINER}>
+          <Title size="h1">{title}</Title>
+        </Spacing>
+        {children}
+      </div>
       {buttonConfig && (
         <Button
           className={styles.button}
@@ -21,6 +23,6 @@ export function PageLayout({ title, buttonConfig, children }: PageLayoutProps) {
           {...buttonConfig}
         />
       )}
-    </div>
+    </>
   );
 }
