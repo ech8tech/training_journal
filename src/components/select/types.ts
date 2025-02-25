@@ -1,17 +1,19 @@
 import { SVGElement } from "@src/types/common";
-import { UseFormRegisterReturn } from "react-hook-form";
+import { Control, FieldValues, Path } from "react-hook-form";
 
 export type Option = {
-  id: string | number;
+  id: string;
   name: string | number;
   icon?: SVGElement;
 };
 
-export type SelectProps = {
-  register: UseFormRegisterReturn;
+export type SelectProps<T extends FieldValues> = {
+  name: Path<T>;
   options: Option[];
+  control: Control<T>;
   placeholder: string;
   className?: string;
-  defaultOptionId?: string | number;
+  defaultOptionId?: string;
   label?: string;
+  onChange(option: Option): void;
 };

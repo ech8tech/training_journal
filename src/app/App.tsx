@@ -1,6 +1,6 @@
 import "./App.scss";
 
-import { Registration } from "@pages/registration/Registration";
+import { Registration } from "@pages/registration";
 import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 

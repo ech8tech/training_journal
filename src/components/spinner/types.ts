@@ -1,4 +1,5 @@
-export type SpinnerType = {
-  size?: number;
+export type SpinnerProps = {
   className?: string;
+  size?: number;
+  isFullPage?: boolean;
 };

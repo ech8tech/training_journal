@@ -64,4 +64,8 @@
   &:hover {
     background-color: colors.$base_background_hover;
   }
+
+  &__selected {
+    background-color: colors.$base_background_hover;
+  }
 }
