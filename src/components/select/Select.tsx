@@ -75,7 +75,7 @@ export function Select<T extends FieldValues>({
       control={control}
       render={({ field }) => {
         return (
-          <div className={cn(styles.container, className)}>
+          <div className={className}>
             {label && (
               <Text size="sm" type="secondary">
                 <label className={styles.label}>{label}</label>

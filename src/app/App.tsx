@@ -4,9 +4,17 @@ import { Registration } from "@pages/registration";
 import { lazy } from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-const Dashboard = lazy(() => import("@pages/dashboard/Dashboard"));
-const Exercise = lazy(() => import("@pages/exercise/Exercise"));
-const Components = lazy(() => import("@pages/components/Components"));
+const Dashboard = lazy(
+  () =>
+    import(/* webpackChunkName: "Dashboard" */ "@pages/dashboard/Dashboard"),
+);
+const Exercise = lazy(
+  () => import(/* webpackChunkName: "Exercise" */ "@pages/exercise/Exercise"),
+);
+const Components = lazy(
+  () =>
+    import(/* webpackChunkName: "Components" */ "@pages/components/Components"),
+);
 
 export function App() {
   return (

@@ -3,13 +3,14 @@ import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 import TerserPlugin from "terser-webpack-plugin";
+import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
 
 import PKG from "../package.json";
 import paths from "./paths.babel";
 
 export default (env, argv) => {
   const isProduction = argv.mode === "production";
-  // const isStats = env.stats;
+  const isStats = argv.stats;
   console.log(argv.mode);
 
   return {
@@ -18,6 +19,9 @@ export default (env, argv) => {
     },
     output: {
       filename: isProduction
+        ? "js/[name].[contenthash].js"
+        : "js/[name].bundle.js",
+      chunkFilename: isProduction
         ? "js/[name].[contenthash].js"
         : "js/[name].bundle.js",
       path: paths.build,
@@ -43,12 +47,18 @@ export default (env, argv) => {
       minimizer: [new TerserPlugin()],
       splitChunks: {
         chunks: "all",
-        // Дополнительные параметры для более тонкой настройки:
         cacheGroups: {
+          react: {
+            test: /[\\/]node_modules[\\/](react|react-dom)[\\/]/,
+            name: "react-vendor",
+            chunks: "all",
+            priority: 20,
+          },
           vendors: {
             test: /[\\/]node_modules[\\/]/,
             name: "vendors",
             chunks: "all",
+            priority: 10,
           },
         },
       },
@@ -81,7 +91,7 @@ export default (env, argv) => {
           },
         ],
       }),
-      // isStats ? new BundleAnalyzerPlugin() : undefined,
+      isStats ? new BundleAnalyzerPlugin() : undefined,
       // new CompressionPlugin(),
     ],
     module: {
