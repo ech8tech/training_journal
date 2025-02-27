@@ -13,7 +13,6 @@ export default (env, argv) => {
       historyApiFallback: true,
       hot: true,
       port: 9000,
-      open: true,
       client: {
         overlay: false,
       },
