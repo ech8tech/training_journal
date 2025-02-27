@@ -1,7 +1,7 @@
 import { Spinner } from "@components/spinner/Spinner";
 import React, { Suspense } from "react";
 
-export const RegistrationComponent = React.lazy(
+const RegistrationComponent = React.lazy(
   () => import(/* webpackChunkName: "Registration" */ "./Registration"),
 );
 
