@@ -9,7 +9,7 @@ export default (env, argv) => {
     mode: "development",
     devtool: "source-map",
     devServer: {
-      static: paths.build,
+      static: paths.public,
       historyApiFallback: true,
       hot: true,
       port: 9000,
