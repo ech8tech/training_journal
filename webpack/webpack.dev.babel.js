@@ -1,4 +1,4 @@
-import paths from "./paths.babel";
+import paths from "./config/paths.babel";
 import common from "./webpack.common.babel.js";
 
 export default (env, argv) => {
@@ -9,7 +9,7 @@ export default (env, argv) => {
     mode: "development",
     devtool: "source-map",
     devServer: {
-      static: paths.build,
+      static: paths.public,
       historyApiFallback: true,
       hot: true,
       port: 9000,
