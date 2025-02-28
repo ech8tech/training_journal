@@ -1,3 +1,5 @@
+@use '@styles/colors';
+
 @font-face {
   font-family: 'SFProText';
   src: url('../assets/fonts/SFProText-Regular.woff2') format('woff2');
@@ -19,6 +21,7 @@
 html {
   font-family: 'SFProText', Arial, serif;
   font-size: 16px;
+  background-color: colors.$base_background_layout;
 }
 
 body {
