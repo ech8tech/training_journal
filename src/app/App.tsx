@@ -3,7 +3,7 @@ import "./App.scss";
 import { Authentication } from "@pages/authentication";
 import { Registration } from "@pages/registration";
 import { lazy } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 const Dashboard = lazy(
   () =>
@@ -26,6 +26,7 @@ export function App() {
         <Route path="/components" element={<Components />} />
         <Route path="/registration" element={<Registration />} />
         <Route path="/authentication" element={<Authentication />} />
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </BrowserRouter>
   );

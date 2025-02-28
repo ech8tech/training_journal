@@ -5,8 +5,8 @@
   "scripts": {
     "start": "webpack serve --mode=development --config webpack/webpack.dev.babel.js",
     "build": "webpack --mode=production --config webpack/webpack.prod.babel.js",
-    "build:local": "npm run build && cp -R dist /opt/homebrew/var/www",
-    "build:serve": "npm run build && http-server dist",
+    "build:local": "npm run build && cp -R build /opt/homebrew/var/www",
+    "build:serve": "npm run build && http-server build",
     "build:stats": "webpack --mode=production --stats=true --config webpack/webpack.prod.babel.js"
   },
   "private": true,
