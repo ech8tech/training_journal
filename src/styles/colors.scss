@@ -1,17 +1,12 @@
 @use "sass:color";
 
-$text_primary: #fff;
+$text_primary: #012030;
 $text_secondary: #828282;
+$text_ghost: #FFF;
 
-$primary: #13678A;
-$primary_active: #177AA3;
-$primary_contrast: #FF8B00;
-$danger: #FF4858;
-$danger_active: #DB414E;
-$ghost: transparent;
-$ghost_active: #EDEDED;
+$accent_primary: #13678A;
+$accent_danger: #FF004F;
 
-$base_background: #012030;
-$base_foreground: #043751;
-$background_layout: #032739;
-$background_layout_action: #032E44;
+$base_background_layout: #032739;
+$base_background: #032739;
+$base_background_hover: color.adjust($base_background, $lightness: -5%);

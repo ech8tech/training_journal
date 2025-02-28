@@ -85,6 +85,14 @@ export default function Components() {
           name={register("name_exercise").name}
         />
       </Spacing>
+      <Spacing space={SPACE_INNER}>
+        <InputText
+          onChange={() => {}}
+          placeholder="Календарь"
+          label="Выберите дату"
+          name={register("date").name}
+        />
+      </Spacing>
 
       <Spacing space={SPACE_CONTAINER}>
         <Table
