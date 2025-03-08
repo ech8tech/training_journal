@@ -3,7 +3,6 @@
 
 .text {
   font-weight: 400;
-  color: colors.$text_primary;
 
   &_sm {
     @include fonts.font(12);
@@ -22,6 +21,6 @@
   }
 
   &_ghost {
-    color: colors.$text_ghost;
+    color: colors.$text_primary;
   }
 }

@@ -7,33 +7,26 @@
 .button {
   display: flex;
   align-items: center;
-  padding: spacing.$space_12;
   border-radius: common.$base_border_radius;
   transition: common.$transition_fast;
   cursor: pointer;
 
-  // types
-  &__primary {
-    background-color: colors.$accent_primary;
-
-    &:hover,
-    &:active {
-      background-color: color.adjust(colors.$accent_primary, $lightness: -10%);
-    }
-
-    &_icon {
-      color: colors.$text_ghost;
-    }
+  // sizes
+  &__sm {
+    padding: spacing.$space_8;
   }
 
-  &__ghost {
-    div {
-      color: colors.$accent_primary;
-    }
+  &__md {
+    padding: spacing.$space_12;
+  }
+
+  // types
+  &__primary {
+    background-color: colors.$primary;
 
     &:hover,
     &:active {
-      background-color: colors.$base_background_hover;
+      background-color: colors.$primary_active;
     }
 
     &_icon {
@@ -41,24 +34,46 @@
     }
   }
 
-  &__danger {
-    background-color: colors.$accent_danger;
-
+  &__ghost {
     &:hover,
     &:active {
-      background-color: color.adjust(colors.$accent_danger, $lightness: -10%);
+      & > div {
+        color: colors.$text_secondary;
+      }
     }
 
     &_icon {
-      color: colors.$text_ghost;
+      color: colors.$text_secondary;
+    }
+  }
+
+  &__danger {
+    background-color: colors.$danger;
+
+    &:hover,
+    &:active {
+      background-color: colors.$danger_active;
+    }
+
+    &_icon {
+      color: colors.$danger;
     }
   }
 
   // variant
-  &__full {
+  &__wide {
     justify-content: center;
     border-radius: 0;
     width: 100%;
+
+    // sizes
+    &__sm {
+      padding: spacing.$space_12;
+    }
+
+    &__md {
+      padding: spacing.$space_20;
+    }
   }
 }
 

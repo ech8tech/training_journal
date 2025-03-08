@@ -1,6 +1,5 @@
 import IconArrow from "@assets/icons/other/IconArrow.svg";
 import { Text } from "@components/text/Text";
-import { TEXT_PRIMARY } from "@constants/colors";
 import { getSvgElement } from "@utils/elements";
 import cn from "classnames";
 import React, { useEffect, useRef, useState } from "react";
@@ -97,7 +96,6 @@ export function Select<T extends FieldValues>({
                   className={cn(styles.value_icon, {
                     [styles.value_icon__opened]: isOpened,
                   })}
-                  color={TEXT_PRIMARY}
                 />
               </div>
 

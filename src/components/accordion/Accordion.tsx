@@ -1,6 +1,5 @@
 import IconArrow from "@assets/icons/other/IconArrow.svg";
 import { Text } from "@components/text/Text";
-import { TEXT_PRIMARY } from "@constants/colors";
 import { getSvgElement } from "@utils/elements";
 import cn from "classnames";
 import { useState } from "react";
@@ -27,7 +26,6 @@ export function Accordion({ icon, title, children }: AccordionProps) {
             className={cn(styles.title_icon, {
               [styles.title_icon__opened]: isOpened,
             })}
-            color={TEXT_PRIMARY}
           />
         </div>
       </div>

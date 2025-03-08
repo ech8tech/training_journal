@@ -1,6 +1,7 @@
 @use 'sass:color';
 @use '@styles/common';
 @use '@styles/spacing';
+@use '@styles/colors';
 
 .header {
   display: flex;
@@ -17,6 +18,7 @@
 
   &_icon {
     transition: common.$transition_slow;
+    color: colors.$text_primary;
 
     &__opened {
       transform: rotate(180deg);
