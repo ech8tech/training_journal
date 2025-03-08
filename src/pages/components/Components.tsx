@@ -69,7 +69,7 @@ export default function Components() {
         <Button
           type="primary"
           text="Full Button"
-          variant="full"
+          variant="wide"
           icon={<IconPlus />}
         />
       </Spacing>

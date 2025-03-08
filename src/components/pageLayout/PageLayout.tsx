@@ -19,7 +19,7 @@ export function PageLayout({ title, buttonConfig, children }: PageLayoutProps) {
         <Button
           className={styles.button}
           type="primary"
-          variant="full"
+          variant="wide"
           {...buttonConfig}
         />
       )}
