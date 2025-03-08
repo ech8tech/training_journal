@@ -3,11 +3,11 @@
 .pageLayout {
   @include mixins.container_main;
   position: relative;
+  min-height: 100vh;
 }
 
 .button {
-  position: absolute;
-  bottom: 0;
+  position: sticky;
   left: 0;
-  width: 100%;
+  bottom: 0;
 }

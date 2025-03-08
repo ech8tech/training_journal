@@ -1,13 +1,15 @@
 import { SVGElement } from "@src/types/common";
 
-export type ButtonVariant = "default" | "full";
+export type ButtonVariant = "default" | "wide";
 export type ButtonType = "primary" | "ghost" | "danger";
+export type ButtonSize = "sm" | "md";
 
 export type ButtonConfig = {
   text: string;
-  type?: ButtonType;
   className?: string;
+  type?: ButtonType;
   variant?: ButtonVariant;
+  size?: ButtonSize;
   isLoading?: boolean;
   icon?: SVGElement;
   onClick?(): void;

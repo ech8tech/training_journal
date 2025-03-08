@@ -1,22 +1,24 @@
 import IconArrow from "@assets/icons/other/IconArrow.svg";
 import { Text } from "@components/text/Text";
-import { TEXT_PRIMARY } from "@constants/colors";
 import { getSvgElement } from "@utils/elements";
 import cn from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { Controller, FieldValues } from "react-hook-form";
 
 import * as styles from "./Select.scss";
 import { Option, SelectProps } from "./types";
 
-export function Select({
+export function Select<T extends FieldValues>({
   label,
-  register,
+  name,
   className,
   options,
   placeholder,
+  onChange,
+  control,
   defaultOptionId,
-}: SelectProps) {
+}: SelectProps<T>) {
   const defaultOption = options.find((option) => option.id === defaultOptionId);
 
   const [selected, setSelected] = useState(defaultOption);
@@ -48,6 +50,7 @@ export function Select({
     event.stopPropagation();
     setSelected(option);
     setIsOpened(false);
+    onChange(option);
   };
 
   useEffect(() => {
@@ -66,57 +69,66 @@ export function Select({
   }, [handleClickOutside]);
 
   return (
-    <div className={cn(styles.container, className)}>
-      {label && (
-        <Text size="sm" type="secondary">
-          <label className={styles.label}>{label}</label>
-        </Text>
-      )}
+    <Controller
+      name={name}
+      control={control}
+      render={({ field }) => {
+        return (
+          <div className={className}>
+            {label && (
+              <Text size="sm" type="secondary">
+                <label className={styles.label}>{label}</label>
+              </Text>
+            )}
 
-      <div
-        ref={refSelect}
-        className={cn(styles.select, {
-          [styles.select__opened]: isOpened,
-        })}
-        onClick={handleClick}
-      >
-        <div className={styles.value}>
-          <div>{selected?.name || placeholder}</div>
-          <IconArrow
-            width={18}
-            height={18}
-            className={cn(styles.value_icon, {
-              [styles.value_icon__opened]: isOpened,
-            })}
-            color={TEXT_PRIMARY}
-          />
-        </div>
-
-        {isOpened &&
-          createPortal(
             <div
-              ref={refOptions}
-              className={styles.options}
-              style={{
-                top: `${coords?.y}px`,
-                left: `${coords?.x}px`,
-                width: `${coords?.width}px`,
-              }}
+              ref={refSelect}
+              className={cn(styles.select, {
+                [styles.select__opened]: isOpened,
+              })}
+              onClick={handleClick}
             >
-              {options.map((option) => (
-                <div
-                  onClick={(event) => handleSelect(event, option)}
-                  className={styles.option}
-                  key={option.id}
-                >
-                  {getSvgElement(option?.icon, 20, 20)}
-                  <Text size="md">{option.name}</Text>
-                </div>
-              ))}
-            </div>,
-            document.body,
-          )}
-      </div>
-    </div>
+              <div className={styles.value}>
+                <div>{selected?.name || placeholder}</div>
+                <IconArrow
+                  width={18}
+                  height={18}
+                  className={cn(styles.value_icon, {
+                    [styles.value_icon__opened]: isOpened,
+                  })}
+                />
+              </div>
+
+              {isOpened &&
+                createPortal(
+                  <div
+                    ref={refOptions}
+                    className={styles.options}
+                    style={{
+                      top: `${coords?.y}px`,
+                      left: `${coords?.x}px`,
+                      width: `${coords?.width}px`,
+                    }}
+                  >
+                    {options.map((option) => (
+                      <div
+                        onClick={(event) => handleSelect(event, option)}
+                        className={cn(styles.option, {
+                          [styles.option__selected]: field.value === option.id,
+                        })}
+                        key={option.id}
+                      >
+                        {getSvgElement(option?.icon, 20, 20)}
+                        <Text size="md">{option.name}</Text>
+                      </div>
+                    ))}
+                  </div>,
+                  document.body,
+                )}
+            </div>
+          </div>
+        );
+      }}
+    ></Controller>
   );
 }

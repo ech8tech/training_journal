@@ -8,19 +8,21 @@ import { PageLayoutProps } from "./types";
 
 export function PageLayout({ title, buttonConfig, children }: PageLayoutProps) {
   return (
-    <div className={styles.pageLayout}>
-      <Spacing space={SPACE_CONTAINER}>
-        <Title size="h1">{title}</Title>
+    <>
+      <div className={styles.pageLayout}>
+        <Spacing space={SPACE_CONTAINER}>
+          <Title size="h1">{title}</Title>
+        </Spacing>
         {children}
-      </Spacing>
+      </div>
       {buttonConfig && (
         <Button
           className={styles.button}
           type="primary"
-          variant="full"
+          variant="wide"
           {...buttonConfig}
         />
       )}
-    </div>
+    </>
   );
 }

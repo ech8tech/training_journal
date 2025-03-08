@@ -1,4 +1,4 @@
-import paths from "./paths.babel";
+import paths from "./config/paths.babel";
 import common from "./webpack.common.babel.js";
 
 export default (env, argv) => {
@@ -13,7 +13,6 @@ export default (env, argv) => {
       historyApiFallback: true,
       hot: true,
       port: 9000,
-      open: true,
       client: {
         overlay: false,
       },

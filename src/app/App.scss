@@ -1,3 +1,5 @@
+@use '@styles/colors';
+
 @font-face {
   font-family: 'SFProText';
   src: url('../assets/fonts/SFProText-Regular.woff2') format('woff2');
@@ -19,12 +21,11 @@
 html {
   font-family: 'SFProText', Arial, serif;
   font-size: 16px;
+  background-color: colors.$base_background;
 }
 
 body {
   margin: 0 auto;
-  max-width: 393px;
-  box-shadow: 0 1px 10px 0 #00000045;
 }
 
 button {

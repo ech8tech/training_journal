@@ -2,12 +2,12 @@ import { PropsWithChildren } from "react";
 
 type SpacingProps = {
   className?: string;
-  space: 0 | 4 | 8 | 12 | 16 | 20 | 24 | 28 | 32 | 36 | 40;
+  space?: 0 | 4 | 8 | 12 | 16 | 20 | 24 | 28 | 32 | 36 | 40;
 };
 
 export function Spacing({
   className,
-  space,
+  space = 0,
   children,
 }: PropsWithChildren<SpacingProps>) {
   return (

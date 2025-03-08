@@ -8,12 +8,13 @@
   padding: spacing.$space_12;
   border-radius: common.$base_border_radius;
   transition: common.$transition_fast;
-  background-color: colors.$base_background;
+  background-color: colors.$background_layout;
   color: colors.$text_primary;
+  width: 100%;
 
   &:focus,
   &:hover {
-    background-color: colors.$base_background_hover;
+    background-color: colors.$background_layout_action;
   }
 }
 

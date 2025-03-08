@@ -10,3 +10,14 @@
 .spinner {
   animation: animateRotate .8s infinite ease-in-out;
 }
+
+.fullPage {
+  position: absolute;
+  left: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
