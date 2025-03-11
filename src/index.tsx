@@ -1,5 +1,6 @@
-import { App } from "@app/App";
 import { createRoot } from "react-dom/client";
+
+import { App } from "@app/App";
 
 document.body.innerHTML = '<div id="app"></div>';
 

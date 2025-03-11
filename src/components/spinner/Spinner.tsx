@@ -1,5 +1,6 @@
-import IconSpinner from "@assets/icons/other/IconSpinner.svg";
 import cn from "classnames";
+
+import IconSpinner from "@assets/icons/other/IconSpinner.svg";
 
 import * as styles from "./Spinner.scss";
 import { SpinnerProps } from "./types";

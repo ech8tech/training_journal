@@ -1,5 +1,6 @@
-import { ButtonConfig } from "@components/buttons";
 import { ReactNode } from "react";
+
+import { ButtonConfig } from "@components/buttons";
 
 export type ModalProps = {
   title: string;

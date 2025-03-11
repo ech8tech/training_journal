@@ -1,5 +1,6 @@
-import { SVGElement } from "@src/types/common";
 import { Control, FieldValues, Path } from "react-hook-form";
+
+import { SVGElement } from "@src/types/common";
 
 export type Option = {
   id: string;

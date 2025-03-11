@@ -1,29 +1,27 @@
-import {
-  InputNumber,
-  InputPassword,
-  InputTel,
-  InputText,
-} from "@components/inputs";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+import { routes } from "@app/routesConfig";
+import { Input } from "@components/input";
+import { InputNumber } from "@components/inputs";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
 import { SPACE_CONTAINER } from "@constants/spacing";
-import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 
 import { optionsSex } from "./consts";
-import * as styles from "./Registration.scss";
-import { RegistrationFormProps } from "./types";
+import * as styles from "./RegistrationProfile.scss";
+import { RegistrationProfileFormProps } from "./types";
 
-export default function Registration() {
+export default function RegistrationProfile() {
   const navigate = useNavigate();
 
-  const handleRegistration = () => {
-    navigate("/authentication");
+  const handleConfirm = () => {
+    navigate(routes.DASHBOARD.path);
   };
 
-  const { control, register, watch, getValues, setValue } =
-    useForm<RegistrationFormProps>({
+  const { control, register, getValues, setValue } =
+    useForm<RegistrationProfileFormProps>({
       defaultValues: {
         sex: "male",
       },
@@ -35,32 +33,16 @@ export default function Registration() {
     <PageLayout
       title="Регистрация"
       buttonConfig={{
-        text: "Зарегистрироваться",
-        onClick: handleRegistration,
+        text: "Подтвердить",
+        onClick: handleConfirm,
       }}
     >
       <Spacing space={SPACE_CONTAINER}>
-        <InputText
+        <Input
           name={register("name").name}
           label="Ваше имя"
           placeholder="Введите имя"
           onChange={(value) => setValue("name", value)}
-        />
-      </Spacing>
-      <Spacing space={SPACE_CONTAINER}>
-        <InputTel
-          name={register("tel").name}
-          label="Ваш телефон"
-          placeholder="Введите телефон"
-          onChange={(value) => setValue("tel", value)}
-        />
-      </Spacing>
-      <Spacing space={SPACE_CONTAINER}>
-        <InputPassword
-          name={register("password").name}
-          label="Ваш пароль"
-          placeholder="Введите пароль"
-          onChange={(value) => setValue("password", value)}
         />
       </Spacing>
 

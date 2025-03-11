@@ -1,5 +1,6 @@
-import { InputText } from "@components/inputs";
 import { Link } from "react-router-dom";
+
+import { InputText } from "@components/inputs";
 
 export default function Dashboard() {
   return (

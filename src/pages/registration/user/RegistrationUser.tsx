@@ -1,56 +1,55 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { InputPassword, InputTel } from "@components/inputs";
-import { InputCalendar } from "@components/inputs/inputCalendar/InputCalendar";
+import { routes } from "@app/routesConfig";
+import { Input } from "@components/input";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Spacing } from "@components/spacing/Spacing";
 import { SPACE_CONTAINER } from "@constants/spacing";
 
-import { AuthenticationFormProps } from "./types";
+import { RegistrationUserFormProps } from "./types";
 
-export default function Authentication() {
+export default function RegistrationUser() {
   const navigate = useNavigate();
 
-  const handleAuthentication = () => {
-    navigate("/dashboard");
+  const handleRegistration = () => {
+    navigate(routes.REGISTRATION.CONFIRM.path);
   };
 
-  const { register, setValue } = useForm<AuthenticationFormProps>({
-    defaultValues: {
-      date: "01.01.2025",
-    },
-  });
+  const { register, setValue } = useForm<RegistrationUserFormProps>();
 
   return (
     <PageLayout
-      title="Авторизация"
+      title="Регистрация"
       buttonConfig={{
-        text: "Авторизоваться",
-        onClick: handleAuthentication,
+        text: "Зарегистрироваться",
+        onClick: handleRegistration,
       }}
     >
       <Spacing space={SPACE_CONTAINER}>
-        <InputTel
+        <Input
           name={register("tel").name}
           label="Ваш телефон"
           placeholder="Введите телефон"
+          mask="tel"
           onChange={(value) => setValue("tel", value)}
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
-        <InputPassword
-          name={register("password").name}
-          label="Ваш пароль"
-          placeholder="Введите пароль"
-          onChange={(value) => setValue("password", value)}
+        <Input
+          name={register("email").name}
+          label="Ваша почта"
+          placeholder="Введите почту"
+          onChange={(value) => setValue("email", value)}
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
-        <InputCalendar
-          name={register("date").name}
-          label="Дата"
-          onChange={() => {}}
+        <Input
+          name={register("password").name}
+          label="Ваш пароль"
+          placeholder="Введите пароль"
+          type="password"
+          onChange={(value) => setValue("password", value)}
         />
       </Spacing>
     </PageLayout>

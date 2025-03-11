@@ -1,9 +1,10 @@
+import { useEffect, useRef } from "react";
+
 import IconClose from "@assets/icons/other/IconClose.svg";
 import { ButtonsGroup } from "@components/buttons/buttonsGroup/ButtonsGroup";
 import { Spacing } from "@components/spacing/Spacing";
 import { Title } from "@components/title/Title";
 import { SPACE_INNER } from "@constants/spacing";
-import { useEffect, useRef } from "react";
 
 import * as styles from "./Modal.scss";
 import { ModalProps } from "./types";

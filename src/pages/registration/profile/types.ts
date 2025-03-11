@@ -1,7 +1,5 @@
-export type RegistrationFormProps = {
+export type RegistrationProfileFormProps = {
   name: string;
-  tel: string;
-  password: string;
   age: string;
   weight: string;
   height: string;
