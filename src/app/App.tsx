@@ -24,7 +24,7 @@ export function App() {
           element={<RegistrationUser />}
         />
         <Route
-          path={routes.REGISTRATION.CONFIRMATION.path}
+          path={routes.REGISTRATION.CONFIRM.path}
           element={<RegistrationConfirm />}
         />
         <Route

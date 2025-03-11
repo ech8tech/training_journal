@@ -1,3 +1,5 @@
+import cn from "classnames";
+
 import { InputProps } from "@components/input/types";
 import { getMask } from "@components/input/utils";
 import { Spacing } from "@components/spacing/Spacing";
@@ -7,15 +9,13 @@ import useMask from "@react-input/mask/useMask";
 import * as styles from "./Input.scss";
 
 export function Input({
-  name,
-  label,
-  placeholder,
-  className,
   value,
-  inputMode,
-  type,
-  onChange,
+  label,
+  className,
+  classNameInput,
   mask,
+  onChange,
+  ...props
 }: InputProps) {
   const inputRef = useMask(getMask(mask));
 
@@ -31,15 +31,12 @@ export function Input({
         </Spacing>
       )}
       <input
-        ref={inputRef}
-        name={name}
-        value={value}
+        ref={mask ? inputRef : undefined}
+        className={cn(styles.input, classNameInput)}
         onChange={(e) => onChange(e.target.value)}
-        placeholder={placeholder}
-        inputMode={inputMode}
-        className={styles.input}
-        type={type}
         autoComplete="off"
+        value={value}
+        {...props}
       />
     </div>
   );

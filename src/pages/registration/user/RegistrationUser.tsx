@@ -30,8 +30,9 @@ export default function RegistrationUser() {
         <Input
           name={register("tel").name}
           label="Ваш телефон"
-          placeholder="Введите телефон"
+          placeholder="+7 (___) ___-__-__"
           mask="tel"
+          inputMode="tel"
           onChange={(value) => setValue("tel", value)}
         />
       </Spacing>
@@ -40,6 +41,7 @@ export default function RegistrationUser() {
           name={register("email").name}
           label="Ваша почта"
           placeholder="Введите почту"
+          inputMode="email"
           onChange={(value) => setValue("email", value)}
         />
       </Spacing>

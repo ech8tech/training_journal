@@ -5,7 +5,7 @@ import { Spinner } from "@components/spinner/Spinner";
 const RegistrationProfileComponent = React.lazy(
   () =>
     import(
-      /* webpackChunkName: "RegistrationProfile" */ "src/pages/registration/profile/RegistrationProfile"
+      /* webpackChunkName: "RegistrationProfile" */ "./RegistrationProfile"
     ),
 );
 

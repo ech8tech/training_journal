@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 
 import { routes } from "@app/routesConfig";
 import { Input } from "@components/input";
-import { InputNumber } from "@components/inputs";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
@@ -47,19 +46,19 @@ export default function RegistrationProfile() {
       </Spacing>
 
       <Spacing className={styles.row} space={SPACE_CONTAINER}>
-        <InputNumber
+        <Input
           name={register("age").name}
           label="Возраст"
           placeholder="напр. 27"
           onChange={(value) => setValue("age", value)}
         />
-        <InputNumber
+        <Input
           name={register("weight").name}
           label="Вес"
           placeholder="напр. 75"
           onChange={(value) => setValue("weight", value)}
         />
-        <InputNumber
+        <Input
           name={register("height").name}
           label="Рост"
           placeholder="напр. 173"
