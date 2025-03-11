@@ -1,5 +1,6 @@
-import { Spinner } from "@components/spinner/Spinner";
 import React, { Suspense } from "react";
+
+import { Spinner } from "@components/spinner/Spinner";
 
 const AuthenticationComponent = React.lazy(
   () => import(/* webpackChunkName: "Authentication" */ "./Authentication"),

@@ -1,8 +1,9 @@
+import cn from "classnames";
+import { useState } from "react";
+
 import IconArrow from "@assets/icons/other/IconArrow.svg";
 import { Text } from "@components/text/Text";
 import { getSvgElement } from "@utils/elements";
-import cn from "classnames";
-import { useState } from "react";
 
 import * as styles from "./Accordion.scss";
 import { AccordionProps } from "./types";

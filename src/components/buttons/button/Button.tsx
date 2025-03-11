@@ -1,8 +1,9 @@
+import cn from "classnames";
+
 import { Spinner } from "@components/spinner/Spinner";
 import { Text } from "@components/text/Text";
 import { Title } from "@components/title/Title";
 import { getSvgElement } from "@utils/elements";
-import cn from "classnames";
 
 import * as styles from "./Button.scss";
 import { ButtonProps } from "./types";

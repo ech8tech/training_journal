@@ -1,3 +1,5 @@
+import { useForm } from "react-hook-form";
+
 import IconBackTop from "@assets/icons/muscles_full/legs_full.svg";
 import IconBiceps from "@assets/icons/muscles_parts/biceps.svg";
 import IconShouldersFront from "@assets/icons/muscles_parts/shoulder_front.svg";
@@ -15,7 +17,6 @@ import { Table } from "@components/table/Table";
 import { Text } from "@components/text/Text";
 import { Title } from "@components/title/Title";
 import { SPACE_CONTAINER, SPACE_INNER } from "@constants/spacing";
-import { useForm } from "react-hook-form";
 
 export default function Components() {
   const { register, control } = useForm();

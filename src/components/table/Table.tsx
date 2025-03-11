@@ -1,6 +1,7 @@
+import cn from "classnames";
+
 import { Button } from "@components/buttons";
 import { Text } from "@components/text/Text";
-import cn from "classnames";
 
 import * as styles from "./Table.scss";
 import { TableProps } from "./types";
