@@ -1,8 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { InputPassword, InputTel } from "@components/inputs";
-import { InputCalendar } from "@components/inputs/inputCalendar/InputCalendar";
+import { Input } from "@components/input";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Spacing } from "@components/spacing/Spacing";
 import { SPACE_CONTAINER } from "@constants/spacing";
@@ -31,26 +30,30 @@ export default function Authentication() {
       }}
     >
       <Spacing space={SPACE_CONTAINER}>
-        <InputTel
+        <Input
           name={register("tel").name}
           label="Ваш телефон"
+          mask="tel"
+          inputMode="tel"
           placeholder="Введите телефон"
           onChange={(value) => setValue("tel", value)}
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
-        <InputPassword
+        <Input
           name={register("password").name}
           label="Ваш пароль"
+          type="password"
           placeholder="Введите пароль"
           onChange={(value) => setValue("password", value)}
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
-        <InputCalendar
+        <Input
           name={register("date").name}
           label="Дата"
           onChange={() => {}}
+          type="date"
         />
       </Spacing>
     </PageLayout>

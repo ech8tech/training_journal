@@ -8,6 +8,7 @@ import { Spacing } from "@components/spacing/Spacing";
 import { Title } from "@components/title/Title";
 import { SPACE_CONTAINER } from "@constants/spacing";
 
+import * as styles from "./RegistrationConfirm.scss";
 import { RegistrationConfirmFormProps } from "./types";
 
 export default function RegistrationConfirm() {
@@ -17,7 +18,11 @@ export default function RegistrationConfirm() {
     navigate(routes.REGISTRATION.PROFILE.path);
   };
 
-  const { register, setValue } = useForm<RegistrationConfirmFormProps>({});
+  const { register, setValue, watch } = useForm<RegistrationConfirmFormProps>(
+    {},
+  );
+
+  const code = watch("code");
 
   return (
     <PageLayout
@@ -32,10 +37,12 @@ export default function RegistrationConfirm() {
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
         <Input
+          classNameInput={code ? styles.code : undefined}
           name={register("code").name}
           label="Код"
           placeholder="Введите код"
           onChange={(value) => setValue("code", value)}
+          maxLength={6}
         />
       </Spacing>
     </PageLayout>
