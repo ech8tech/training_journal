@@ -9,7 +9,8 @@ export default function Dashboard() {
       <div>Dashboard</div>
       <Input name={"name"} placeholder={"test"} onChange={() => {}} />
       <Link to={routes.COMPONENTS.path}>Компоненты</Link>
-      <Link to={routes.REGISTRATION.USER.path}>Регистрация</Link>
+      <Link to={routes.AUTHENTICATION.SIGN_IN.path}>Авторизация</Link>
+      <Link to={routes.AUTHENTICATION.SIGN_UP.path}>Регистрация</Link>
     </div>
   );
 }

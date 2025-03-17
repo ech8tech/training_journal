@@ -3,20 +3,17 @@ const routesConfig = {
     DASHBOARD: {
       path: "/dashboard",
     },
-    REGISTRATION: {
-      path: "/registration",
-      USER: {
-        path: "/user",
-      },
-      CONFIRM: {
-        path: "/confirm",
-      },
-      PROFILE: {
-        path: "/profile",
-      },
-    },
     AUTHENTICATION: {
       path: "/authentication",
+      SIGN_IN: {
+        path: "/sign_in",
+      },
+      SIGN_UP: {
+        path: "/sign_up",
+      },
+    },
+    PROFILE: {
+      path: "/profile",
     },
     JOURNAL: {
       path: "/journal",

@@ -7,17 +7,15 @@ import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
 import { SPACE_CONTAINER } from "@constants/spacing";
+import { useMutation } from "@tanstack/react-query";
+import { api } from "@utils/fetch";
 
 import { optionsSex } from "./consts";
-import * as styles from "./RegistrationProfile.scss";
+import * as styles from "./Profile.scss";
 import { RegistrationProfileFormProps } from "./types";
 
-export default function RegistrationProfile() {
+export default function Profile() {
   const navigate = useNavigate();
-
-  const handleConfirm = () => {
-    navigate(routes.DASHBOARD.path);
-  };
 
   const { control, register, getValues, setValue } =
     useForm<RegistrationProfileFormProps>({
@@ -28,10 +26,24 @@ export default function RegistrationProfile() {
 
   const { sex } = getValues();
 
+  const { isPending, mutateAsync: createProfile } = useMutation({
+    mutationFn: (payload: RegistrationProfileFormProps) => {
+      return api.post(`/profile/create`, payload);
+    },
+    onSuccess: () => {
+      navigate(routes.DASHBOARD.path);
+    },
+  });
+
+  const handleConfirm = async () => {
+    await createProfile(getValues());
+  };
+
   return (
     <PageLayout
-      title="Регистрация"
+      title="Заполните профиль"
       buttonConfig={{
+        isLoading: isPending,
         text: "Подтвердить",
         onClick: handleConfirm,
       }}
