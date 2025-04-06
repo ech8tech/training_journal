@@ -11,6 +11,10 @@
   transition: common.$transition_fast;
   cursor: pointer;
 
+  &:disabled {
+    cursor: default;
+  }
+
   // sizes
   &__sm {
     padding: spacing.$space_8;
@@ -28,8 +32,15 @@
     &:active {
       background-color: colors.$primary_active;
     }
+    &:disabled {
+      background-color: colors.$primary_disabled;
 
-    &_icon {
+      div, svg {
+        color: colors.$text_secondary;
+      }
+    }
+
+    &_content {
       color: colors.$text_primary;
     }
   }
@@ -37,13 +48,23 @@
   &__ghost {
     &:hover,
     &:active {
-      & > div {
+      background-color: colors.$ghost_active;
+
+      div, svg {
         color: colors.$text_secondary;
       }
     }
 
-    &_icon {
-      color: colors.$text_secondary;
+    &:disabled {
+      background-color: colors.$ghost_disabled;
+
+      div, svg {
+        color: colors.$text_secondary;
+      }
+    }
+
+    &_content {
+      color: colors.$text_primary;
     }
   }
 
@@ -54,9 +75,16 @@
     &:active {
       background-color: colors.$danger_active;
     }
+    &:disabled {
+      background-color: colors.$danger_disabled;
 
-    &_icon {
-      color: colors.$danger;
+      div, svg {
+        color: colors.$text_secondary;
+      }
+    }
+
+    &_content {
+      color: colors.$text_primary;
     }
   }
 

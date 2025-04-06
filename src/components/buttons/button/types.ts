@@ -11,6 +11,7 @@ export type ButtonConfig = {
   variant?: ButtonVariant;
   size?: ButtonSize;
   isLoading?: boolean;
+  isDisabled?: boolean;
   icon?: SVGElement;
   onClick?(): void;
 };

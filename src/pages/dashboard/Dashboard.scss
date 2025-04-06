@@ -24,3 +24,11 @@
   background-size: 10px 10px;
   background-position: -0.3px 0.3px;
 }
+
+.statistic {
+  &_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

@@ -17,9 +17,10 @@ export function Button({
   size = "md",
   icon,
   isLoading,
+  isDisabled,
   onClick,
 }: ButtonProps) {
-  const configClass = getConfigClass(type, variant, size);
+  const configClass = getConfigClass(type, variant, size, isDisabled);
   const textIsGhost = type === "primary" || type === "danger";
 
   return (
@@ -31,21 +32,26 @@ export function Button({
         configClass.button,
         configClass.buttonSize,
       )}
+      disabled={isDisabled}
     >
       {isLoading ? (
-        <Spinner className={configClass.spinner} size={18} />
+        <Spinner className={configClass.content} size={18} />
       ) : (
         <>
           {variant === "wide" ? (
             <Title size="h5">{text}</Title>
           ) : (
-            <Text type={textIsGhost ? "ghost" : "primary"} size="md">
+            <Text
+              className={configClass.content}
+              type={textIsGhost ? "ghost" : "primary"}
+              size="md"
+            >
               {text}
             </Text>
           )}
           {icon && (
             <div className={styles.icon}>
-              {getSvgElement(icon, 18, 18, configClass.icon)}
+              {getSvgElement(icon, 18, 18, configClass.content)}
             </div>
           )}
         </>

@@ -4,6 +4,8 @@ import IconLegsFull from "@assets/icons/muscles_full/legs_full.svg";
 import IconPressFull from "@assets/icons/muscles_full/press_full.svg";
 import IconShouldersFull from "@assets/icons/muscles_full/shoulders_full.svg";
 import IconBreast from "@assets/icons/muscles_parts/breast.svg";
+import IconGraph from "@assets/icons/other/IconGraph.svg";
+import { Button } from "@components/buttons";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Spacing } from "@components/spacing/Spacing";
 import { Title } from "@components/title/Title";
@@ -17,7 +19,7 @@ export default function Dashboard() {
       <Spacing space={SPACE_CONTAINER}>
         <Title size="h1">Что тренируем сегодня?</Title>
       </Spacing>
-      <div className={styles.muscles}>
+      <Spacing space={SPACE_CONTAINER} className={styles.muscles}>
         <div className={styles.muscle}>
           <IconShouldersFull width={60} height={60} />
         </div>
@@ -36,7 +38,11 @@ export default function Dashboard() {
         <div className={styles.muscle}>
           <IconPressFull width={60} height={60} />
         </div>
-      </div>
+      </Spacing>
+      <Spacing space={SPACE_CONTAINER} className={styles.statistic_title}>
+        <Title size="h1">Статистика</Title>
+        <Button text="Подробнее" type="ghost" size="sm" icon={<IconGraph />} />
+      </Spacing>
     </PageLayout>
   );
 }
