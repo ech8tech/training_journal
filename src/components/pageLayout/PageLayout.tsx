@@ -10,9 +10,11 @@ export function PageLayout({ title, buttonConfig, children }: PageLayoutProps) {
   return (
     <>
       <div className={styles.pageLayout}>
-        <Spacing space={SPACE_CONTAINER}>
-          <Title size="h1">{title}</Title>
-        </Spacing>
+        {title && (
+          <Spacing space={SPACE_CONTAINER}>
+            <Title size="h1">{title}</Title>
+          </Spacing>
+        )}
         {children}
       </div>
       {buttonConfig && (

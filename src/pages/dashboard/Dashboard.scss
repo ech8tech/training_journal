@@ -1,0 +1,26 @@
+@use 'sass:color';
+@use '@styles/colors';
+@use '@styles/common';
+@use '@styles/spacing';
+
+.muscles {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(2, 100px);
+  justify-content: space-between;
+  gap: spacing.$space_20;
+}
+
+.muscle {
+  background-color: colors.$background_layout;
+  border-radius: common.$base_border_radius;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image:
+    linear-gradient(0deg, colors.$primary, transparent 0.4px),
+    linear-gradient(90deg, colors.$primary, transparent 0.4px);
+  background-repeat: repeat;
+  background-size: 10px 10px;
+  background-position: -0.3px 0.3px;
+}
