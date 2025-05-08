@@ -19,8 +19,8 @@ export function useModal() {
     modalProps &&
     createPortal(
       <Modal {...modalProps} onClose={handleClose} />,
-      document.body,
+      document.getElementById("modal-root")!,
     );
 
-  return { openModal, modal };
+  return { openModal, modal, onClose: handleClose };
 }

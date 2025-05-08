@@ -28,20 +28,18 @@ export function AuthenticateForm({
     >
       <Spacing space={SPACE_CONTAINER}>
         <Input
-          name={register("email").name}
+          {...register("email")}
           label="Ваша почта"
           placeholder="Введите почту"
           inputMode="email"
-          onChange={(value) => setValue("email", value)}
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
         <Input
-          name={register("password").name}
+          {...register("password")}
           label="Ваш пароль"
           placeholder="Введите пароль"
           type="password"
-          onChange={(value) => setValue("password", value)}
         />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>

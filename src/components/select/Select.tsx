@@ -105,6 +105,7 @@ export function Select<T extends FieldValues>({
                   <div
                     ref={refOptions}
                     className={styles.options}
+                    onMouseDown={(e) => e.stopPropagation()}
                     style={{
                       top: `${coords?.y}px`,
                       left: `${coords?.x}px`,
@@ -124,7 +125,7 @@ export function Select<T extends FieldValues>({
                       </div>
                     ))}
                   </div>,
-                  document.body,
+                  document.getElementById("select-root")!,
                 )}
             </div>
           </div>

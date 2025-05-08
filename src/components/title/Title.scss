@@ -10,22 +10,22 @@
   }
 
   &_h2 {
-    @include fonts.font(22);
-  }
-
-  &_h3 {
     @include fonts.font(20);
   }
 
-  &_h4 {
+  &_h3 {
     @include fonts.font(18);
   }
 
-  &_h5 {
+  &_h4 {
     @include fonts.font(16);
   }
 
-  &_h6 {
+  &_h5 {
     @include fonts.font(14);
+  }
+
+  &_h6 {
+    @include fonts.font(12);
   }
 }

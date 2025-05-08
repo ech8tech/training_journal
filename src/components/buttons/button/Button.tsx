@@ -38,19 +38,26 @@ export function Button({
         <Spinner className={configClass.content} size={18} />
       ) : (
         <>
-          {variant === "wide" ? (
-            <Title size="h5">{text}</Title>
-          ) : (
-            <Text
-              className={configClass.content}
-              type={textIsGhost ? "ghost" : "primary"}
-              size="md"
-            >
-              {text}
-            </Text>
-          )}
+          {text ? (
+            variant === "wide" ? (
+              <Title size="h4">{text}</Title>
+            ) : (
+              <Text
+                className={configClass.content}
+                type={textIsGhost ? "ghost" : "primary"}
+                size="md"
+              >
+                {text}
+              </Text>
+            )
+          ) : null}
+
           {icon && (
-            <div className={styles.icon}>
+            <div
+              className={cn(styles.icon, {
+                [styles.icon__offset]: !!text,
+              })}
+            >
               {getSvgElement(icon, 18, 18, configClass.content)}
             </div>
           )}

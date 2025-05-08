@@ -48,7 +48,7 @@
   &__ghost {
     &:hover,
     &:active {
-      background-color: colors.$ghost_active;
+      //background-color: colors.$ghost_active;
 
       div, svg {
         color: colors.$text_secondary;
@@ -107,5 +107,8 @@
 
 .icon {
   display: flex;
-  margin-left: spacing.$space_8;
+
+  &__offset {
+    margin-left: spacing.$space_8;
+  }
 }

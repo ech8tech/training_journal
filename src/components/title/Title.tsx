@@ -3,10 +3,10 @@ import cn from "classnames";
 import * as styles from "./Title.scss";
 import { TitleProps } from "./types";
 
-export function Title({ size, children }: TitleProps) {
+export function Title({ className, size, children }: TitleProps) {
   return (
     <div
-      className={cn(styles.title, {
+      className={cn(className, styles.title, {
         [styles.title_h1]: size === "h1",
         [styles.title_h2]: size === "h2",
         [styles.title_h3]: size === "h3",

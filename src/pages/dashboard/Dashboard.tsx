@@ -1,48 +1,76 @@
-import IconBackFull from "@assets/icons/muscles_full/back_full.svg";
-import IconHandsFull from "@assets/icons/muscles_full/hands_full.svg";
-import IconLegsFull from "@assets/icons/muscles_full/legs_full.svg";
-import IconPressFull from "@assets/icons/muscles_full/press_full.svg";
-import IconShouldersFull from "@assets/icons/muscles_full/shoulders_full.svg";
-import IconBreast from "@assets/icons/muscles_parts/breast.svg";
+import cn from "classnames";
+
 import IconGraph from "@assets/icons/other/IconGraph.svg";
+import IconSettings from "@assets/icons/other/IconSettings.svg";
 import { Button } from "@components/buttons";
+import { CalendarStatistics } from "@components/calendarStatistics/CalendarStatistics";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Spacing } from "@components/spacing/Spacing";
+import { Text } from "@components/text/Text";
 import { Title } from "@components/title/Title";
 import { SPACE_CONTAINER } from "@constants/spacing";
+import { getWeekDays } from "@pages/dashboard/utils";
 
+import { Muscles } from "./components/muscles/Muscles";
 import * as styles from "./Dashboard.scss";
 
 export default function Dashboard() {
+  const weekDays = getWeekDays();
+
   return (
     <PageLayout>
+      <Spacing space={SPACE_CONTAINER} className={styles.header}>
+        <div className={styles.header_title}>
+          <div>
+            <Title size="h3">Привет, Эдуард!</Title>
+          </div>
+          <div>
+            <IconSettings
+              className={styles.header_settings}
+              width={28}
+              height={28}
+            />
+          </div>
+        </div>
+        <div className={styles.calendar}>
+          {weekDays.map((day) => {
+            const { date, weekday, isCurrent } = day;
+
+            return (
+              <div key={date}>
+                <Text
+                  className={styles.calendar_weekday}
+                  type="secondary"
+                  size="sm"
+                >
+                  {weekday}
+                </Text>
+                <Title
+                  className={cn(styles.calendar_date, {
+                    [styles.calendar_date__current]: isCurrent,
+                  })}
+                  size="h4"
+                >
+                  {date}
+                </Title>
+              </div>
+            );
+          })}
+        </div>
+      </Spacing>
+
       <Spacing space={SPACE_CONTAINER}>
         <Title size="h1">Что тренируем сегодня?</Title>
       </Spacing>
-      <Spacing space={SPACE_CONTAINER} className={styles.muscles}>
-        <div className={styles.muscle}>
-          <IconShouldersFull width={60} height={60} />
-        </div>
-        <div className={styles.muscle}>
-          <IconHandsFull width={60} height={60} />
-        </div>
-        <div className={styles.muscle}>
-          <IconBreast width={60} height={60} />
-        </div>
-        <div className={styles.muscle}>
-          <IconLegsFull width={60} height={60} />
-        </div>
-        <div className={styles.muscle}>
-          <IconBackFull width={60} height={60} />
-        </div>
-        <div className={styles.muscle}>
-          <IconPressFull width={60} height={60} />
-        </div>
-      </Spacing>
+      <Muscles />
+
       <Spacing space={SPACE_CONTAINER} className={styles.statistic_title}>
         <Title size="h1">Статистика</Title>
         <Button text="Подробнее" type="ghost" size="sm" icon={<IconGraph />} />
       </Spacing>
+      <div>
+        <CalendarStatistics />
+      </div>
     </PageLayout>
   );
 }

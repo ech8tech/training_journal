@@ -16,7 +16,10 @@ const routesConfig = {
       path: "/profile",
     },
     JOURNAL: {
-      path: "/journal",
+      path: "/journal/:muscleGroupType",
+    },
+    PROGRESS: {
+      path: "/progress/:muscleType",
     },
     COMPONENTS: {
       path: "/components",

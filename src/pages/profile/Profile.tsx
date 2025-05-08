@@ -50,32 +50,16 @@ export default function Profile() {
     >
       <Spacing space={SPACE_CONTAINER}>
         <Input
-          name={register("name").name}
+          {...register("name")}
           label="Ваше имя"
           placeholder="Введите имя"
-          onChange={(value) => setValue("name", value)}
         />
       </Spacing>
 
       <Spacing className={styles.row} space={SPACE_CONTAINER}>
-        <Input
-          name={register("age").name}
-          label="Возраст"
-          placeholder="напр. 27"
-          onChange={(value) => setValue("age", value)}
-        />
-        <Input
-          name={register("weight").name}
-          label="Вес"
-          placeholder="напр. 75"
-          onChange={(value) => setValue("weight", value)}
-        />
-        <Input
-          name={register("height").name}
-          label="Рост"
-          placeholder="напр. 173"
-          onChange={(value) => setValue("height", value)}
-        />
+        <Input {...register("age")} label="Возраст" placeholder="напр. 27" />
+        <Input {...register("weight")} label="Вес" placeholder="напр. 75" />
+        <Input {...register("height")} label="Рост" placeholder="напр. 173" />
       </Spacing>
 
       <Spacing>

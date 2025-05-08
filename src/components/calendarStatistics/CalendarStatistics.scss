@@ -1,0 +1,25 @@
+@use '@styles/common';
+@use '@styles/colors';
+@use '@styles/spacing';
+
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: spacing.$gap_24;
+  justify-items: center;
+}
+
+.day {
+  background-color: colors.$danger;
+  width: spacing.$space_32;
+  height: spacing.$space_32;
+  border-radius: 50px;
+  color: colors.$text_primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &__future {
+    background-color: colors.$text_secondary;
+  }
+}

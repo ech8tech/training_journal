@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 
 import IconBackTop from "@assets/icons/muscles_full/legs_full.svg";
 import IconBiceps from "@assets/icons/muscles_parts/biceps.svg";
-import IconShouldersFront from "@assets/icons/muscles_parts/shoulder_front.svg";
+import IconShouldersFront from "@assets/icons/muscles_parts/shoulders_front.svg";
 import IconEdit from "@assets/icons/other/IconEdit.svg";
 import IconPlus from "@assets/icons/other/IconPlus.svg";
 import { Accordion } from "@components/accordion/Accordion";

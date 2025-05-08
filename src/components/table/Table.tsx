@@ -11,9 +11,11 @@ export function Table<T>({
   rows,
   columns,
   buttonConfig,
+  header,
 }: TableProps<T>) {
   return (
     <div className={cn(styles.container, className)}>
+      {header && <div className={styles.header}>{header}</div>}
       <table className={styles.table}>
         <thead>
           <tr>

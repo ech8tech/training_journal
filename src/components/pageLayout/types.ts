@@ -4,5 +4,6 @@ import { ButtonConfig } from "@components/buttons";
 
 export type PageLayoutProps = PropsWithChildren<{
   title?: string;
-  buttonConfig?: Pick<ButtonConfig, "text" | "onClick" | "isLoading">;
+  buttonConfig?: ButtonConfig;
+  onBack?(): void;
 }>;

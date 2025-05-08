@@ -1,4 +1,4 @@
-import { InputHTMLAttributes } from "react";
+import { ChangeEvent, InputHTMLAttributes } from "react";
 
 type InputBaseProps = Omit<InputHTMLAttributes<HTMLInputElement>, "onChange">;
 
@@ -9,5 +9,5 @@ export type InputProps = InputBaseProps & {
   className?: string;
   classNameInput?: string;
   mask?: InputMask;
-  onChange(value: string): void;
+  onChange(e: ChangeEvent<HTMLInputElement>): void;
 };

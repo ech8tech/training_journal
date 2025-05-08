@@ -33,7 +33,7 @@ export function Input({
       <input
         ref={mask ? inputRef : undefined}
         className={cn(styles.input, classNameInput)}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={onChange}
         autoComplete="off"
         value={value}
         {...props}

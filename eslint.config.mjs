@@ -42,16 +42,16 @@ export default [
         },
       ],
       "simple-import-sort/exports": "error",
-      "sort-imports": [
-        "error",
-        {
-          ignoreCase: false,
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
-          allowSeparatedGroups: true,
-        },
-      ],
+      // "sort-imports": [
+      //   "error",
+      //   {
+      //     ignoreCase: false,
+      //     ignoreDeclarationSort: true,
+      //     ignoreMemberSort: false,
+      //     memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+      //     allowSeparatedGroups: true,
+      //   },
+      // ],
       indent: ["error", 2, { SwitchCase: 1 }],
       "object-curly-spacing": ["error", "always"],
     },
