@@ -1,10 +1,19 @@
 @use 'sass:math';
 @use '@styles/common';
 @use '@styles/colors';
+@use '@styles/spacing';
 
 .container {
-  background-color: colors.$base_background;
+  background-color: colors.$background_layout;
   border-radius: common.$base_border_radius common.$base_border_radius 0 0;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 0 0 spacing.$space_12;
+  border-bottom: 1px dashed colors.$text_secondary;
 }
 
 .table {

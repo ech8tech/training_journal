@@ -1,0 +1,56 @@
+@use 'sass:color';
+@use 'sass:math';
+@use '@styles/colors';
+@use '@styles/common';
+@use '@styles/spacing';
+
+.header {
+  display: flex;
+  flex-direction: column;
+
+  &_title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: spacing.$space_28;
+  }
+
+  &_settings {
+    color: colors.$text_primary;
+    cursor: pointer;
+  }
+}
+
+.calendar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &_weekday {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: spacing.$space_4;
+  }
+
+  &_date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: spacing.$space_28;
+    height: spacing.$space_28;
+
+    &__current {
+      border-radius: math.div(common.$base_border_radius, 2);
+      background-color: colors.$danger;
+    }
+  }
+}
+
+.statistic {
+  &_title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}

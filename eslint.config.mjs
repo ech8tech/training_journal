@@ -1,10 +1,11 @@
-import pluginJs from "@eslint/js";
 import eslintPluginPrettierRecommended from "eslint-plugin-prettier/recommended";
 import pluginReact from "eslint-plugin-react";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import unusedImports from "eslint-plugin-unused-imports";
 import globals from "globals";
 import tseslint from "typescript-eslint";
+
+import pluginJs from "@eslint/js";
 
 /** @type {import('eslint').Linter.Config[]} */
 export default [
@@ -25,19 +26,33 @@ export default [
       "no-undef": "warn",
       semi: ["error", "always"],
       "unused-imports/no-unused-imports": "error",
-      "simple-import-sort/imports": "error",
-      "simple-import-sort/exports": "error",
-      "sort-imports": [
+      "simple-import-sort/imports": [
         "error",
         {
-          ignoreCase: false,
-          ignoreDeclarationSort: true,
-          ignoreMemberSort: false,
-          memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
-          allowSeparatedGroups: true,
+          groups: [
+            // Внешние пакеты, которые НЕ начинаются с "@" и не начинаются с точки (относительные)
+            ["^(?!@)(?!\\.).+"],
+            // Импорты, начинающиеся с "@"
+            ["^@"],
+            // Относительные импорты (начинающиеся с "." или "..")
+            ["^\\."],
+            // Сайд-эффект импорты, например: import "styles.css";
+            ["^\\u0000"],
+          ],
         },
       ],
-      indent: ["error", 2],
+      "simple-import-sort/exports": "error",
+      // "sort-imports": [
+      //   "error",
+      //   {
+      //     ignoreCase: false,
+      //     ignoreDeclarationSort: true,
+      //     ignoreMemberSort: false,
+      //     memberSyntaxSortOrder: ["none", "all", "multiple", "single"],
+      //     allowSeparatedGroups: true,
+      //   },
+      // ],
+      indent: ["error", 2, { SwitchCase: 1 }],
       "object-curly-spacing": ["error", "always"],
     },
   },

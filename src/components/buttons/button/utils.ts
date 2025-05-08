@@ -7,6 +7,7 @@ export function getConfigClass(
   type: ButtonType,
   variant: ButtonVariant,
   size: ButtonSize,
+  isDisabled?: boolean,
 ) {
   return {
     button: cn({
@@ -21,15 +22,10 @@ export function getConfigClass(
       [styles.button__wide__sm]: variant === "wide" && size === "sm",
       [styles.button__wide__md]: variant === "wide" && size === "md",
     }),
-    spinner: cn({
-      [styles.button__primary_icon]: type === "primary",
-      [styles.button__danger_icon]: type === "danger",
-      [styles.button__ghost_icon]: type === "ghost",
-    }),
-    icon: cn({
-      [styles.button__primary_icon]: type === "primary",
-      [styles.button__danger_icon]: type === "danger",
-      [styles.button__ghost_icon]: type === "ghost",
+    content: cn({
+      [styles.button__primary_content]: type === "primary",
+      [styles.button__danger_content]: type === "danger",
+      [styles.button__ghost_content]: type === "ghost",
     }),
   };
 }

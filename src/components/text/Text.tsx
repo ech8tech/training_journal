@@ -4,7 +4,7 @@ import * as styles from "./Text.scss";
 import { TextProps } from "./types";
 
 export function Text({
-  size,
+  size = "md",
   type = "primary",
   className,
   children,

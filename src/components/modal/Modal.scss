@@ -1,18 +1,18 @@
 @use "@styles/colors";
 @use "@styles/common";
 @use "@styles/mixins";
+@use "@styles/spacing";
 @use "@styles/zIndex";
 
 .modal {
+  @include mixins.container_inner;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border-radius: common.$base_border_radius;
   background-color: colors.$base_foreground;
-  @include mixins.container_inner;
-  max-width: 357px;
-  width: 100%;
+  width: calc(100% - #{spacing.$space_28 * 2});
   z-index: zIndex.$modal;
 }
 

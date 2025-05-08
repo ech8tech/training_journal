@@ -1,5 +1,6 @@
-import { SVGElement } from "@src/types/common";
 import { cloneElement, isValidElement } from "react";
+
+import { SVGElement } from "@src/types/common";
 
 export function getSvgElement(
   icon?: SVGElement,

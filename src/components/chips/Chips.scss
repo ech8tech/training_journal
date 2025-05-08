@@ -1,0 +1,26 @@
+@use "@styles/spacing";
+@use "@styles/colors";
+@use "@styles/common";
+
+.chips {
+  display: flex;
+  align-items: center;
+  gap: spacing.$gap_8;
+}
+
+.chip {
+  padding: spacing.$space_4 spacing.$space_12;
+  border-radius: 50px;
+  background-color: colors.$primary;
+  color: colors.$text_primary;
+  transition: common.$transition_fast;
+  cursor: pointer;
+
+  &__active {
+    background-color: colors.$primary_contrast !important;
+  }
+
+  &:hover {
+    background-color: colors.$primary_active;
+  }
+}

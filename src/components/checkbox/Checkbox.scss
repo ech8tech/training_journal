@@ -1,0 +1,51 @@
+@use "@styles/spacing";
+@use "@styles/colors";
+
+.container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: spacing.$space_16;
+  height: spacing.$space_16;
+  cursor: pointer;
+  user-select: none;
+
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+
+    &:checked ~ .checkmark {
+      border: 1px solid colors.$primary_contrast;
+
+      & > .checkmark_icon {
+        display: block;
+      }
+    }
+  }
+}
+
+.label {
+  margin-left: spacing.$space_24;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: spacing.$space_16;
+  width: spacing.$space_16;
+  border-radius: 50%;
+  border: 1px solid colors.$primary;
+
+  &_icon {
+    display: none;
+    color: colors.$primary_contrast;
+    transform: translate(-50%, -50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+  }
+}

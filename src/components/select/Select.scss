@@ -3,6 +3,7 @@
 @use '@styles/spacing';
 @use '@styles/colors';
 @use '@styles/common';
+@use '@styles/zIndex';
 
 .label {
   display: block;
@@ -48,6 +49,7 @@
   position: absolute;
   overflow: hidden;
   border-radius: 0 0 common.$base_border_radius common.$base_border_radius;
+  z-index: zIndex.$selectDropDown;
 }
 
 .option {

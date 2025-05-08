@@ -1,6 +1,7 @@
+import cn from "classnames";
+
 import { Button } from "@components/buttons";
 import { Text } from "@components/text/Text";
-import cn from "classnames";
 
 import * as styles from "./Table.scss";
 import { TableProps } from "./types";
@@ -10,9 +11,11 @@ export function Table<T>({
   rows,
   columns,
   buttonConfig,
+  header,
 }: TableProps<T>) {
   return (
     <div className={cn(styles.container, className)}>
+      {header && <div className={styles.header}>{header}</div>}
       <table className={styles.table}>
         <thead>
           <tr>

@@ -1,3 +1,5 @@
+@use '@styles/colors';
+
 @keyframes animateRotate {
   from {
     transform: rotate(0deg);
@@ -9,6 +11,7 @@
 
 .spinner {
   animation: animateRotate .8s infinite ease-in-out;
+  color: colors.$primary_contrast;
 }
 
 .fullPage {

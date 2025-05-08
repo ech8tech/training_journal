@@ -1,9 +1,29 @@
 @use "@styles/mixins";
+@use "@styles/spacing";
+@use "@styles/colors";
 
 .pageLayout {
-  @include mixins.container_main;
   position: relative;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: auto;
+}
+
+.titleContainer {
+  display: flex;
+}
+
+.content {
+  padding: spacing.$space_28;
+  flex-grow: 1;
+}
+
+.iconBack {
+  margin-right: spacing.$space_8;
+  color: colors.$text_primary;
+  transform: rotate(90deg);
+  cursor: pointer;
 }
 
 .button {

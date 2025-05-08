@@ -1,0 +1,27 @@
+@use '@styles/colors';
+@use '@styles/spacing';
+
+.fields {
+  margin-bottom: spacing.$space_8;
+}
+
+.field {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: spacing.$gap_8;
+
+  &_input {
+    flex-grow: 1;
+  }
+
+  &_delete {
+    color: colors.$danger;
+    flex-basis: 42px;
+  }
+}
+
+.buttonAdd {
+  display: flex;
+  justify-content: flex-end;
+}

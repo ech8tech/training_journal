@@ -1,8 +1,9 @@
+import cn from "classnames";
+
 import { Spinner } from "@components/spinner/Spinner";
 import { Text } from "@components/text/Text";
 import { Title } from "@components/title/Title";
 import { getSvgElement } from "@utils/elements";
-import cn from "classnames";
 
 import * as styles from "./Button.scss";
 import { ButtonProps } from "./types";
@@ -16,9 +17,10 @@ export function Button({
   size = "md",
   icon,
   isLoading,
+  isDisabled,
   onClick,
 }: ButtonProps) {
-  const configClass = getConfigClass(type, variant, size);
+  const configClass = getConfigClass(type, variant, size, isDisabled);
   const textIsGhost = type === "primary" || type === "danger";
 
   return (
@@ -30,21 +32,33 @@ export function Button({
         configClass.button,
         configClass.buttonSize,
       )}
+      disabled={isDisabled}
     >
       {isLoading ? (
-        <Spinner className={configClass.spinner} size={18} />
+        <Spinner className={configClass.content} size={18} />
       ) : (
         <>
-          {variant === "wide" ? (
-            <Title size="h5">{text}</Title>
-          ) : (
-            <Text type={textIsGhost ? "ghost" : "primary"} size="md">
-              {text}
-            </Text>
-          )}
+          {text ? (
+            variant === "wide" ? (
+              <Title size="h4">{text}</Title>
+            ) : (
+              <Text
+                className={configClass.content}
+                type={textIsGhost ? "ghost" : "primary"}
+                size="md"
+              >
+                {text}
+              </Text>
+            )
+          ) : null}
+
           {icon && (
-            <div className={styles.icon}>
-              {getSvgElement(icon, 18, 18, configClass.icon)}
+            <div
+              className={cn(styles.icon, {
+                [styles.icon__offset]: !!text,
+              })}
+            >
+              {getSvgElement(icon, 18, 18, configClass.content)}
             </div>
           )}
         </>

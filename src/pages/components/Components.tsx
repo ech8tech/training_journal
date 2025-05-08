@@ -1,12 +1,14 @@
+import { useForm } from "react-hook-form";
+
 import IconBackTop from "@assets/icons/muscles_full/legs_full.svg";
 import IconBiceps from "@assets/icons/muscles_parts/biceps.svg";
-import IconShouldersFront from "@assets/icons/muscles_parts/shoulder_front.svg";
+import IconShouldersFront from "@assets/icons/muscles_parts/shoulders_front.svg";
 import IconEdit from "@assets/icons/other/IconEdit.svg";
 import IconPlus from "@assets/icons/other/IconPlus.svg";
 import { Accordion } from "@components/accordion/Accordion";
 import { Button } from "@components/buttons";
 import { Field } from "@components/field/Field";
-import { InputText } from "@components/inputs";
+import { Input } from "@components/input";
 import { useModal } from "@components/modal/hook";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select/Select";
@@ -15,7 +17,6 @@ import { Table } from "@components/table/Table";
 import { Text } from "@components/text/Text";
 import { Title } from "@components/title/Title";
 import { SPACE_CONTAINER, SPACE_INNER } from "@constants/spacing";
-import { useForm } from "react-hook-form";
 
 export default function Components() {
   const { register, control } = useForm();
@@ -78,7 +79,7 @@ export default function Components() {
         <Title size="h1">Input</Title>
       </Spacing>
       <Spacing space={SPACE_INNER}>
-        <InputText
+        <Input
           onChange={() => {}}
           placeholder="Наименование упражнения"
           label="Наименование"
@@ -86,7 +87,7 @@ export default function Components() {
         />
       </Spacing>
       <Spacing space={SPACE_INNER}>
-        <InputText
+        <Input
           onChange={() => {}}
           placeholder="Календарь"
           label="Выберите дату"
@@ -180,7 +181,7 @@ export default function Components() {
               title: "Создание упражнения",
               content: (
                 <div>
-                  <InputText
+                  <Input
                     onChange={() => {}}
                     label="Наименование"
                     name={register("exercise_name").name}

@@ -4,6 +4,7 @@
   "description": "Training Journal",
   "scripts": {
     "start": "webpack serve --mode=development --config webpack/webpack.dev.babel.js",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --fix",
     "build": "webpack --mode=production --config webpack/webpack.prod.babel.js",
     "build:local": "npm run build && cp -R build /opt/homebrew/var/www",
     "build:serve": "npm run build && http-server build",
@@ -57,7 +58,11 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "@react-input/mask": "^2.0.4",
+    "@tanstack/react-query": "^5.67.3",
+    "axios": "^1.8.2",
     "classnames": "^2.5.1",
+    "dayjs": "^1.11.13",
     "lodash": "^4.17.21",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

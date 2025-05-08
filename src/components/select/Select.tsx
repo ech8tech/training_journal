@@ -1,10 +1,11 @@
-import IconArrow from "@assets/icons/other/IconArrow.svg";
-import { Text } from "@components/text/Text";
-import { getSvgElement } from "@utils/elements";
 import cn from "classnames";
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { Controller, FieldValues } from "react-hook-form";
+
+import IconArrow from "@assets/icons/other/IconArrow.svg";
+import { Text } from "@components/text/Text";
+import { getSvgElement } from "@utils/elements";
 
 import * as styles from "./Select.scss";
 import { Option, SelectProps } from "./types";
@@ -104,6 +105,7 @@ export function Select<T extends FieldValues>({
                   <div
                     ref={refOptions}
                     className={styles.options}
+                    onMouseDown={(e) => e.stopPropagation()}
                     style={{
                       top: `${coords?.y}px`,
                       left: `${coords?.x}px`,
@@ -123,7 +125,7 @@ export function Select<T extends FieldValues>({
                       </div>
                     ))}
                   </div>,
-                  document.body,
+                  document.getElementById("select-root")!,
                 )}
             </div>
           </div>
