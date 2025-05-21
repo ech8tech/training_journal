@@ -1,13 +1,15 @@
 import cn from "classnames";
+import { useNavigate } from "react-router-dom";
 
+import { routes } from "@app/routesConfig";
 import IconGraph from "@assets/icons/other/IconGraph.svg";
 import IconSettings from "@assets/icons/other/IconSettings.svg";
 import { Button } from "@components/buttons";
-import { CalendarStatistics } from "@components/calendarStatistics/CalendarStatistics";
-import { PageLayout } from "@components/pageLayout/PageLayout";
-import { Spacing } from "@components/spacing/Spacing";
-import { Text } from "@components/text/Text";
-import { Title } from "@components/title/Title";
+import { PageLayout } from "@components/pageLayout";
+import { Schedule } from "@components/schedule";
+import { Spacing } from "@components/spacing";
+import { Text } from "@components/text";
+import { Title } from "@components/title";
 import { SPACE_CONTAINER } from "@constants/spacing";
 import { getWeekDays } from "@pages/dashboard/utils";
 
@@ -16,6 +18,11 @@ import * as styles from "./Dashboard.scss";
 
 export default function Dashboard() {
   const weekDays = getWeekDays();
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(routes.STATISTICS.path);
+  };
 
   return (
     <PageLayout>
@@ -66,10 +73,16 @@ export default function Dashboard() {
 
       <Spacing space={SPACE_CONTAINER} className={styles.statistic_title}>
         <Title size="h1">Статистика</Title>
-        <Button text="Подробнее" type="ghost" size="sm" icon={<IconGraph />} />
+        <Button
+          onClick={handleClick}
+          text="Подробнее"
+          type="ghost"
+          size="sm"
+          icon={<IconGraph />}
+        />
       </Spacing>
       <div>
-        <CalendarStatistics />
+        <Schedule dates={[]} />
       </div>
     </PageLayout>
   );

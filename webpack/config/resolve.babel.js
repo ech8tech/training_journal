@@ -12,6 +12,7 @@ export function getResolve() {
       "@styles": `${paths.src}/styles`,
       "@constants": `${paths.src}/constants`,
       "@utils": `${paths.src}/utils`,
+      "@configs": `${paths.src}/configs`,
     },
   };
 }

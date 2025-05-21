@@ -68,7 +68,7 @@ export default function Profile() {
           placeholder="Ваш пол"
           name={register("sex").name}
           control={control}
-          onChange={(option) => setValue("sex", option.id)}
+          onChange={(option) => setValue("sex", option?.id)}
           options={optionsSex}
           defaultOptionId={sex}
         />

@@ -7,6 +7,7 @@ import { Dashboard } from "@pages/dashboard";
 import { Journal } from "@pages/journal";
 import { Profile } from "@pages/profile";
 import { Progress } from "@pages/progress";
+import { Statistics } from "@pages/statistics";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { routes } from "./routesConfig";
@@ -34,6 +35,8 @@ export function App() {
           <Route path={routes.PROFILE.path} element={<Profile />} />
 
           <Route path={routes.PROGRESS.path} element={<Progress />} />
+
+          <Route path={routes.STATISTICS.path} element={<Statistics />} />
 
           <Route
             path="*"

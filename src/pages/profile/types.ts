@@ -3,5 +3,5 @@ export type RegistrationProfileFormProps = {
   age: string;
   weight: string;
   height: string;
-  sex: string;
+  sex?: string;
 };

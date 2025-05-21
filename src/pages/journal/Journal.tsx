@@ -10,14 +10,14 @@ import { Checkbox } from "@components/checkbox/Checkbox";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Spacing } from "@components/spacing/Spacing";
 import { Table } from "@components/table/Table";
-import { SPACE_CONTAINER } from "@constants/spacing";
-
 import {
   MuscleGroupName,
   MuscleGroupType,
   Muscles,
   MuscleType,
-} from "./consts";
+} from "@constants/muscles";
+import { SPACE_CONTAINER } from "@constants/spacing";
+
 import { useOpenModal } from "./utils";
 
 export default function Journal() {
