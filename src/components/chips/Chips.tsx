@@ -1,30 +1,22 @@
 import cn from "classnames";
-import { useState } from "react";
 
 import { Text } from "@components/text/Text";
 
 import * as styles from "./Chips.scss";
 import { ChipsProps } from "./types";
 
-export function Chips({ className, chips }: ChipsProps) {
-  const [isActiveChip, setIsActiveChip] = useState<string>();
-
-  const handleClick = (text: string, onClick: () => void) => {
-    setIsActiveChip(text);
-    onClick();
-  };
-
+export function Chips({ className, activeChipsId, chips }: ChipsProps) {
   return (
     <div className={cn(className, styles.chips)}>
-      {chips.map((chip) => (
+      {chips.map(({ id, text, onClick }) => (
         <div
-          key={chip.text}
+          key={text}
           className={cn(styles.chip, {
-            [styles.chip__active]: isActiveChip === chip.text,
+            [styles.chip__active]: activeChipsId === id,
           })}
-          onClick={() => handleClick(chip.text, chip.onClick)}
+          onClick={() => onClick(id)}
         >
-          <Text>{chip.text}</Text>
+          <Text>{text}</Text>
         </div>
       ))}
     </div>

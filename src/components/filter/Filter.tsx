@@ -1,25 +1,40 @@
+import IconDelete from "@assets/icons/other/IconDelete.svg";
+import { Button } from "@components/buttons";
 import { Chips } from "@components/chips";
 import { Input } from "@components/input";
 import { Spacing } from "@components/spacing/Spacing";
 import { Text } from "@components/text/Text";
 
 import * as styles from "./Filter.scss";
+import { FilterProps } from "./types";
 
-export function Filter() {
+export function Filter({
+  configDateStart,
+  configDateEnd,
+  activeChipsId,
+  onClickChips,
+  onResetCalendar,
+}: FilterProps) {
   return (
-    <div>
+    <>
       <Spacing className={styles.period} space={16}>
         <Input
+          {...configDateStart}
           className={styles.date}
           label="Начало периода"
-          placeholder="Выберите дату"
           type="date"
         />
         <Input
+          {...configDateEnd}
           className={styles.date}
           label="Конец периода"
-          placeholder="Выберите дату"
           type="date"
+        />
+        <Button
+          isDisabled={!configDateStart.value || !configDateEnd.value}
+          onClick={onResetCalendar}
+          type="danger"
+          icon={<IconDelete />}
         />
       </Spacing>
       <div className={styles.filter}>
@@ -28,14 +43,15 @@ export function Filter() {
         </div>
         <div className={styles.chips_row}>
           <Chips
+            activeChipsId={activeChipsId}
             chips={[
-              { text: "За неделю", onClick: () => {} },
-              { text: "За месяц", onClick: () => {} },
-              { text: "За год", onClick: () => {} },
+              { id: "week", text: "За неделю", onClick: onClickChips },
+              { id: "month", text: "За месяц", onClick: onClickChips },
+              { id: "year", text: "За год", onClick: onClickChips },
             ]}
           />
         </div>
       </div>
-    </div>
+    </>
   );
 }

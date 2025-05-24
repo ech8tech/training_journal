@@ -1,7 +1,9 @@
 export type ChipsProps = {
-  className?: string;
   chips: {
+    id: string;
     text: string;
-    onClick(): void;
+    onClick(id: string): void;
   }[];
+  className?: string;
+  activeChipsId?: string;
 };

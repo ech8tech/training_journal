@@ -21,6 +21,9 @@ const routesConfig = {
     PROGRESS: {
       path: "/progress/:muscleType",
     },
+    STATISTICS: {
+      path: "/statistics",
+    },
     COMPONENTS: {
       path: "/components",
     },

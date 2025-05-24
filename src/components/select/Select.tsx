@@ -4,6 +4,7 @@ import { createPortal } from "react-dom";
 import { Controller, FieldValues } from "react-hook-form";
 
 import IconArrow from "@assets/icons/other/IconArrow.svg";
+import IconDelete from "@assets/icons/other/IconDelete.svg";
 import { Text } from "@components/text/Text";
 import { getSvgElement } from "@utils/elements";
 
@@ -54,6 +55,12 @@ export function Select<T extends FieldValues>({
     onChange(option);
   };
 
+  const handleReset = (event: MouseEvent | React.MouseEvent) => {
+    event.stopPropagation();
+    setSelected(undefined);
+    onChange(undefined);
+  };
+
   useEffect(() => {
     if (refSelect?.current) {
       const { width, height, x, y } = refSelect.current.getBoundingClientRect();
@@ -91,13 +98,18 @@ export function Select<T extends FieldValues>({
             >
               <div className={styles.value}>
                 <div>{selected?.name || placeholder}</div>
-                <IconArrow
-                  width={18}
-                  height={18}
-                  className={cn(styles.value_icon, {
-                    [styles.value_icon__opened]: isOpened,
-                  })}
-                />
+                <div className={styles.value_controls}>
+                  <IconArrow
+                    width={18}
+                    height={18}
+                    className={cn(styles.value_icon, {
+                      [styles.value_icon__opened]: isOpened,
+                    })}
+                  />
+                  {selected?.name && (
+                    <IconDelete width={18} height={18} onClick={handleReset} />
+                  )}
+                </div>
               </div>
 
               {isOpened &&

@@ -6,6 +6,7 @@ $base_size: 16;
 $base_size_rem: 1rem;
 
 $base_border_radius: math.div(10, $base_size) * $base_size_rem;
+$circle_border_radius: math.div(50, $base_size) * $base_size_rem;
 
 $transition_fast: .1s;
 $transition_slow: .3s;

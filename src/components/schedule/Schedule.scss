@@ -10,14 +10,22 @@
 }
 
 .day {
-  background-color: colors.$danger;
-  width: spacing.$space_32;
-  height: spacing.$space_32;
-  border-radius: 50px;
+  background-color: colors.$primary;
+  width: spacing.space(30);
+  height: spacing.space(30);
+  border-radius: common.$circle_border_radius;
   color: colors.$text_primary;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &__passed {
+    background-color: colors.$primary_contrast;
+  }
+
+  &__current {
+    background-color: colors.$danger;
+  }
 
   &__future {
     background-color: colors.$text_secondary;

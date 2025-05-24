@@ -1,21 +1,25 @@
 @use "@styles/spacing";
 
+.filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: spacing.$gap_8;
+}
+
 .period {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   gap: spacing.$gap_16;
 }
 
 .date {
   flex-grow: 1;
+  min-width: 120px;
 }
 
-.filter {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .chips_row {
   display: flex;

@@ -8,7 +8,7 @@ import { Button } from "@components/buttons";
 import { Input } from "@components/input";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
-import { MuscleGroupType } from "@pages/journal/consts";
+import { MuscleGroupType } from "@constants/muscles";
 import { getMuscleOptions } from "@pages/journal/modalAddEdit/utils";
 
 import * as styles from "./ModalAddEdit.scss";
@@ -18,9 +18,9 @@ export function ModalAddEdit({ formData }: ModalAddEditProps) {
   const params = useParams<{ muscleGroupType: MuscleGroupType }>();
   const muscleGroupType = params.muscleGroupType!;
 
-  const { register, watch, control, setValue } = useForm<ModalAddEditFormProps>(
-    { defaultValues: { ...formData } },
-  );
+  const { register, control, setValue } = useForm<ModalAddEditFormProps>({
+    defaultValues: { ...formData },
+  });
 
   const { fields, append, remove } = useFieldArray({
     control,

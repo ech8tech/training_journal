@@ -28,6 +28,15 @@ export enum MuscleGroupType {
   PRESS = "press",
 }
 
+export const MuscleGroupColor: Record<MuscleGroupType, string> = {
+  [MuscleGroupType.SHOULDERS]: "#ff595e",
+  [MuscleGroupType.HANDS]: "#ff924c",
+  [MuscleGroupType.BREAST]: "#ffca3a",
+  [MuscleGroupType.LEGS]: "#8ac926",
+  [MuscleGroupType.BACK]: "#1982c4",
+  [MuscleGroupType.PRESS]: "#6a4c93",
+};
+
 export const MuscleGroupName: Record<MuscleGroupType, string> = {
   [MuscleGroupType.SHOULDERS]: "Плечи и трапеции",
   [MuscleGroupType.HANDS]: "Руки",
@@ -159,25 +168,3 @@ export const Muscles: Record<
     icon: <IconCalf />,
   },
 };
-
-// export const MuscleIcon: Record<MuscleType, ReactNode> = {
-//   [MuscleType.TRAPEZOIDS]: <IconTrapezoids />,
-//   [MuscleType.SHOULDERS_FRONT]: <IconShouldersFront />,
-//   [MuscleType.SHOULDERS_BACK]: <IconShouldersBack />,
-//   [MuscleType.BREAST]: <IconBreast />,
-//   [MuscleType.BACK_TOP]: <IconBackTop />,
-//   [MuscleType.BACK_MIDDLE]: <IconBackMiddle />,
-//   [MuscleType.BACK_BOTTOM]: <IconBackBottom />,
-//   [MuscleType.BICEPS]: <IconBiceps />,
-//   [MuscleType.BRACHIALIS]: <IconBrachialis />,
-//   [MuscleType.TRICEPS]: <IconTriceps />,
-//   [MuscleType.FOREARM_FRONT]: <IconForearmFront />,
-//   [MuscleType.FOREARM_BACK]: <IconForearmBack />,
-//   [MuscleType.PRESS_MIDDLE]: <IconPressMiddle />,
-//   [MuscleType.PRESS_OBLIQUE]: <IconPressOblique />,
-//   [MuscleType.LEGS_FRONT]: <IconLegsFront />,
-//   [MuscleType.LEGS_FRONT_INSIDE]: <IconLegsFrontInside />,
-//   [MuscleType.LEGS_BACK]: <IconLegsBack />,
-//   [MuscleType.BUTTOCKS]: <IconButtocks />,
-//   [MuscleType.CALF]: <IconCalf />,
-// };
