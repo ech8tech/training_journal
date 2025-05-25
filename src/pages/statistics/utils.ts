@@ -100,7 +100,7 @@ export function mockData(
           const setsCount = randInt(3, 5);
           const sets = Array.from({ length: setsCount }, (_, i) => ({
             order: i + 1,
-            weight: parseFloat((randInt(10, 400) + Math.random()).toFixed(1)), // 10.0–60.9 кг
+            weight: parseFloat((randInt(10, 100) + Math.random()).toFixed(1)), // 10.0–60.9 кг
             reps: randInt(5, 15),
           }));
 

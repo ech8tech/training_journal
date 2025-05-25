@@ -129,7 +129,7 @@ export default function Statistics() {
             activeChipsId={period}
           />
         </Spacing>
-        <ChartScatterplot data={data} hideDays={period === "year"} />
+        <ChartScatterplot data={data} />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
         <Spacing space={16}>

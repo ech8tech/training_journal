@@ -29,9 +29,8 @@ export default function Journal() {
     navigate(-1);
   };
 
-  const handleNavigateToProgress = (muscleType: MuscleType) => {
-    console.log(muscleType);
-    const to = generatePath(routes.PROGRESS.path, { muscleType });
+  const handleNavigateToProgress = (id: string) => {
+    const to = generatePath(routes.PROGRESS.path, { exerciseId: id });
     navigate(to);
   };
 
@@ -108,7 +107,7 @@ export default function Journal() {
                   <Button
                     type="ghost"
                     icon={<IconGraph />}
-                    onClick={() => handleNavigateToProgress(item.muscleType)}
+                    onClick={() => handleNavigateToProgress(item.id)}
                   />
                 </>
               }

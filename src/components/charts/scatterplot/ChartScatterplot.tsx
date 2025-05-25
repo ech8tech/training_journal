@@ -4,13 +4,14 @@ import { useEffect, useRef, useState } from "react";
 import { Spacing } from "@components/spacing";
 import { Text } from "@components/text";
 import { dayjs } from "@configs/dayjs";
+import { DAYS_IN_MONTH } from "@constants/dayjs";
 import { MuscleGroupColor, MuscleGroupName } from "@constants/muscles";
 
 import * as styles from "./ChartScatterplot.scss";
 import { LineChartProps } from "./types";
 import { getConfig } from "./utils";
 
-export function ChartScatterplot({ data, hideDays }: LineChartProps) {
+export function ChartScatterplot({ data }: LineChartProps) {
   const ref = useRef<SVGSVGElement | null>(null);
   const [isShowNotification, setIsShowNotification] = useState(false);
 
@@ -35,6 +36,9 @@ export function ChartScatterplot({ data, hideDays }: LineChartProps) {
       LEGEND_CIRCLE_SIZE,
     } = getConfig(data);
 
+    const innerWidth = width - marginLeft - marginRight;
+    const innerHeight = height - marginTop - marginRight;
+
     let svg;
 
     if (!dates?.length) {
@@ -42,10 +46,15 @@ export function ChartScatterplot({ data, hideDays }: LineChartProps) {
     } else {
       setIsShowNotification(false);
 
+      const [minDate, maxDate] = d3.extent(dates) as [Date, Date];
+
+      const hideDays =
+        dayjs(maxDate).diff(dayjs(minDate), "day") + 1 > DAYS_IN_MONTH;
+
       // Ось X
       const x = d3
         .scaleTime()
-        .domain(d3.extent(dates) as [Date, Date])
+        .domain([minDate, maxDate])
         .range([marginLeft + CIRCLE_SIZE, width - marginRight - CIRCLE_SIZE]);
 
       // Ось Y
@@ -64,40 +73,21 @@ export function ChartScatterplot({ data, hideDays }: LineChartProps) {
 
       svg.selectAll("*").remove();
 
-      // Ось X (СЕТКА)
-      const xGrid = svg
-        .append("g")
-        .attr("transform", `translate(0,${height - marginBottom})`)
-        .call(
-          d3
-            .axisBottom(x)
-            .ticks(d3.timeDay.every(1))
-            .tickSize(-height)
-            .tickFormat(() => ""),
-        );
-      xGrid.selectAll("line").attr("stroke", "#13678a1c");
-      xGrid.select(".domain").remove();
-
-      // Ось Y (СЕТКА)
-      const yGrid = svg
-        .append("g")
-        .attr("transform", `translate(${marginLeft}, 0)`)
-        .call(
-          d3
-            .axisLeft(y)
-            .tickSize(-width)
-            .tickFormat(() => ""),
-        );
-      yGrid.selectAll("line").attr("stroke", "#13678a1c");
-      yGrid.select(".domain").remove();
-
       // Ось X (ЛИНИЯ)
       svg
         .append("g")
         .attr("transform", `translate(0,${height - marginBottom})`)
         .call(d3.axisBottom(x).ticks(d3.timeDay.every(1)).tickSize(6))
         .call((g) => g.select(".domain").remove())
-        .call((g) => g.selectAll(".tick line").style("stroke", "white"))
+        .call((g) => g.selectAll(".tick line").attr("stroke", "white"))
+        .call((g) =>
+          g
+            .selectAll(".tick line")
+            .clone()
+            .attr("y2", -innerHeight)
+            .attr("stroke", "#13678a")
+            .attr("stroke-opacity", 0.2),
+        )
         .call((g) => {
           if (hideDays) {
             return g
@@ -113,8 +103,8 @@ export function ChartScatterplot({ data, hideDays }: LineChartProps) {
         .call((g) =>
           g
             .selectAll<SVGTextElement, Date>(".tick text")
+            .attr("fill", "white")
             .style("font-size", "1.25rem")
-            .style("fill", "white")
             .each(function (d) {
               const text = d3.select(this);
               text.text("");
@@ -149,13 +139,22 @@ export function ChartScatterplot({ data, hideDays }: LineChartProps) {
             }),
         )
         .call((g) => g.select(".domain").remove())
+        .call((g) => g.selectAll(".tick line").attr("stroke", "white"))
         .call((g) =>
           g
             .selectAll(".tick text")
-            .style("font-size", "1.25rem")
-            .style("fill", "white"),
+            .attr("fill", "white")
+            .style("font-size", "1.25rem"),
         )
-        .call((g) => g.selectAll(".tick line").style("stroke", "white"));
+        .call((g) =>
+          g
+            .selectAll(".tick line")
+            .clone()
+            .clone()
+            .attr("x2", innerWidth)
+            .attr("stroke", "#13678a")
+            .attr("stroke-opacity", 0.2),
+        );
 
       // Точки
       svg
