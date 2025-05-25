@@ -19,7 +19,7 @@ const routesConfig = {
       path: "/journal/:muscleGroupType",
     },
     PROGRESS: {
-      path: "/progress/:muscleType",
+      path: "/progress/:exerciseId",
     },
     STATISTICS: {
       path: "/statistics",
