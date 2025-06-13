@@ -6,10 +6,10 @@ const ProfileComponent = React.lazy(
   () => import(/* webpackChunkName: "Profile" */ "./Profile"),
 );
 
-export const Profile = () => {
+export const Profile = ({ onSetProfile }: any) => {
   return (
     <Suspense fallback={<Spinner isFullPage />}>
-      <ProfileComponent />
+      <ProfileComponent onSetProfile={onSetProfile} />
     </Suspense>
   );
 };

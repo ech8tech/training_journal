@@ -23,9 +23,11 @@ export default function SignIn() {
       return api.post<UserModel>("/auth/sign_in", payload);
     },
     onSuccess: ({ data }) => {
-      if (data.hasProfile) {
+      if (data.id && data.hasProfile) {
         navigate(routes.DASHBOARD.path);
-      } else {
+      }
+
+      if (data.id && !data.hasProfile) {
         navigate(routes.PROFILE.path);
       }
     },

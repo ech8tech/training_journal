@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
@@ -6,8 +7,9 @@ import { Input } from "@components/input";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
+import { Spinner } from "@components/spinner/Spinner";
 import { SPACE_CONTAINER } from "@constants/spacing";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { api } from "@utils/fetch";
 
 import { optionsSex } from "./consts";
@@ -30,14 +32,31 @@ export default function Profile() {
     mutationFn: (payload: RegistrationProfileFormProps) => {
       return api.post(`/profile/create`, payload);
     },
-    onSuccess: () => {
-      navigate(routes.DASHBOARD.path);
+    onSuccess: ({ data }) => {
+      if (data.id) {
+        navigate(routes.DASHBOARD.path);
+      }
     },
   });
+
+  const { data, isFetching: isLoading } = useQuery({
+    queryKey: ["CHECK_USER_PROFILE"],
+    queryFn: () => api.get("/profile/check"),
+  });
+
+  useEffect(() => {
+    if (data?.data?.id) {
+      navigate(routes.DASHBOARD.path);
+    }
+  }, [data]);
 
   const handleConfirm = async () => {
     await createProfile(getValues());
   };
+
+  if (isLoading) {
+    return <Spinner isFullPage />;
+  }
 
   return (
     <PageLayout

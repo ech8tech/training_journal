@@ -22,9 +22,7 @@ export default function SignUp() {
       return api.post<UserModel>("/auth/sign_up", payload);
     },
     onSuccess: ({ data }) => {
-      if (data.hasProfile) {
-        navigate(routes.DASHBOARD.path);
-      } else {
+      if (data.id) {
         navigate(routes.PROFILE.path);
       }
     },
