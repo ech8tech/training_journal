@@ -1,4 +1,5 @@
 import cn from "classnames";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { routes } from "@app/routesConfig";
@@ -12,6 +13,7 @@ import { Text } from "@components/text";
 import { Title } from "@components/title";
 import { SPACE_CONTAINER } from "@constants/spacing";
 import { getWeekDays } from "@pages/dashboard/utils";
+import { api } from "@utils/fetch";
 
 import { Muscles } from "./components/muscles/Muscles";
 import * as styles from "./Dashboard.scss";
@@ -23,6 +25,11 @@ export default function Dashboard() {
   const handleClick = () => {
     navigate(routes.STATISTICS.path);
   };
+
+  useEffect(() => {
+    api.get("/users").then((data) => console.log(data.data));
+    api.get("/profile").then((data) => console.log(data.data));
+  }, []);
 
   return (
     <PageLayout>

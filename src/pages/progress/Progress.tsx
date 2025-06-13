@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { LineChart } from "@components/charts/lineChart";
 import { LineChartData } from "@components/charts/lineChart/types";
@@ -17,6 +17,7 @@ import { generateRandomSessions, getDateConfig } from "./utils";
 export default function Progress() {
   const { exerciseId } = useParams();
   const [data, setData] = useState<ProgressData>();
+  const navigate = useNavigate();
 
   const { register, watch, resetField, setValue } = useForm<ProgressFormProps>({
     defaultValues: {
@@ -58,6 +59,10 @@ export default function Progress() {
     resetField("calendar");
   };
 
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   const filterData = (startDate: string, endDate: string) => {
     const filtered = [...mock.sessions].filter(({ date }) => {
       return (
@@ -84,7 +89,7 @@ export default function Progress() {
   }, [period, calendar?.dateStart, calendar?.dateEnd]);
 
   return (
-    <PageLayout title="График прогресса">
+    <PageLayout title="График прогресса" onBack={handleBack}>
       <Spacing space={16}>
         <Filter
           configDateStart={{
