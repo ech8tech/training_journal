@@ -9,12 +9,12 @@ import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
 import { Spinner } from "@components/spinner/Spinner";
 import { SPACE_CONTAINER } from "@constants/spacing";
+import { api } from "@src/api";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { api } from "@utils/fetch";
 
 import { optionsSex } from "./consts";
 import * as styles from "./Profile.scss";
-import { RegistrationProfileFormProps } from "./types";
+import { ProfileDto, RegistrationProfileFormProps } from "./types";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -29,8 +29,8 @@ export default function Profile() {
   const { sex } = getValues();
 
   const { isPending, mutateAsync: createProfile } = useMutation({
-    mutationFn: (payload: RegistrationProfileFormProps) => {
-      return api.post(`/profile/create`, payload);
+    mutationFn: (payload: ProfileDto) => {
+      return api.apiProfile.createProfile(payload);
     },
     onSuccess: ({ data }) => {
       if (data.id) {
@@ -41,7 +41,7 @@ export default function Profile() {
 
   const { data, isFetching: isLoading } = useQuery({
     queryKey: ["CHECK_USER_PROFILE"],
-    queryFn: () => api.get("/profile/check"),
+    queryFn: () => api.apiProfile.getProfile(),
   });
 
   useEffect(() => {

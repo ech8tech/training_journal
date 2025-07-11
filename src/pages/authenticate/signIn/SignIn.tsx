@@ -2,34 +2,34 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { routes } from "@app/routesConfig";
+import { useToast } from "@hooks/useToast";
+import { api } from "@src/api";
 import { useMutation } from "@tanstack/react-query";
-import { api } from "@utils/fetch";
 
-import {
-  AuthenticateForm,
-  AuthenticateFormProps,
-  Types,
-  UserModel,
-} from "../common";
+import { AuthenticateForm, AuthenticateFormProps, UserDto } from "../common";
 
 export default function SignIn() {
   const form = useForm<AuthenticateFormProps>();
   const { getValues } = form;
 
   const navigate = useNavigate();
+  const { openToastError } = useToast();
 
   const { isPending: isSignInPending, mutateAsync: signIn } = useMutation({
-    mutationFn: (payload: Types) => {
-      return api.post<UserModel>("/auth/sign_in", payload);
+    mutationFn: (payload: UserDto) => {
+      return api.apiAuth.signIn(payload);
     },
     onSuccess: ({ data }) => {
-      if (data.id && data.hasProfile) {
-        navigate(routes.DASHBOARD.path);
+      if (data?.id && data.hasProfile) {
+        window.location.href = routes.DASHBOARD.path;
       }
 
-      if (data.id && !data.hasProfile) {
-        navigate(routes.PROFILE.path);
+      if (data?.id && !data.hasProfile) {
+        window.location.href = routes.PROFILE.path;
       }
+    },
+    onError: (error) => {
+      openToastError(error.message);
     },
   });
 

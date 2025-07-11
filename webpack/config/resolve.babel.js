@@ -13,6 +13,10 @@ export function getResolve() {
       "@constants": `${paths.src}/constants`,
       "@utils": `${paths.src}/utils`,
       "@configs": `${paths.src}/configs`,
+      "@typings": `${paths.src}/typings`,
+      "@hooks": `${paths.src}/hooks`,
+      "@providers": `${paths.src}/providers`,
+      "@api": `${paths.src}/api`,
     },
   };
 }

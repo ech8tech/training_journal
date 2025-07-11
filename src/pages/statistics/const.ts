@@ -1,10 +1,10 @@
 import { LineChartData } from "@components/charts/scatterplot/types";
-import { MuscleGroupType } from "@constants/muscles";
+import { MuscleGroup } from "@constants/muscles";
 
 export const data: Array<LineChartData> = [
   {
     date: "2025-05-20",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Жим штангой",
     sets: [
       { order: 1, weight: 30.0, reps: 15 },
@@ -15,7 +15,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-20",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Жим со штангой в наклоне",
     sets: [
       { order: 1, weight: 30.0, reps: 15 },
@@ -26,7 +26,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-20",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Сведение гантелей лежа",
     sets: [
       { order: 1, weight: 12.5, reps: 10 },
@@ -36,7 +36,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-20",
-    muscleGroupType: MuscleGroupType.HANDS,
+    muscleGroupType: MuscleGroup.HANDS,
     exerciseName: "Гантель над головой",
     sets: [
       { order: 1, weight: 12.5, reps: 10 },
@@ -46,7 +46,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-20",
-    muscleGroupType: MuscleGroupType.HANDS,
+    muscleGroupType: MuscleGroup.HANDS,
     exerciseName: "Французский жим",
     sets: [
       { order: 1, weight: 17.5, reps: 15 },
@@ -57,7 +57,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-21",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Жим штангой",
     sets: [
       { order: 1, weight: 30.0, reps: 15 },
@@ -68,7 +68,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-21",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Жим со штангой в наклоне",
     sets: [
       { order: 1, weight: 30.0, reps: 15 },
@@ -79,7 +79,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-21",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Сведение гантелей лежа",
     sets: [
       { order: 1, weight: 12.5, reps: 15 },
@@ -89,7 +89,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-21",
-    muscleGroupType: MuscleGroupType.HANDS,
+    muscleGroupType: MuscleGroup.HANDS,
     exerciseName: "Гантель над головой",
     sets: [
       { order: 1, weight: 12.5, reps: 12 },
@@ -99,7 +99,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-21",
-    muscleGroupType: MuscleGroupType.HANDS,
+    muscleGroupType: MuscleGroup.HANDS,
     exerciseName: "Французский жим",
     sets: [
       { order: 1, weight: 17.5, reps: 15 },
@@ -110,7 +110,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-22",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Жим штангой",
     sets: [
       { order: 1, weight: 30.0, reps: 15 },
@@ -121,7 +121,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-22",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Жим со штангой в наклоне",
     sets: [
       { order: 1, weight: 30.0, reps: 15 },
@@ -132,7 +132,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-22",
-    muscleGroupType: MuscleGroupType.BREAST,
+    muscleGroupType: MuscleGroup.BREAST,
     exerciseName: "Сведение гантелей лежа",
     sets: [
       { order: 1, weight: 10, reps: 15 },
@@ -142,7 +142,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-22",
-    muscleGroupType: MuscleGroupType.HANDS,
+    muscleGroupType: MuscleGroup.HANDS,
     exerciseName: "Гантель над головой",
     sets: [
       { order: 1, weight: 12.5, reps: 12 },
@@ -152,7 +152,7 @@ export const data: Array<LineChartData> = [
   },
   {
     date: "2025-05-22",
-    muscleGroupType: MuscleGroupType.HANDS,
+    muscleGroupType: MuscleGroup.HANDS,
     exerciseName: "Французский жим",
     sets: [
       { order: 1, weight: 17.5, reps: 15 },

@@ -28,20 +28,20 @@ export function Muscles() {
   const navigate = useNavigate();
   const muscles = Object.keys(MuscleList);
 
-  const handleNavigate = (muscleGroupType: string) => {
-    const to = generatePath(routes.JOURNAL.path, { muscleGroupType });
+  const handleNavigate = (muscleGroup: string) => {
+    const to = generatePath(routes.JOURNAL.path, { muscleGroup });
     navigate(to);
   };
 
   return (
     <Spacing space={SPACE_CONTAINER} className={styles.muscles}>
-      {muscles.map((muscleGroupType) => (
+      {muscles.map((muscleGroup) => (
         <div
-          key={muscleGroupType}
+          key={muscleGroup}
           className={styles.muscle}
-          onClick={() => handleNavigate(muscleGroupType)}
+          onClick={() => handleNavigate(muscleGroup)}
         >
-          {MuscleList[muscleGroupType]}
+          {MuscleList[muscleGroup]}
         </div>
       ))}
     </Spacing>

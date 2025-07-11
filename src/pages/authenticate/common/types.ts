@@ -1,9 +1,4 @@
-export type Types = {
+export type UserDto = {
   email: string;
   password: string;
-};
-
-export type UserModel = {
-  id: string;
-  hasProfile: boolean;
 };

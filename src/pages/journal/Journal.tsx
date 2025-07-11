@@ -1,6 +1,8 @@
+import dayjs from "dayjs";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
 
 import { routes } from "@app/routesConfig";
+import IconCircleTick from "@assets/icons/other/IconCircleTick.svg";
 import IconEdit from "@assets/icons/other/IconEdit.svg";
 import IconGraph from "@assets/icons/other/IconGraph.svg";
 import IconPlus from "@assets/icons/other/IconPlus.svg";
@@ -9,21 +11,27 @@ import { Button } from "@components/buttons";
 import { Checkbox } from "@components/checkbox/Checkbox";
 import { PageLayout } from "@components/pageLayout/PageLayout";
 import { Spacing } from "@components/spacing/Spacing";
+import { Spinner } from "@components/spinner/Spinner";
 import { Table } from "@components/table/Table";
-import {
-  MuscleGroupName,
-  MuscleGroupType,
-  Muscles,
-  MuscleType,
-} from "@constants/muscles";
+import { Title } from "@components/title";
+import { DATE_FORMAT } from "@constants/format";
+import { MuscleGroup, MuscleGroupName, Muscles } from "@constants/muscles";
 import { SPACE_CONTAINER } from "@constants/spacing";
+import { useCreateSession } from "@pages/journal/hooks/useCreateSession";
+import { useDeleteSession } from "@pages/journal/hooks/useDeleteSession";
+import { SetDto } from "@pages/journal/types";
 
-import { useOpenModal } from "./utils";
+import { useGetExercises, useModalAddEdit } from "./hooks";
+import * as styles from "./Journal.scss";
 
 export default function Journal() {
   const navigate = useNavigate();
-  const params = useParams<{ muscleGroupType: MuscleGroupType }>();
-  const muscleGroupType = params.muscleGroupType!;
+  const params = useParams<{ muscleGroup: MuscleGroup }>();
+  const muscleGroup = params.muscleGroup!;
+
+  const { createSession } = useCreateSession();
+  const { deleteSession } = useDeleteSession();
+  const { data, isLoading } = useGetExercises(muscleGroup);
 
   const handleBack = () => {
     navigate(-1);
@@ -34,50 +42,30 @@ export default function Journal() {
     navigate(to);
   };
 
-  const { modal, handleOpenModal } = useOpenModal();
+  const { modal, handleOpenModal } = useModalAddEdit();
 
-  const mock = [
-    {
-      id: "1",
-      exerciseName: "Поднятие штанги стоя",
-      muscleType: MuscleType.BICEPS,
-      data: [
-        { reps: 15, weight: 20 },
-        { reps: 12, weight: 25 },
-        { reps: 10, weight: 30 },
-      ],
-    },
-    {
-      id: "2",
-      exerciseName: "Поднятие штанги стоя",
-      muscleType: MuscleType.BRACHIALIS,
-      data: [
-        { reps: 15, weight: 30 },
-        { reps: 12, weight: 40 },
-        { reps: 10, weight: 50 },
-      ],
-    },
-    {
-      id: "3",
-      exerciseName: "Сгибание рук гантелей",
-      muscleType: MuscleType.FOREARM_FRONT,
-      data: [
-        { reps: 15, weight: 30 },
-        { reps: 12, weight: 40 },
-        { reps: 10, weight: 50 },
-      ],
-    },
-    {
-      id: "4",
-      exerciseName: "Разгибание рук гантелей",
-      muscleType: MuscleType.FOREARM_BACK,
-      data: [
-        { reps: 15, weight: 30 },
-        { reps: 12, weight: 40 },
-        { reps: 10, weight: 50 },
-      ],
-    },
-  ];
+  const handleCreateSession = async (exerciseId: string, sets?: SetDto[]) => {
+    await createSession({
+      date: dayjs().format(DATE_FORMAT),
+      exerciseId,
+      sets,
+    });
+  };
+
+  const handleDeleteSession = async (exerciseId: string) => {
+    await deleteSession(exerciseId);
+  };
+
+  // const handleEditExercise = async (
+  //   exerciseId: string,
+  //   payload: EditExerciseDto,
+  // ) => {
+  //   await editExercise({ exerciseId, payload });
+  // };
+
+  if (isLoading) {
+    return <Spinner isFullPage />;
+  }
 
   return (
     <PageLayout
@@ -89,48 +77,79 @@ export default function Journal() {
         },
       }}
       onBack={handleBack}
-      title={MuscleGroupName[muscleGroupType]}
+      title={MuscleGroupName[muscleGroup]}
     >
-      {mock.map((item, index) => (
-        <Spacing
-          key={item.id}
-          space={index !== mock.length - 1 ? SPACE_CONTAINER : 0}
-        >
-          <Accordion
-            title={item.exerciseName}
-            icon={Muscles[item.muscleType].icon}
+      {!data?.length ? (
+        <Title size="h3">Добавьте упражнения на эту группу мышц</Title>
+      ) : (
+        data?.map((item, index) => (
+          <Spacing
+            key={item.id}
+            space={index !== data.length - 1 ? SPACE_CONTAINER : 0}
           >
-            <Table
-              header={
-                <>
-                  <Checkbox label="Выполнено" />
-                  <Button
-                    type="ghost"
-                    icon={<IconGraph />}
-                    onClick={() => handleNavigateToProgress(item.id)}
+            <Accordion
+              title={item.name}
+              iconPrimary={Muscles[item.muscleType].icon}
+              iconSecondary={
+                !!item?.sets?.length && item.isDone ? (
+                  <IconCircleTick
+                    width={24}
+                    height={24}
+                    className={styles.iconDone}
                   />
-                </>
+                ) : undefined
               }
-              columns={[
-                { key: "reps", title: "Подходы" },
-                { key: "weight", title: "Вес" },
-              ]}
-              rows={item.data}
-              buttonConfig={{
-                title: "Редактировать",
-                icon: <IconEdit />,
-                onClick: () => {
-                  handleOpenModal("Редактирование упражнения", "Сохранить", {
-                    exerciseName: item.exerciseName,
-                    muscleType: item.muscleType,
-                    data: item.data,
-                  });
-                },
-              }}
-            />
-          </Accordion>
-        </Spacing>
-      ))}
+            >
+              <Table
+                header={
+                  <>
+                    {!!item?.sets?.length && (
+                      <Checkbox
+                        checked={item.isDone}
+                        onChange={() =>
+                          item.isDone
+                            ? handleDeleteSession(item.id)
+                            : handleCreateSession(item.id, item?.sets)
+                        }
+                        label="Выполнено"
+                      />
+                    )}
+                    <Button
+                      type="ghost"
+                      className={styles.buttonGraph}
+                      icon={<IconGraph />}
+                      onClick={() => handleNavigateToProgress(item.id)}
+                    />
+                  </>
+                }
+                bodyEmpty={
+                  !item?.sets?.length ? (
+                    <Title size="h5">Добавьте подходы к упражнению</Title>
+                  ) : null
+                }
+                columns={[
+                  { key: "reps", title: "Подходы" },
+                  { key: "weight", title: "Вес" },
+                ]}
+                rows={item?.sets || []}
+                buttonConfig={{
+                  title: "Редактировать",
+                  icon: <IconEdit />,
+                  onClick: () => {
+                    handleOpenModal("Редактирование упражнения", "Сохранить", {
+                      exerciseId: item.id,
+                      name: item.name,
+                      muscleType: item.muscleType,
+                      muscleGroup: item.muscleGroup,
+                      sets: item?.sets,
+                    });
+                  },
+                }}
+              />
+            </Accordion>
+          </Spacing>
+        ))
+      )}
 
       {modal}
     </PageLayout>

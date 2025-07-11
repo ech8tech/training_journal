@@ -1,8 +1,8 @@
-import IconTick from "@assets/icons/other/IconTick.svg";
+import IconCircleEmpty from "@assets/icons/other/IconCircleEmpty.svg";
+import IconCircleTick from "@assets/icons/other/IconCircleTick.svg";
 import { Text } from "@components/text/Text";
 
 type CheckboxProps = {
-  name: string;
   label: string;
   checked?: boolean;
   className?: string;
@@ -11,18 +11,21 @@ type CheckboxProps = {
 
 import * as styles from "./Checkbox.scss";
 
-export function Checkbox({ name, label, checked, onChange }: CheckboxProps) {
+export function Checkbox({ label, checked, onChange }: CheckboxProps) {
   return (
     <label className={styles.container}>
       <Text className={styles.label}>{label}</Text>
       <input
-        name={name}
         type="checkbox"
         checked={checked}
         onChange={(e) => onChange(e.target.checked)}
       />
       <span className={styles.checkmark}>
-        <IconTick width={8} className={styles.checkmark_icon} />
+        {checked ? (
+          <IconCircleTick className={styles.on} width={20} height={20} />
+        ) : (
+          <IconCircleEmpty className={styles.off} width={20} height={20} />
+        )}
       </span>
     </label>
   );

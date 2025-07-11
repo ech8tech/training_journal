@@ -1,0 +1,1 @@
+export { useGetExercises } from "./useGetExercises";

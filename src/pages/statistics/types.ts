@@ -1,9 +1,9 @@
-import { MuscleGroupType } from "@constants/muscles";
+import { MuscleGroup } from "@constants/muscles";
 
 export type Period = "week" | "month" | "year";
 
 export type StatisticsFormProps = {
-  muscleGroupType?: MuscleGroupType;
+  muscleGroupType?: MuscleGroup;
   period?: Period;
   calendar?: {
     dateStart: string;

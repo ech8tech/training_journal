@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { SVGElement } from "@src/types/common";
+import { SVGElement } from "@typings/ui";
 
 export type TableProps<T> = {
   className?: string;
@@ -15,4 +15,5 @@ export type TableProps<T> = {
     onClick?(): void;
   };
   header?: ReactNode;
+  bodyEmpty?: ReactNode;
 };

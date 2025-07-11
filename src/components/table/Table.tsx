@@ -12,34 +12,42 @@ export function Table<T>({
   columns,
   buttonConfig,
   header,
+  bodyEmpty,
 }: TableProps<T>) {
   return (
     <div className={cn(styles.container, className)}>
-      {header && <div className={styles.header}>{header}</div>}
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            {columns.map((column, i) => (
-              <th align="center" key={i}>
-                <Text size="md" type="secondary">
-                  {column.title}
-                </Text>
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((cells, i) => (
-            <tr key={i}>
-              {columns.map((column, j) => (
-                <td align="center" key={j}>
-                  <Text size="md">{cells[column.key] as string}</Text>
-                </td>
+      {bodyEmpty ? (
+        <div className={styles.bodyEmpty}>{bodyEmpty}</div>
+      ) : (
+        <>
+          {header && <div className={styles.header}>{header}</div>}
+          <table className={styles.table}>
+            <thead>
+              <tr>
+                {columns.map((column, i) => (
+                  <th align="center" key={i}>
+                    <Text size="md" type="secondary">
+                      {column.title}
+                    </Text>
+                  </th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {rows.map((cells, i) => (
+                <tr key={i}>
+                  {columns.map((column, j) => (
+                    <td align="center" key={j}>
+                      <Text size="md">{cells[column.key] as string}</Text>
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
+            </tbody>
+          </table>
+        </>
+      )}
+
       {buttonConfig && (
         <Button
           className={styles.button}

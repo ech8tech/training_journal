@@ -1,4 +1,4 @@
-import { SVGElement } from "@src/types/common";
+import { SVGElement } from "@typings/ui";
 
 export type FieldProps = {
   label: string;

@@ -8,7 +8,7 @@ import { Filter } from "@components/filter";
 import { PageLayout } from "@components/pageLayout";
 import { Spacing } from "@components/spacing";
 import { dayjs } from "@configs/dayjs";
-import { MuscleGroupType, MuscleType } from "@constants/muscles";
+import { MuscleGroup, MuscleType } from "@constants/muscles";
 import { Period } from "@pages/statistics/types";
 
 import { ProgressData, ProgressFormProps } from "./types";
@@ -31,7 +31,7 @@ export default function Progress() {
     id: "1",
     exerciseName: "Поднятие штанги стоя",
     muscleType: MuscleType.BICEPS,
-    muscleGroupType: MuscleGroupType.HANDS,
+    muscleGroupType: MuscleGroup.HANDS,
     sessions: generateRandomSessions("2025-04-15", 250),
   };
 

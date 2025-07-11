@@ -5,3 +5,5 @@ export type RegistrationProfileFormProps = {
   height: string;
   sex?: string;
 };
+
+export type ProfileDto = RegistrationProfileFormProps;

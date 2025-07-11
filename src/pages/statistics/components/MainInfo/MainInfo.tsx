@@ -4,7 +4,7 @@ import IconFull from "@assets/icons/muscles_full/full.svg";
 import IconEdit from "@assets/icons/other/IconEdit.svg";
 import { Button } from "@components/buttons";
 import { Input } from "@components/input";
-import { useModal } from "@components/modal/hook";
+import { useModal } from "@components/modal/hooks/useModal";
 import { Spacing } from "@components/spacing/Spacing";
 import { Text } from "@components/text/Text";
 
@@ -61,11 +61,6 @@ export function MainInfo() {
           </Spacing>
         </>
       ),
-      buttonsConfig: [
-        {
-          text: "Сохранить",
-        },
-      ],
     });
   };
 

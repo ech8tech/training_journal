@@ -1,0 +1,6 @@
+@use '@styles/fonts';
+
+.errorCode {
+  @include fonts.font(60);
+  font-weight: 600;
+}

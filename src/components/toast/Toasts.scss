@@ -1,0 +1,37 @@
+@use 'sass:color';
+@use '@styles/fonts';
+@use '@styles/spacing';
+@use '@styles/colors';
+@use '@styles/common';
+@use '@styles/zIndex';
+
+@keyframes slide-in {
+  from {
+    top: -100%;
+    opacity: 0;
+  }
+
+  to {
+    top: 5%;
+    opacity: 1;
+  }
+}
+
+.toast {
+  top: 5%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  position: absolute;
+  animation: slide-in 0.5s;
+  border-radius: common.$circle_border_radius;
+  padding: spacing.$space_12;
+  color: colors.$text_primary;
+
+  &__success {
+    background-color: colors.$primary;
+  }
+
+  &__error {
+    background-color: colors.$danger;
+  }
+}

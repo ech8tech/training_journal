@@ -25,6 +25,17 @@ export default [
       "no-trailing-spaces": "error",
       "no-undef": "warn",
       semi: ["error", "always"],
+      "max-len": [
+        "error",
+        {
+          code: 80, // граница в 120 символов
+          ignoreUrls: true, // не ругаться на длинные URL
+          ignoreStrings: true, // не ругаться на длинные строки в кавычках
+          ignoreTemplateLiterals: true, // не ругаться на шаблонные литералы
+          ignoreComments: true, // отслеживать и комментарии
+          ignoreTrailingComments: true, // но не ругаться на комментарии в конце строк
+        },
+      ],
       "unused-imports/no-unused-imports": "error",
       "simple-import-sort/imports": [
         "error",

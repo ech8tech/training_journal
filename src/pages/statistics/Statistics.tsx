@@ -9,7 +9,7 @@ import { Select } from "@components/select";
 import { Spacing } from "@components/spacing";
 import { Title } from "@components/title";
 import { dayjs } from "@configs/dayjs";
-import { MuscleGroupType } from "@constants/muscles";
+import { MuscleGroup } from "@constants/muscles";
 import { SPACE_CONTAINER } from "@constants/spacing";
 
 import { MainInfo } from "./components/MainInfo";
@@ -62,7 +62,7 @@ export default function Statistics() {
   const filterData = (
     startDate: string,
     endDate: string,
-    groupType?: MuscleGroupType,
+    groupType?: MuscleGroup,
   ) => {
     const filtered = [...response].filter(({ date, muscleGroupType }) => {
       const dateChecked =
@@ -108,7 +108,7 @@ export default function Statistics() {
             control={control}
             options={getMuscleOptions(response)}
             onChange={(option) =>
-              setValue("muscleGroupType", option?.id as MuscleGroupType)
+              setValue("muscleGroupType", option?.id as MuscleGroup)
             }
             label="Группа мышц"
             placeholder="Выберите"

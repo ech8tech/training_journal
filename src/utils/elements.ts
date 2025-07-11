@@ -1,6 +1,7 @@
+import cn from "classnames";
 import { cloneElement, isValidElement } from "react";
 
-import { SVGElement } from "@src/types/common";
+import { SVGElement } from "@typings/ui";
 
 export function getSvgElement(
   icon?: SVGElement,
@@ -9,6 +10,11 @@ export function getSvgElement(
   className?: string,
 ) {
   return (
-    isValidElement(icon) && cloneElement(icon, { width, height, className })
+    isValidElement(icon) &&
+    cloneElement(icon, {
+      width,
+      height,
+      className: cn(icon.props.className, className),
+    })
   );
 }

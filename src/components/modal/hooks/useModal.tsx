@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
 
-import { Modal } from "./Modal";
-import { ModalProps } from "./types";
+import { Modal } from "../Modal";
+import { ModalProps } from "../types";
 
 export function useModal() {
   const [modalProps, setModalProps] = useState<ModalProps | null>(null);

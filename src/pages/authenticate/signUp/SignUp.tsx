@@ -2,29 +2,29 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
 import { routes } from "@app/routesConfig";
+import { useToast } from "@hooks/useToast";
+import { api } from "@src/api";
 import { useMutation } from "@tanstack/react-query";
-import { api } from "@utils/fetch";
 
-import {
-  AuthenticateForm,
-  AuthenticateFormProps,
-  Types,
-  UserModel,
-} from "../common";
+import { AuthenticateForm, AuthenticateFormProps, UserDto } from "../common";
 
 export default function SignUp() {
   const form = useForm<AuthenticateFormProps>();
   const { getValues } = form;
   const navigate = useNavigate();
+  const { openToastError } = useToast();
 
   const { isPending: isSignUpPending, mutateAsync: singUp } = useMutation({
-    mutationFn: (payload: Types) => {
-      return api.post<UserModel>("/auth/sign_up", payload);
+    mutationFn: (payload: UserDto) => {
+      return api.apiAuth.signUp(payload);
     },
     onSuccess: ({ data }) => {
       if (data.id) {
-        navigate(routes.PROFILE.path);
+        window.location.href = routes.PROFILE.path;
       }
+    },
+    onError: (error) => {
+      openToastError(error.message);
     },
   });
 
