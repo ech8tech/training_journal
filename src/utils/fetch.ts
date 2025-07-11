@@ -1,11 +1,13 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
-export const api = axios.create({
+import { ApiError } from "@typings/api";
+
+export const apiConf = axios.create({
   baseURL: "http://localhost:9001/api",
   withCredentials: true,
 });
 
-export const apiRefreshToken = axios.create({
+export const apiConfRefreshToken = axios.create({
   baseURL: "http://localhost:9001/api",
   withCredentials: true,
 });
@@ -22,7 +24,7 @@ const refreshAndRetryQueue: RetryQueueItem[] = [];
 // Flag to prevent multiple token refresh requests
 let isRefreshing = false;
 
-api.interceptors.response.use(
+apiConf.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest: AxiosRequestConfig = error.config;
@@ -32,14 +34,15 @@ api.interceptors.response.use(
         isRefreshing = true;
         try {
           // Refresh the access token
-          const newAccessToken = await apiRefreshToken.post("/auth/refresh");
+          const newAccessToken =
+            await apiConfRefreshToken.post("/auth/refresh");
 
           // Update the request headers with the new access token
           error.config.headers["Authorization"] = `Bearer ${newAccessToken}`;
 
           // Retry all requests in the queue with the new token
           refreshAndRetryQueue.forEach(({ config, resolve, reject }) => {
-            api
+            apiConf
               .request(config)
               .then((response) => resolve(response))
               .catch((err) => reject(err));
@@ -49,7 +52,7 @@ api.interceptors.response.use(
           refreshAndRetryQueue.length = 0;
 
           // Retry the original request
-          return api(originalRequest);
+          return apiConf(originalRequest);
         } catch (refreshError) {
           // Handle token refresh error
           // You can clear all storage and redirect the user to the login page
@@ -69,5 +72,15 @@ api.interceptors.response.use(
 
     // Return a Promise rejection if the status code is not 401
     return Promise.reject(error);
+  },
+);
+
+apiConf.interceptors.response.use(
+  (response) => response,
+  async (error: AxiosError<{ error: ApiError }>) => {
+    // if (error?.response?.data) {
+    //   return Promise.resolve(error.response.data);
+    // }
+    return Promise.reject(error?.response?.data?.error);
   },
 );

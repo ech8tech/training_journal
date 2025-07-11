@@ -3,26 +3,46 @@
 @use '@styles/spacing';
 @use '@styles/colors';
 
-.header {
+.wrapper {
   display: flex;
   align-items: center;
   gap: spacing.$gap_12;
   cursor: pointer;
 }
 
-.title {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-grow: 1;
+  margin-right: spacing.$space_16;
+}
 
-  &_icon {
-    transition: common.$transition_slow;
-    color: colors.$text_primary;
+.title {
+  margin-right: spacing.$space_4;
+}
 
-    &__opened {
-      transform: rotate(180deg);
-    }
+.icons {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+
+.iconPrimary {
+  flex: 0 0 auto;
+}
+
+.iconSecondary {
+  flex: 0 0 auto;
+}
+
+.iconToggle {
+  transition: common.$transition_slow;
+  color: colors.$text_primary;
+  flex: 0 0 auto;
+
+  &__opened {
+    transform: rotate(180deg);
   }
 }
 

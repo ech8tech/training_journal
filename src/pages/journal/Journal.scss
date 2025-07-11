@@ -1,7 +1,11 @@
-.container {
-  background: blue;
-  font-size: 16px;
-  height: 40px;
-  font-weight: 600;
-  font-family: SFProText, Arial, serif;
+@use "@styles/colors";
+@use "@styles/spacing";
+
+.buttonGraph {
+  margin-left: auto;
+}
+
+.iconDone {
+  color: colors.$primary_contrast;
+  margin-right: spacing.$space_4;
 }

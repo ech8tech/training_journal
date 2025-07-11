@@ -5,8 +5,8 @@
   display: flex;
   align-items: center;
   position: relative;
-  width: spacing.$space_16;
-  height: spacing.$space_16;
+  width: spacing.$space_20;
+  height: spacing.$space_20;
   cursor: pointer;
   user-select: none;
 
@@ -16,14 +16,6 @@
     cursor: pointer;
     height: 0;
     width: 0;
-
-    &:checked ~ .checkmark {
-      border: 1px solid colors.$primary_contrast;
-
-      & > .checkmark_icon {
-        display: block;
-      }
-    }
   }
 }
 
@@ -35,17 +27,14 @@
   position: absolute;
   top: 0;
   left: 0;
-  height: spacing.$space_16;
-  width: spacing.$space_16;
-  border-radius: 50%;
-  border: 1px solid colors.$primary;
+  height: spacing.$space_20;
+  width: spacing.$space_20;
 
-  &_icon {
-    display: none;
+  .on {
     color: colors.$primary_contrast;
-    transform: translate(-50%, -50%);
-    position: absolute;
-    left: 50%;
-    top: 50%;
+  }
+
+  .off {
+    color: colors.$primary;
   }
 }

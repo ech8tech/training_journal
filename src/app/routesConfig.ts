@@ -16,16 +16,13 @@ const routesConfig = {
       path: "/profile",
     },
     JOURNAL: {
-      path: "/journal/:muscleGroupType",
+      path: "/journal/:muscleGroup",
     },
     PROGRESS: {
       path: "/progress/:exerciseId",
     },
     STATISTICS: {
       path: "/statistics",
-    },
-    COMPONENTS: {
-      path: "/components",
     },
   },
 };

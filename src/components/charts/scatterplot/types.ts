@@ -1,8 +1,8 @@
-import { MuscleGroupType } from "@constants/muscles";
+import { MuscleGroup } from "@constants/muscles";
 
 export type LineChartData = {
   date: string;
-  muscleGroupType: MuscleGroupType;
+  muscleGroupType: MuscleGroup;
   exerciseName: string;
   sets: Array<{
     order: number;

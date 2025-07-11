@@ -32,7 +32,11 @@
       "@styles/*": ["./src/styles/*"],
       "@constants/*": ["./src/constants/*"],
       "@utils/*": ["./src/utils/*"],
-      "@configs/*": ["./src/configs/*"]
+      "@configs/*": ["./src/configs/*"],
+      "@typings/*": ["./src/typings/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@providers/*": ["./src/providers/*"],
+      "@api/*": ["./src/api/*"]
     }
   },
   "exclude": ["node_modules"],

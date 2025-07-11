@@ -10,13 +10,13 @@ import {
   START_DAY_OF_WEEK,
   START_DAY_OF_YEAR,
 } from "@constants/dayjs";
-import { MuscleGroupName, MuscleGroupType } from "@constants/muscles";
+import { MuscleGroup, MuscleGroupName } from "@constants/muscles";
 
 import { Period } from "./types";
 
 export type Datum = {
   date: string;
-  muscleGroupType: MuscleGroupType;
+  muscleGroupType: MuscleGroup;
   exerciseName: string;
   sets: Array<{
     order: number;
@@ -43,25 +43,25 @@ export function getMuscleOptions(data: LineChartData[]): Option[] {
   }));
 }
 
-const mockExercise: Record<MuscleGroupType, string[]> = {
-  [MuscleGroupType.BREAST]: [
+const mockExercise: Record<MuscleGroup, string[]> = {
+  [MuscleGroup.BREAST]: [
     "Жим штангой",
     "Жим со штангой в наклоне",
     "Сведение гантелей лежа",
   ],
-  [MuscleGroupType.HANDS]: ["Гантель над головой", "Французский жим"],
-  [MuscleGroupType.LEGS]: [
+  [MuscleGroup.HANDS]: ["Гантель над головой", "Французский жим"],
+  [MuscleGroup.LEGS]: [
     "Выпады на месте",
     "Приседания со штангой",
     "Сумо-приседания",
   ],
-  [MuscleGroupType.PRESS]: ["Скручивание на скамье"],
-  [MuscleGroupType.BACK]: [
+  [MuscleGroup.PRESS]: ["Скручивание на скамье"],
+  [MuscleGroup.BACK]: [
     "Подтягивания широким хватом",
     "Подтягивания средним хватом",
     "Подтягивания узким хватом",
   ],
-  [MuscleGroupType.SHOULDERS]: [
+  [MuscleGroup.SHOULDERS]: [
     "Поднятие гантелей сидя",
     "Подъемы в сторону",
     "Тяга штанги к подбородку",
@@ -79,7 +79,7 @@ export function mockData(
   daysCount: number,
 ): Datum[] {
   const result: Datum[] = [];
-  const groups = Object.values(MuscleGroupType);
+  const groups = Object.values(MuscleGroup);
 
   for (let dayOffset = 0; dayOffset < daysCount; dayOffset++) {
     const date = dayjs(startDate).add(dayOffset, "day").format("YYYY-MM-DD");

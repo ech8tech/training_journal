@@ -17,9 +17,9 @@ import IconShouldersBack from "@assets/icons/muscles_parts/shoulders_back.svg";
 import IconShouldersFront from "@assets/icons/muscles_parts/shoulders_front.svg";
 import IconTrapezoids from "@assets/icons/muscles_parts/trapezoids.svg";
 import IconTriceps from "@assets/icons/muscles_parts/triceps.svg";
-import { SVGElement } from "@src/types/common";
+import { SVGElement } from "@typings/ui";
 
-export enum MuscleGroupType {
+export enum MuscleGroup {
   SHOULDERS = "shoulders",
   HANDS = "hands",
   BREAST = "breast",
@@ -28,22 +28,22 @@ export enum MuscleGroupType {
   PRESS = "press",
 }
 
-export const MuscleGroupColor: Record<MuscleGroupType, string> = {
-  [MuscleGroupType.SHOULDERS]: "#ff595e",
-  [MuscleGroupType.HANDS]: "#ff924c",
-  [MuscleGroupType.BREAST]: "#ffca3a",
-  [MuscleGroupType.LEGS]: "#8ac926",
-  [MuscleGroupType.BACK]: "#1982c4",
-  [MuscleGroupType.PRESS]: "#6a4c93",
+export const MuscleGroupColor: Record<MuscleGroup, string> = {
+  [MuscleGroup.SHOULDERS]: "#ff595e",
+  [MuscleGroup.HANDS]: "#ff924c",
+  [MuscleGroup.BREAST]: "#ffca3a",
+  [MuscleGroup.LEGS]: "#8ac926",
+  [MuscleGroup.BACK]: "#1982c4",
+  [MuscleGroup.PRESS]: "#6a4c93",
 };
 
-export const MuscleGroupName: Record<MuscleGroupType, string> = {
-  [MuscleGroupType.SHOULDERS]: "Плечи и трапеции",
-  [MuscleGroupType.HANDS]: "Руки",
-  [MuscleGroupType.BREAST]: "Грудь",
-  [MuscleGroupType.LEGS]: "Ноги",
-  [MuscleGroupType.BACK]: "Спина",
-  [MuscleGroupType.PRESS]: "Пресс",
+export const MuscleGroupName: Record<MuscleGroup, string> = {
+  [MuscleGroup.SHOULDERS]: "Плечи и трапеции",
+  [MuscleGroup.HANDS]: "Руки",
+  [MuscleGroup.BREAST]: "Грудь",
+  [MuscleGroup.LEGS]: "Ноги",
+  [MuscleGroup.BACK]: "Спина",
+  [MuscleGroup.PRESS]: "Пресс",
 };
 
 export enum MuscleType {
@@ -70,100 +70,100 @@ export enum MuscleType {
 
 export const Muscles: Record<
   MuscleType,
-  { group: MuscleGroupType; name: string; icon: SVGElement }
+  { group: MuscleGroup; name: string; icon: SVGElement }
 > = {
   [MuscleType.TRAPEZOIDS]: {
-    group: MuscleGroupType.SHOULDERS,
+    group: MuscleGroup.SHOULDERS,
     name: "Трапеции",
     icon: <IconTrapezoids />,
   },
   [MuscleType.SHOULDERS_FRONT]: {
-    group: MuscleGroupType.SHOULDERS,
+    group: MuscleGroup.SHOULDERS,
     name: "Передняя и средняя дельты",
     icon: <IconShouldersFront />,
   },
   [MuscleType.SHOULDERS_BACK]: {
-    group: MuscleGroupType.SHOULDERS,
+    group: MuscleGroup.SHOULDERS,
     name: "Задняя дельта",
     icon: <IconShouldersBack />,
   },
   [MuscleType.BREAST]: {
-    group: MuscleGroupType.BREAST,
+    group: MuscleGroup.BREAST,
     name: "Грудь",
     icon: <IconBreast />,
   },
   [MuscleType.BACK_TOP]: {
-    group: MuscleGroupType.BACK,
+    group: MuscleGroup.BACK,
     name: "Ромбовидная мышца",
     icon: <IconBackTop />,
   },
   [MuscleType.BACK_MIDDLE]: {
-    group: MuscleGroupType.BACK,
+    group: MuscleGroup.BACK,
     name: "Широчайшие мышцы",
     icon: <IconBackMiddle />,
   },
   [MuscleType.BACK_BOTTOM]: {
-    group: MuscleGroupType.BACK,
+    group: MuscleGroup.BACK,
     name: "Поясница",
     icon: <IconBackBottom />,
   },
   [MuscleType.BICEPS]: {
-    group: MuscleGroupType.HANDS,
+    group: MuscleGroup.HANDS,
     name: "Бицепс",
     icon: <IconBiceps />,
   },
   [MuscleType.BRACHIALIS]: {
-    group: MuscleGroupType.HANDS,
+    group: MuscleGroup.HANDS,
     name: "Плечевая мышца",
     icon: <IconBrachialis />,
   },
   [MuscleType.TRICEPS]: {
-    group: MuscleGroupType.HANDS,
+    group: MuscleGroup.HANDS,
     name: "Трицепс",
     icon: <IconTriceps />,
   },
   [MuscleType.FOREARM_FRONT]: {
-    group: MuscleGroupType.HANDS,
+    group: MuscleGroup.HANDS,
     name: "Сгибатели предплечья",
     icon: <IconForearmFront />,
   },
   [MuscleType.FOREARM_BACK]: {
-    group: MuscleGroupType.HANDS,
+    group: MuscleGroup.HANDS,
     name: "Разгибатели предплечья",
     icon: <IconForearmBack />,
   },
   [MuscleType.PRESS_MIDDLE]: {
-    group: MuscleGroupType.PRESS,
+    group: MuscleGroup.PRESS,
     name: "Прямая мышца пресса",
     icon: <IconPressMiddle />,
   },
   [MuscleType.PRESS_OBLIQUE]: {
-    group: MuscleGroupType.PRESS,
+    group: MuscleGroup.PRESS,
     name: "Косые мышцы пресса",
     icon: <IconPressOblique />,
   },
   [MuscleType.LEGS_FRONT]: {
-    group: MuscleGroupType.LEGS,
+    group: MuscleGroup.LEGS,
     name: "Квадрицепс бедра",
     icon: <IconLegsFront />,
   },
   [MuscleType.LEGS_FRONT_INSIDE]: {
-    group: MuscleGroupType.LEGS,
+    group: MuscleGroup.LEGS,
     name: "Приводящие мышцы бедра",
     icon: <IconLegsFrontInside />,
   },
   [MuscleType.LEGS_BACK]: {
-    group: MuscleGroupType.LEGS,
+    group: MuscleGroup.LEGS,
     name: "Бицепс бедра",
     icon: <IconLegsBack />,
   },
   [MuscleType.BUTTOCKS]: {
-    group: MuscleGroupType.LEGS,
+    group: MuscleGroup.LEGS,
     name: "Ягодицы",
     icon: <IconButtocks />,
   },
   [MuscleType.CALF]: {
-    group: MuscleGroupType.LEGS,
+    group: MuscleGroup.LEGS,
     name: "Икроножные мышцы",
     icon: <IconCalf />,
   },

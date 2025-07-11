@@ -1,7 +1,6 @@
 import { useEffect, useRef } from "react";
 
 import IconClose from "@assets/icons/other/IconClose.svg";
-import { ButtonsGroup } from "@components/buttons/buttonsGroup/ButtonsGroup";
 import { Spacing } from "@components/spacing/Spacing";
 import { Title } from "@components/title/Title";
 import { SPACE_INNER } from "@constants/spacing";
@@ -9,7 +8,7 @@ import { SPACE_INNER } from "@constants/spacing";
 import * as styles from "./Modal.scss";
 import { ModalProps } from "./types";
 
-export function Modal({ title, buttonsConfig, content, onClose }: ModalProps) {
+export function Modal({ title, content, onClose }: ModalProps) {
   const refModal = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -48,15 +47,7 @@ export function Modal({ title, buttonsConfig, content, onClose }: ModalProps) {
             className={styles.iconClose}
           />
         </Spacing>
-        <Spacing space={SPACE_INNER}>{content}</Spacing>
-        <div className={styles.controls}>
-          <ButtonsGroup
-            buttonsConfig={[
-              ...buttonsConfig,
-              { text: "Отмена", onClick: onClose },
-            ]}
-          />
-        </div>
+        <Spacing>{content}</Spacing>
       </div>
       <div className={styles.overlay} />
     </>

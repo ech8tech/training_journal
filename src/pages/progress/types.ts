@@ -1,4 +1,4 @@
-import { MuscleGroupType, MuscleType } from "@constants/muscles";
+import { MuscleGroup, MuscleType } from "@constants/muscles";
 import { Period } from "@pages/statistics/types";
 
 export type ProgressFormProps = {
@@ -13,7 +13,7 @@ export type ProgressData = {
   id: string;
   exerciseName: string;
   muscleType: MuscleType;
-  muscleGroupType: MuscleGroupType;
+  muscleGroupType: MuscleGroup;
   sessions: {
     date: string;
     sets: {

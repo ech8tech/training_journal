@@ -1,7 +1,7 @@
 import { Option } from "@components/select";
-import { MuscleGroupType, Muscles, MuscleType } from "@constants/muscles";
+import { MuscleGroup, Muscles, MuscleType } from "@constants/muscles";
 
-export function getMuscleOptions(muscleGroupType: MuscleGroupType): Option[] {
+export function getMuscleOptions(muscleGroupType: MuscleGroup): Option[] {
   const options = [];
 
   const muscleTypes = Object.keys(Muscles) as MuscleType[];

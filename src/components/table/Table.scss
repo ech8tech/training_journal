@@ -11,7 +11,6 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   padding: 0 0 0 spacing.$space_12;
   border-bottom: 1px dashed colors.$text_secondary;
 }
@@ -24,4 +23,8 @@
 
 .button {
   border-radius: 0 0 common.$base_border_radius common.$base_border_radius;
+}
+
+.bodyEmpty {
+  padding: spacing.$space_16 spacing.$space_12;
 }
