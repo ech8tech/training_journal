@@ -5,30 +5,41 @@
 @use '@styles/common';
 @use '@styles/zIndex';
 
-@keyframes slide-in {
+@keyframes toast-enter {
   from {
-    top: -100%;
+    transform: translate(0%, -20%);
     opacity: 0;
   }
-
   to {
-    top: 5%;
+    transform: translate(0%, 0%);
     opacity: 1;
   }
 }
 
-.toast {
-  top: 5%;
-  transform: translate(-50%, -50%);
+.container {
+  position: fixed;
+  top: spacing.$space_16;
   left: 50%;
-  position: absolute;
-  animation: slide-in 0.5s;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$space_12;
+  pointer-events: none;
+}
+
+.toast {
+  position: relative;
+  pointer-events: auto;
+  animation: toast-enter .3s;
+  align-self: center;
+  justify-content: center;
   border-radius: common.$circle_border_radius;
   padding: spacing.$space_12;
   color: colors.$text_primary;
+  will-change: transform, opacity;
 
   &__success {
-    background-color: colors.$primary;
+    background-color: colors.$success;
   }
 
   &__error {

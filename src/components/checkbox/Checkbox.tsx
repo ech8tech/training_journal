@@ -6,19 +6,23 @@ type CheckboxProps = {
   label: string;
   checked?: boolean;
   className?: string;
-  onChange(value: boolean): void;
+  onChange?(value: boolean): void;
 };
 
 import * as styles from "./Checkbox.scss";
 
 export function Checkbox({ label, checked, onChange }: CheckboxProps) {
+  const handleChange = (value: boolean) => {
+    if (onChange) onChange(value);
+  };
+
   return (
     <label className={styles.container}>
       <Text className={styles.label}>{label}</Text>
       <input
         type="checkbox"
         checked={checked}
-        onChange={(e) => onChange(e.target.checked)}
+        onChange={(e) => handleChange(e.target.checked)}
       />
       <span className={styles.checkmark}>
         {checked ? (

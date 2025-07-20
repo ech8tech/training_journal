@@ -1,4 +1,8 @@
+import { useParams } from "react-router-dom";
+
 import { useModal } from "@components/modal/hooks/useModal";
+import { MuscleGroup } from "@constants/muscles";
+import { useGetExercises } from "@pages/journal/hooks";
 
 import {
   ModalAddEdit,
@@ -6,20 +10,32 @@ import {
 } from "../../components/modalAddEdit";
 
 export function useModalAddEdit() {
+  const params = useParams<{ muscleGroup: MuscleGroup }>();
+  const muscleGroup = params.muscleGroup!;
+
   const { openModal, modal, onClose } = useModal();
+
+  const { getExercises } = useGetExercises(muscleGroup);
+
+  const handleClose = async () => {
+    await getExercises();
+    onClose();
+  };
 
   const handleOpenModal = (
     title: string,
     buttonText: string,
+    mode: "addExercise" | "editExercise" | "addSession",
     editData?: ModalAddEditFormProps,
   ) => {
     openModal({
       title,
       content: (
         <ModalAddEdit
-          onClose={onClose}
+          onClose={handleClose}
           buttonText={buttonText}
           editData={editData}
+          mode={mode}
         />
       ),
     });

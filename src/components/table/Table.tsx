@@ -52,11 +52,9 @@ export function Table<T>({
         <Button
           className={styles.button}
           type="primary"
-          text="Редактировать"
           size="sm"
           variant="wide"
-          icon={buttonConfig.icon}
-          onClick={buttonConfig?.onClick}
+          {...buttonConfig}
         />
       )}
     </div>
