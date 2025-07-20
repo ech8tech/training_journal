@@ -1,23 +1,26 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { LineChart } from "@components/charts/lineChart";
 import { LineChartData } from "@components/charts/lineChart/types";
+import { ErrorPage } from "@components/errorPage";
 import { Filter } from "@components/filter";
 import { PageLayout } from "@components/pageLayout";
 import { Spacing } from "@components/spacing";
 import { dayjs } from "@configs/dayjs";
-import { MuscleGroup, MuscleType } from "@constants/muscles";
 import { Period } from "@pages/statistics/types";
 
-import { ProgressData, ProgressFormProps } from "./types";
-import { generateRandomSessions, getDateConfig } from "./utils";
+import { useGetExerciseGraphData } from "./hooks";
+import { ProgressFormProps } from "./types";
+import { getDateConfig } from "./utils";
 
 export default function Progress() {
-  const { exerciseId } = useParams();
-  const [data, setData] = useState<ProgressData>();
+  const [data, setData] = useState<LineChartData[]>([]);
   const navigate = useNavigate();
+
+  const { data: exerciseGraphData, error: exerciseGraphDataError } =
+    useGetExerciseGraphData();
 
   const { register, watch, resetField, setValue } = useForm<ProgressFormProps>({
     defaultValues: {
@@ -26,28 +29,6 @@ export default function Progress() {
   });
 
   const { period, calendar } = watch();
-
-  const mock = {
-    id: "1",
-    exerciseName: "Поднятие штанги стоя",
-    muscleType: MuscleType.BICEPS,
-    muscleGroupType: MuscleGroup.HANDS,
-    sessions: generateRandomSessions("2025-04-15", 250),
-  };
-
-  const lineChartData =
-    data?.sessions.reduce((acc: LineChartData[], curr) => {
-      return [
-        ...acc,
-        {
-          date: curr.date,
-          commonRate: curr.sets.reduce(
-            (sum, curr) => sum + curr.weight * curr.reps,
-            0,
-          ),
-        },
-      ];
-    }, []) || [];
 
   const handleSetPeriod = (period: Period) => {
     setValue("period", period);
@@ -64,14 +45,15 @@ export default function Progress() {
   };
 
   const filterData = (startDate: string, endDate: string) => {
-    const filtered = [...mock.sessions].filter(({ date }) => {
-      return (
-        dayjs(date).isSameOrAfter(startDate) &&
-        dayjs(date).isSameOrBefore(endDate)
-      );
-    });
+    const filtered =
+      exerciseGraphData?.graphData?.filter(({ date }) => {
+        return (
+          dayjs(date).isSameOrAfter(startDate) &&
+          dayjs(date).isSameOrBefore(endDate)
+        );
+      }) || [];
 
-    setData({ ...mock, sessions: filtered });
+    setData(filtered);
   };
 
   useEffect(() => {
@@ -86,7 +68,24 @@ export default function Progress() {
       const { startDate, endDate } = getDateConfig(period);
       filterData(startDate, endDate);
     }
-  }, [period, calendar?.dateStart, calendar?.dateEnd]);
+  }, [
+    period,
+    calendar?.dateStart,
+    calendar?.dateEnd,
+    exerciseGraphData?.graphData,
+  ]);
+
+  if (!data || !exerciseGraphData) {
+    return <PageLayout>Нет данных</PageLayout>;
+  }
+
+  if (exerciseGraphDataError) {
+    return (
+      <PageLayout>
+        <ErrorPage error={exerciseGraphDataError} />
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout title="График прогресса" onBack={handleBack}>
@@ -106,9 +105,9 @@ export default function Progress() {
         />
       </Spacing>
       <LineChart
-        data={lineChartData}
-        muscleGroupType={mock.muscleGroupType}
-        exerciseName={mock.exerciseName}
+        data={data}
+        muscleGroup={exerciseGraphData.muscleGroup}
+        exerciseName={exerciseGraphData.exerciseName}
       />
     </PageLayout>
   );

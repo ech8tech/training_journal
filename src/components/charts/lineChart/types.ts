@@ -7,6 +7,6 @@ export type LineChartData = {
 
 export type LineChartProps = {
   data: LineChartData[];
-  muscleGroupType: MuscleGroup;
+  muscleGroup: MuscleGroup;
   exerciseName: string;
 };
