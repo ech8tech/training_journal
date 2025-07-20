@@ -8,11 +8,7 @@ import { MuscleGroupColor } from "@constants/muscles";
 
 import { LineChartProps } from "./types";
 
-export function LineChart({
-  data,
-  muscleGroupType,
-  exerciseName,
-}: LineChartProps) {
+export function LineChart({ data, muscleGroup, exerciseName }: LineChartProps) {
   const ref = useRef<SVGSVGElement | null>(null);
 
   useEffect(() => {
@@ -158,7 +154,7 @@ export function LineChart({
       .attr("cx", (d) => x(d.date))
       .attr("cy", (d) => y(d.commonRate))
       .attr("r", CIRCLE_SIZE)
-      .attr("fill", MuscleGroupColor[muscleGroupType]);
+      .attr("fill", MuscleGroupColor[muscleGroup]);
 
     const legend = svg
       .append("g")
@@ -172,7 +168,7 @@ export function LineChart({
       .attr("cx", marginLeft + LEGEND_CIRCLE_SIZE)
       .attr("cy", cY)
       .attr("r", LEGEND_CIRCLE_SIZE)
-      .attr("fill", MuscleGroupColor[muscleGroupType]);
+      .attr("fill", MuscleGroupColor[muscleGroup]);
 
     legend
       .append("text")
