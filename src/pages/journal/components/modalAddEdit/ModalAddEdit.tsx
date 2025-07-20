@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { ChangeEvent } from "react";
 import { Path, useFieldArray, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -8,9 +9,11 @@ import { Button, ButtonsGroup } from "@components/buttons";
 import { Input } from "@components/input";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
+import { DATE_FORMAT } from "@constants/format";
 import { MuscleGroup, MuscleType } from "@constants/muscles";
 import { SPACE_INNER } from "@constants/spacing";
 import { useCreateExercise } from "@pages/journal/hooks/useCreateExercise";
+import { useCreateSession } from "@pages/journal/hooks/useCreateSession";
 import { useEditExercise } from "@pages/journal/hooks/useEditExercise";
 import { SetDto } from "@pages/journal/types";
 
@@ -21,8 +24,12 @@ import { getMuscleOptions } from "./utils";
 export function ModalAddEdit({
   buttonText,
   onClose,
+  mode,
   editData,
 }: ModalAddEditProps) {
+  const isEditExerciseMode = mode === "editExercise";
+  const isAddSessionMode = mode === "addSession";
+
   const params = useParams<{ muscleGroup: MuscleGroup }>();
   const muscleGroup = params.muscleGroup!;
 
@@ -38,8 +45,9 @@ export function ModalAddEdit({
     name: "sets",
   });
 
-  const { createExercise } = useCreateExercise();
-  const { editExercise } = useEditExercise();
+  const { createExercise } = useCreateExercise(onClose);
+  const { editExercise } = useEditExercise(onClose);
+  const { createSession } = useCreateSession(onClose);
 
   const handleChangeField = (
     path: Path<ModalAddEditFormProps>,
@@ -55,11 +63,23 @@ export function ModalAddEdit({
     if (values?.sets?.length) {
       payload = {
         ...payload,
-        sets: values.sets.map((set, index) => ({ ...set, order: index + 1 })),
+        sets: values.sets.map((set, index) => ({
+          ...set,
+          order: index + 1,
+        })),
       };
     }
 
-    if (editData) {
+    if (isAddSessionMode) {
+      await createSession({
+        date: dayjs().format(DATE_FORMAT),
+        exerciseId: values.exerciseId,
+        sets: payload?.sets,
+      });
+      return;
+    }
+
+    if (isEditExerciseMode) {
       await editExercise({ exerciseId: values.exerciseId, payload });
     } else {
       await createExercise(payload);
@@ -118,7 +138,7 @@ export function ModalAddEdit({
           );
         })}
       </Spacing>
-      <Spacing space={SPACE_INNER} className={styles.buttonAdd}>
+      <Spacing space={SPACE_INNER} className={styles.actions}>
         <Button
           text="Добавить подход"
           icon={<IconPlus />}

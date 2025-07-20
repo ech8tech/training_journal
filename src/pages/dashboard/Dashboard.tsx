@@ -33,6 +33,8 @@ export default function Dashboard() {
     error,
   } = useGetProfile();
 
+  console.log(profileData);
+
   if (profileLoading) {
     return <Spinner isFullPage />;
   }

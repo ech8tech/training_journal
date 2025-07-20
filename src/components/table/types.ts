@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-import { SVGElement } from "@typings/ui";
+import { ButtonConfig } from "@components/buttons";
 
 export type TableProps<T> = {
   className?: string;
@@ -9,11 +9,7 @@ export type TableProps<T> = {
     title: string;
   }[];
   rows: T[];
-  buttonConfig?: {
-    title: string;
-    icon?: SVGElement;
-    onClick?(): void;
-  };
+  buttonConfig?: ButtonConfig;
   header?: ReactNode;
   bodyEmpty?: ReactNode;
 };

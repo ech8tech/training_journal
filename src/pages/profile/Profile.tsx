@@ -9,8 +9,9 @@ import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
 import { Spinner } from "@components/spinner/Spinner";
 import { SPACE_CONTAINER } from "@constants/spacing";
+import { useGetProfile } from "@hooks/useGetProfile";
 import { api } from "@src/api";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
 import { optionsSex } from "./consts";
 import * as styles from "./Profile.scss";
@@ -39,13 +40,10 @@ export default function Profile() {
     },
   });
 
-  const { data, isFetching: isLoading } = useQuery({
-    queryKey: ["CHECK_USER_PROFILE"],
-    queryFn: () => api.apiProfile.getProfile(),
-  });
+  const { data, isLoading } = useGetProfile();
 
   useEffect(() => {
-    if (data?.data?.id) {
+    if (data?.id) {
       navigate(routes.DASHBOARD.path);
     }
   }, [data]);
