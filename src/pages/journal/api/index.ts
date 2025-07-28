@@ -5,8 +5,8 @@ import { EditExerciseDto } from "@pages/journal/hooks/useEditExercise/types";
 import { apiConf } from "@utils/fetch";
 
 export const apiJournal = {
-  getExercises: (muscleGroup: MuscleGroup) => {
-    return apiConf.get(`/exercise/all/${muscleGroup}`);
+  getExercisesByMuscleGroup: (muscleGroup: MuscleGroup) => {
+    return apiConf.get(`/exercise/muscle_group/${muscleGroup}`);
   },
 
   createExercise: (payload: CreateExerciseDto) => {

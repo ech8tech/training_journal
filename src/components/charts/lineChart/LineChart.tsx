@@ -2,16 +2,27 @@ import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 
 import { getCircleSize } from "@components/charts/lineChart/utils";
+import { Title } from "@components/title";
 import { dayjs } from "@configs/dayjs";
 import { DAYS_IN_MONTH } from "@constants/dayjs";
 import { MuscleGroupColor } from "@constants/muscles";
 
 import { LineChartProps } from "./types";
 
-export function LineChart({ data, muscleGroup, exerciseName }: LineChartProps) {
+export function LineChart({
+  data = [],
+  muscleGroup,
+  exerciseName,
+}: LineChartProps) {
   const ref = useRef<SVGSVGElement | null>(null);
 
+  const isNotEnoughData = data?.length <= 1;
+
+  console.log(isNotEnoughData);
+
   useEffect(() => {
+    if (isNotEnoughData || !exerciseName || !muscleGroup) return;
+
     const width = 928;
     const height = 840;
     const marginTop = 25;
@@ -29,7 +40,7 @@ export function LineChart({ data, muscleGroup, exerciseName }: LineChartProps) {
 
     const parsed = data.map((d) => ({
       date: dayjs(d.date).toDate(),
-      commonRate: Math.log10(d.commonRate),
+      commonRate: d.commonRate === 0 ? 0 : Math.log10(d.commonRate),
     }));
 
     const [minDate, maxDate] = d3.extent(parsed, (d) => d.date) as [Date, Date];
@@ -178,7 +189,11 @@ export function LineChart({ data, muscleGroup, exerciseName }: LineChartProps) {
       .attr("fill", "white")
       .style("font-size", "1.25rem")
       .text(exerciseName);
-  }, [data]);
+  }, [data, isNotEnoughData, exerciseName, muscleGroup]);
+
+  if (isNotEnoughData) {
+    return <Title size="h4">Недостаточно данных для показа графика</Title>;
+  }
 
   return <svg ref={ref} />;
 }

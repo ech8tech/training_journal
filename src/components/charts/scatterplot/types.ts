@@ -1,16 +1,17 @@
 import { MuscleGroup } from "@constants/muscles";
 
-export type LineChartData = {
+export type ScatterplotModel = {
   date: string;
-  muscleGroupType: MuscleGroup;
+  muscleGroup: MuscleGroup;
   exerciseName: string;
   sets: Array<{
+    id: string;
     order: number;
     weight: number;
     reps: number;
   }>;
 };
 
-export type LineChartProps = {
-  data: LineChartData[];
+export type ScatterplotProps = {
+  data?: ScatterplotModel[];
 };

@@ -5,7 +5,7 @@ import { ApiData } from "@typings/api";
 export type ExerciseGraphData = {
   exerciseName: string;
   muscleGroup: MuscleGroup;
-  graphData: LineChartData[];
+  lineChartData: LineChartData[];
 };
 
 export type ExerciseApiGraphData = ApiData<ExerciseGraphData>;

@@ -1,1 +1,1 @@
-export { useGetExerciseGraphData } from "./useGetExerciseGraphData/useGetExerciseGraphData";
+export { useGetLineChart } from "./useGetLineChart/useGetLineChart";

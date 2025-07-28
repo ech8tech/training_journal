@@ -1,8 +1,8 @@
-import { Period } from "@pages/statistics/types";
+import { Period } from "@pages/statistics";
 
 export type ProgressFormProps = {
   period?: Period;
-  calendar?: {
+  calendar: {
     dateStart: string;
     dateEnd: string;
   };

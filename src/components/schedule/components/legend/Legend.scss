@@ -1,0 +1,38 @@
+@use '@styles/common';
+@use '@styles/colors';
+@use '@styles/spacing';
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: spacing.$gap_8;
+
+  &_item {
+    display: flex;
+    align-items: center;
+    gap: spacing.$gap_8;
+  }
+
+  .circle {
+    width: spacing.space(10);
+    height: spacing.space(10);
+    background-color: colors.$primary;
+    border-radius: common.$circle_border_radius;
+
+    &__half {
+      background-image: linear-gradient(90deg, colors.$primary_contrast 0% 50%, colors.$danger 50% 100%);
+    }
+
+    &__passed {
+      background-color: colors.$primary_contrast;
+    }
+
+    &__current {
+      background-color: colors.$danger;
+    }
+
+    &__future {
+      background-color: colors.$text_secondary;
+    }
+  }
+}

@@ -13,3 +13,5 @@ export const Statistics = () => {
     </Suspense>
   );
 };
+
+export * from "./types";

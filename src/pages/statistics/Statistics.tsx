@@ -1,97 +1,62 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { ChartScatterplot } from "@components/charts/scatterplot";
+import { Scatterplot } from "@components/charts/scatterplot";
 import { Filter } from "@components/filter";
 import { PageLayout } from "@components/pageLayout";
 import { Schedule } from "@components/schedule";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing";
+import { Spinner } from "@components/spinner/Spinner";
 import { Title } from "@components/title";
 import { dayjs } from "@configs/dayjs";
 import { MuscleGroup } from "@constants/muscles";
 import { SPACE_CONTAINER } from "@constants/spacing";
 
 import { MainInfo } from "./components/MainInfo";
+import { useGetExercises, useGetScatterplot } from "./hooks";
 import { Period, StatisticsFormProps } from "./types";
-import { Datum, getDateConfig, getMuscleOptions, mockData } from "./utils";
+import { getDateConfig, getMuscleOptions } from "./utils";
 
 export default function Statistics() {
-  const response = useMemo(() => {
-    return mockData("2025-04-19", 60);
-  }, []);
+  const { register, control, watch, setValue } = useForm<StatisticsFormProps>({
+    defaultValues: {
+      period: "month",
+      calendar: getDateConfig("month"),
+    },
+  });
 
-  const { register, control, watch, resetField, setValue } =
-    useForm<StatisticsFormProps>({
-      defaultValues: {
-        period: "week",
-      },
-    });
+  const { muscleGroup, period, calendar } = watch();
 
-  const { muscleGroupType, period, calendar } = watch();
-
-  const [data, setData] = useState<Datum[]>([]);
-
-  const calendarData = () => {
-    let monthStart = dayjs().startOf("month");
-    let monthEnd = dayjs().endOf("month");
-
-    if (calendar?.dateStart) {
-      monthStart = dayjs(calendar.dateStart).startOf("month");
-      monthEnd = dayjs(calendar.dateStart).endOf("month");
-    }
-
-    const monthDates = response.filter(
-      (d) =>
-        dayjs(d.date).isSameOrAfter(monthStart) &&
-        dayjs(d.date).isSameOrBefore(monthEnd),
-    );
-    return [...new Set(monthDates.map((d) => d.date))];
-  };
+  const { data: exercises, isLoading: isLoadingExercises } = useGetExercises();
+  const { data: scatterplotData, getScatterplot } = useGetScatterplot({
+    ...calendar,
+    muscleGroup,
+  });
 
   const handleSetPeriod = (period: Period) => {
     setValue("period", period);
-    resetField("calendar");
+    setValue("calendar", getDateConfig(period));
   };
 
   const handleResetCalendar = () => {
-    setValue("period", "week");
-    resetField("calendar");
+    setValue("period", "month");
+    setValue("calendar", getDateConfig("month"));
   };
 
-  const filterData = (
-    startDate: string,
-    endDate: string,
-    groupType?: MuscleGroup,
-  ) => {
-    const filtered = [...response].filter(({ date, muscleGroupType }) => {
-      const dateChecked =
-        dayjs(date).isSameOrAfter(startDate) &&
-        dayjs(date).isSameOrBefore(endDate);
-
-      if (groupType) {
-        return dateChecked && groupType === muscleGroupType;
-      }
-
-      return dateChecked;
-    });
-
-    setData(filtered);
-  };
+  console.log(watch());
 
   useEffect(() => {
-    if (calendar?.dateStart && calendar?.dateEnd) {
-      filterData(calendar.dateStart, calendar.dateEnd, muscleGroupType);
-      setValue("period", undefined);
-      return;
-    }
+    getScatterplot();
+  }, [muscleGroup, calendar?.dateStart, calendar?.dateEnd]);
 
-    if (period) {
-      // если календарь не активирован, включаем по умолчанию период
-      const { startDate, endDate } = getDateConfig(period);
-      filterData(startDate, endDate, muscleGroupType);
-    }
-  }, [muscleGroupType, period, calendar?.dateStart, calendar?.dateEnd]);
+  if (isLoadingExercises) {
+    return (
+      <PageLayout>
+        <Spinner isFullPage />
+      </PageLayout>
+    );
+  }
 
   return (
     <PageLayout title="Статистика">
@@ -104,11 +69,11 @@ export default function Statistics() {
         </Spacing>
         <Spacing space={16}>
           <Select
-            name={register("muscleGroupType").name}
+            name={register("muscleGroup").name}
             control={control}
-            options={getMuscleOptions(response)}
+            options={getMuscleOptions(exercises)}
             onChange={(option) =>
-              setValue("muscleGroupType", option?.id as MuscleGroup)
+              setValue("muscleGroup", option?.id as MuscleGroup)
             }
             label="Группа мышц"
             placeholder="Выберите"
@@ -129,7 +94,7 @@ export default function Statistics() {
             activeChipsId={period}
           />
         </Spacing>
-        <ChartScatterplot data={data} />
+        <Scatterplot data={scatterplotData} />
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
         <Spacing space={16}>
@@ -140,7 +105,11 @@ export default function Statistics() {
               : `${dayjs().format("MMMM")}`}
           </Title>
         </Spacing>
-        <Schedule startDate={calendar?.dateStart} dates={calendarData()} />
+        <Schedule
+          calendarStart={calendar?.dateStart}
+          calendarEnd={calendar?.dateEnd}
+          period={period}
+        />
       </Spacing>
     </PageLayout>
   );
