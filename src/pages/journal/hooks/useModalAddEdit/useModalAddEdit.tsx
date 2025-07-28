@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 
 import { useModal } from "@components/modal/hooks/useModal";
 import { MuscleGroup } from "@constants/muscles";
-import { useGetExercises } from "@pages/journal/hooks";
+import { useGetExercisesByMuscleGroup } from "@pages/journal/hooks";
 
 import {
   ModalAddEdit,
@@ -15,7 +15,7 @@ export function useModalAddEdit() {
 
   const { openModal, modal, onClose } = useModal();
 
-  const { getExercises } = useGetExercises(muscleGroup);
+  const { getExercises } = useGetExercisesByMuscleGroup(muscleGroup);
 
   const handleClose = async () => {
     await getExercises();

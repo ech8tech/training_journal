@@ -1,4 +1,7 @@
+import { Period } from "@pages/statistics";
+
 export type ScheduleProps = {
-  dates: string[];
-  startDate?: string;
+  calendarStart?: string;
+  calendarEnd?: string;
+  period?: Period;
 };

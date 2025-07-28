@@ -7,11 +7,11 @@ import { dayjs } from "@configs/dayjs";
 import { DAYS_IN_MONTH } from "@constants/dayjs";
 import { MuscleGroupColor, MuscleGroupName } from "@constants/muscles";
 
-import * as styles from "./ChartScatterplot.scss";
-import { LineChartProps } from "./types";
+import * as styles from "./Scatterplot.scss";
+import { ScatterplotProps } from "./types";
 import { getConfig } from "./utils";
 
-export function ChartScatterplot({ data }: LineChartProps) {
+export function Scatterplot({ data = [] }: ScatterplotProps) {
   const ref = useRef<SVGSVGElement | null>(null);
   const [isShowNotification, setIsShowNotification] = useState(false);
 

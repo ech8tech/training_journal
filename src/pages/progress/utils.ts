@@ -6,7 +6,7 @@ import {
   START_DAY_OF_WEEK,
   START_DAY_OF_YEAR,
 } from "@constants/dayjs";
-import { Period } from "@pages/statistics/types";
+import { Period } from "@pages/statistics";
 
 /**
  * Возвращает случайное целое между min и max включительно
@@ -16,7 +16,7 @@ import { Period } from "@pages/statistics/types";
 // }
 
 // export function generateRandomSessions(
-//   startDate: string,
+//   dateStart: string,
 //   daysCount: number,
 //   minSets = 3,
 //   maxSets = 5,
@@ -24,7 +24,7 @@ import { Period } from "@pages/statistics/types";
 //   const sessions: ProgressData["sessions"] = [];
 //
 //   for (let i = 0; i < daysCount; i++) {
-//     const date = dayjs(startDate).add(i, "day").format(DATE_FORMAT);
+//     const date = dayjs(dateStart).add(i, "day").format(DATE_FORMAT);
 //
 //     const setsCount = randInt(minSets, maxSets);
 //     const sets = Array.from({ length: setsCount }, (_, idx) => ({
@@ -43,9 +43,9 @@ import { Period } from "@pages/statistics/types";
 
 export function getDateConfig(period: Period) {
   const config = {
-    week: { startDate: START_DAY_OF_WEEK, endDate: END_DAY_OF_WEEK },
-    month: { startDate: START_DAY_OF_MONTH, endDate: END_DAY_OF_MONTH },
-    year: { startDate: START_DAY_OF_YEAR, endDate: END_DAY_OF_YEAR },
+    week: { dateStart: START_DAY_OF_WEEK, dateEnd: END_DAY_OF_WEEK },
+    month: { dateStart: START_DAY_OF_MONTH, dateEnd: END_DAY_OF_MONTH },
+    year: { dateStart: START_DAY_OF_YEAR, dateEnd: END_DAY_OF_YEAR },
   };
 
   return config[period];

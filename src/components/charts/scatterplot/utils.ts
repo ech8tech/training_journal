@@ -1,4 +1,4 @@
-import { LineChartData } from "@components/charts/scatterplot/types";
+import { ScatterplotModel } from "@components/charts/scatterplot/types";
 import { dayjs } from "@configs/dayjs";
 import { DAYS_IN_MONTH } from "@constants/dayjs";
 import { DATE_FORMAT } from "@constants/format";
@@ -16,7 +16,7 @@ function getCircleSize(dataLength: number) {
   return 15;
 }
 
-function getCommonRate(sets: LineChartData["sets"]) {
+function getCommonRate(sets: ScatterplotModel["sets"]) {
   return sets.reduce((sum, { weight, reps }) => sum + weight * reps, 0);
 }
 
@@ -24,7 +24,7 @@ function getDatesUniq(dates: Date[]) {
   return new Set([...dates].map((d) => dayjs(d).format(DATE_FORMAT)));
 }
 
-export function getConfig(data: LineChartData[]) {
+export function getConfig(data: ScatterplotModel[]) {
   const width = 928;
   const height = 840;
   const marginTop = 25;
@@ -39,7 +39,7 @@ export function getConfig(data: LineChartData[]) {
   const prepareData = data.map((d) => ({
     ...d,
     commonRate: getCommonRate(d.sets),
-    color: MuscleGroupColor[d.muscleGroupType],
+    color: MuscleGroupColor[d.muscleGroup],
   }));
 
   const parsed = prepareData.map((d) => {
@@ -47,13 +47,13 @@ export function getConfig(data: LineChartData[]) {
     return {
       ...d,
       date,
-      logRate: Math.log10(d.commonRate),
+      logRate: d.commonRate === 0 ? 0 : Math.log10(d.commonRate),
     };
   });
 
   const muscleGroupTypes = [
     ...new Set(
-      parsed.map((d) => d.muscleGroupType).sort((a, b) => a.localeCompare(b)),
+      parsed.map((d) => d.muscleGroup).sort((a, b) => a.localeCompare(b)),
     ),
   ];
   const logRates = parsed.map((d) => d.logRate);

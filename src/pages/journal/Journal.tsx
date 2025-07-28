@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { omit } from "lodash";
 import { useEffect, useState } from "react";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
 
@@ -22,7 +23,7 @@ import { useCreateSession } from "@pages/journal/hooks/useCreateSession";
 import { useDeleteSession } from "@pages/journal/hooks/useDeleteSession";
 import { SetDto } from "@pages/journal/types";
 
-import { useGetExercises, useModalAddEdit } from "./hooks";
+import { useGetExercisesByMuscleGroup, useModalAddEdit } from "./hooks";
 import * as styles from "./Journal.scss";
 
 export default function Journal() {
@@ -31,7 +32,7 @@ export default function Journal() {
   const [isDoneIds, setIsDoneIds] = useState<string[]>([]);
   const muscleGroup = params.muscleGroup!;
 
-  const { data, isLoading } = useGetExercises(muscleGroup);
+  const { data, isLoading } = useGetExercisesByMuscleGroup(muscleGroup);
   const { createSession } = useCreateSession();
   const { deleteSession } = useDeleteSession();
 
@@ -50,7 +51,8 @@ export default function Journal() {
     const createdSession = await createSession({
       date: dayjs().format(DATE_FORMAT),
       exerciseId,
-      sets,
+      // при создании сессий мы отправляем НОВЫЕ подходы
+      sets: sets?.map((s) => omit(s, ["id"])),
     });
 
     if (createdSession?.data?.length) {

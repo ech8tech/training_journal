@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { omit } from "lodash";
 import { ChangeEvent } from "react";
 import { Path, useFieldArray, useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
@@ -74,7 +75,8 @@ export function ModalAddEdit({
       await createSession({
         date: dayjs().format(DATE_FORMAT),
         exerciseId: values.exerciseId,
-        sets: payload?.sets,
+        // при создании сессий мы отправляем НОВЫЕ подходы
+        sets: payload?.sets?.map((set) => omit(set, ["id"])),
       });
       return;
     }

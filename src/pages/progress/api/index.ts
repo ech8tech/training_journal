@@ -1,7 +1,9 @@
 import { apiConf } from "@utils/fetch";
 
 export const apiProgress = {
-  getExerciseGraphData: (exerciseId: string) => {
-    return apiConf.get(`/exercise/${exerciseId}`);
+  getLineChart: (exerciseId: string, dateStart: string, dateEnd: string) => {
+    return apiConf.get(`/charts/line_chart/${exerciseId}`, {
+      params: { dateStart, dateEnd },
+    });
   },
 };

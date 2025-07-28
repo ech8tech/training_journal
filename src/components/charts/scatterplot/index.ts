@@ -1,1 +1,2 @@
-export { ChartScatterplot } from "./ChartScatterplot";
+export { Scatterplot } from "./Scatterplot";
+export * from "./types";
