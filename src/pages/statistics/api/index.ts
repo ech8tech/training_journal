@@ -1,3 +1,4 @@
+import { PieChartModel } from "@components/charts/pieChart";
 import { ScatterplotModel } from "@components/charts/scatterplot";
 import { MuscleGroup } from "@constants/muscles";
 import { ExerciseData } from "@pages/journal/hooks/useGetExercisesByMuscleGroup/types";
@@ -15,6 +16,20 @@ export const apiStatistics = {
   }) => {
     return apiConf.get<ScatterplotModel[]>("/charts/scatterplot", {
       params: { dateStart, dateEnd, muscleGroup },
+    });
+  },
+
+  getPieChart: ({
+    muscleGroup,
+    dateStart,
+    dateEnd,
+  }: {
+    muscleGroup: MuscleGroup;
+    dateStart: string;
+    dateEnd: string;
+  }) => {
+    return apiConf.get<PieChartModel[]>(`/charts/pie_chart`, {
+      params: { muscleGroup, dateStart, dateEnd },
     });
   },
 

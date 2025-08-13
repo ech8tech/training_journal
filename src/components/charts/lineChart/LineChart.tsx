@@ -27,7 +27,7 @@ export function LineChart({
     const height = 840;
     const marginTop = 25;
     const marginRight = 15;
-    const marginLeft = 50;
+    const marginLeft = 60;
     const LEGEND_ROW_HEIGHT = 40;
     const AXIS_X_TEXT_HEIGHT = 80;
     const marginBottom = LEGEND_ROW_HEIGHT + AXIS_X_TEXT_HEIGHT;
@@ -40,8 +40,16 @@ export function LineChart({
 
     const parsed = data.map((d) => ({
       date: dayjs(d.date).toDate(),
-      commonRate: d.commonRate === 0 ? 0 : Math.log10(d.commonRate),
+      commonRate: d.commonRate === 0 ? 0 : d.commonRate,
     }));
+
+    console.log(parsed);
+
+    const minRate = d3.min(parsed, (d) => d.commonRate) || 1;
+    const maxRate = d3.max(parsed, (d) => d.commonRate) || 1;
+
+    const toPercent = (value: number) =>
+      ((value - minRate) / (maxRate - minRate)) * 100;
 
     const [minDate, maxDate] = d3.extent(parsed, (d) => d.date) as [Date, Date];
 
@@ -55,15 +63,18 @@ export function LineChart({
 
     const y = d3
       .scaleLinear()
-      // .domain([0, d3.max(parsed, (d) => d.commonRate)] as [number, number])
-      .domain(d3.extent(parsed, (d) => d.commonRate) as [number, number])
+      .domain([0, 100])
+      // .domain(d3.extent(parsed, (d) => d.commonRate) as [number, number])
       .nice()
       .range([height - marginBottom, marginTop]);
 
     const lineGen = d3
       .line<{ date: Date; commonRate: number }>()
       .x((d) => x(d.date))
-      .y((d) => y(d.commonRate));
+      .y((d) => {
+        console.log(toPercent(d.commonRate), d.commonRate);
+        return y(toPercent(d.commonRate));
+      });
 
     const svg = d3
       .select(ref.current)
@@ -128,7 +139,12 @@ export function LineChart({
     svg
       .append("g")
       .attr("transform", `translate(${marginLeft},0)`)
-      .call(d3.axisLeft(y).ticks(6))
+      .call(
+        d3
+          .axisLeft(y)
+          .ticks(6)
+          .tickFormat((d) => `${d}%`),
+      )
       .call((g) => g.select(".domain").remove())
       .call((g) => g.selectAll(".tick line").attr("stroke", "white"))
       .call((g) =>
@@ -163,7 +179,7 @@ export function LineChart({
       .data(parsed)
       .join("circle")
       .attr("cx", (d) => x(d.date))
-      .attr("cy", (d) => y(d.commonRate))
+      .attr("cy", (d) => y(toPercent(d.commonRate)))
       .attr("r", CIRCLE_SIZE)
       .attr("fill", MuscleGroupColor[muscleGroup]);
 
