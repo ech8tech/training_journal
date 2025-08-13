@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
-import { Scatterplot } from "@components/charts/scatterplot";
+import { PieChart } from "@components/charts/pieChart/PieChart";
 import { Filter } from "@components/filter";
 import { PageLayout } from "@components/pageLayout";
 import { Schedule } from "@components/schedule";
@@ -14,7 +14,7 @@ import { MuscleGroup } from "@constants/muscles";
 import { SPACE_CONTAINER } from "@constants/spacing";
 
 import { MainInfo } from "./components/MainInfo";
-import { useGetExercises, useGetScatterplot } from "./hooks";
+import { useGetExercises, useGetPieChart } from "./hooks";
 import { Period, StatisticsFormProps } from "./types";
 import { getDateConfig, getMuscleOptions } from "./utils";
 
@@ -23,13 +23,19 @@ export default function Statistics() {
     defaultValues: {
       period: "month",
       calendar: getDateConfig("month"),
+      muscleGroup: MuscleGroup.SHOULDERS,
     },
   });
 
   const { muscleGroup, period, calendar } = watch();
 
   const { data: exercises, isLoading: isLoadingExercises } = useGetExercises();
-  const { data: scatterplotData, getScatterplot } = useGetScatterplot({
+  // const { data: scatterplotData, getScatterplot } = useGetScatterplot({
+  //   ...calendar,
+  //   muscleGroup,
+  // });
+
+  const { data: pieChartData, getPieChart } = useGetPieChart({
     ...calendar,
     muscleGroup,
   });
@@ -44,10 +50,9 @@ export default function Statistics() {
     setValue("calendar", getDateConfig("month"));
   };
 
-  console.log(watch());
-
   useEffect(() => {
-    getScatterplot();
+    // getScatterplot();
+    getPieChart();
   }, [muscleGroup, calendar?.dateStart, calendar?.dateEnd]);
 
   if (isLoadingExercises) {
@@ -94,7 +99,8 @@ export default function Statistics() {
             activeChipsId={period}
           />
         </Spacing>
-        <Scatterplot data={scatterplotData} />
+        <PieChart data={pieChartData} />
+        {/*<Scatterplot data={scatterplotData} />*/}
       </Spacing>
       <Spacing space={SPACE_CONTAINER}>
         <Spacing space={16}>
