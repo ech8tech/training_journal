@@ -13,7 +13,7 @@
 
 .select {
   @include fonts.font(14);
-  padding: spacing.$space_12;
+  position: relative;
   border-radius: common.$base_border_radius;
   transition: common.$transition_fast;
   background-color: colors.$background_layout;
@@ -33,6 +33,7 @@
   display: flex;
   align-content: center;
   justify-content: space-between;
+  padding: spacing.$space_12;
 
   &_icon {
     color: colors.$text_primary;
@@ -52,6 +53,7 @@
 
 .options {
   @include fonts.font(14);
+  width: 100%;
   position: absolute;
   overflow: hidden;
   border-radius: 0 0 common.$base_border_radius common.$base_border_radius;
@@ -63,7 +65,7 @@
   align-content: center;
   gap: spacing.$gap_8;
   cursor: pointer;
-  background-color: colors.$base_background;
+  background-color: colors.$background_layout;
   transition: common.$transition_fast;
   padding: spacing.$space_12;
 

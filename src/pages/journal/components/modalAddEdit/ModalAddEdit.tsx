@@ -10,6 +10,7 @@ import { Button, ButtonsGroup } from "@components/buttons";
 import { Input } from "@components/input";
 import { Select } from "@components/select";
 import { Spacing } from "@components/spacing/Spacing";
+import { TextArea } from "@components/textArea";
 import { DATE_FORMAT } from "@constants/format";
 import { MuscleGroup, MuscleType } from "@constants/muscles";
 import { SPACE_INNER } from "@constants/spacing";
@@ -38,8 +39,6 @@ export function ModalAddEdit({
     useForm<ModalAddEditFormProps>({
       defaultValues: { muscleGroup, ...editData },
     });
-
-  const muscleType = getValues("muscleType");
 
   const { fields, append, remove } = useFieldArray({
     control,
@@ -76,12 +75,21 @@ export function ModalAddEdit({
         date: dayjs().format(DATE_FORMAT),
         exerciseId: values.exerciseId,
         // при создании сессий мы отправляем НОВЫЕ подходы
-        sets: payload?.sets?.map((set) => omit(set, ["id"])),
+        sets: payload?.sets?.map((set) => {
+          if (set?.sessionId) return omit(set, ["id"]);
+          else return set;
+        }),
       });
       return;
     }
 
     if (isEditExerciseMode) {
+      payload.sets = payload?.sets?.map((set, index) => ({
+        ...set,
+        order: index + 1,
+        sessionId: values.sessionId,
+      }));
+
       await editExercise({ exerciseId: values.exerciseId, payload });
     } else {
       await createExercise(payload);
@@ -102,7 +110,6 @@ export function ModalAddEdit({
             setValue("muscleType", option?.id as MuscleType)
           }
           options={getMuscleOptions(muscleGroup)}
-          defaultOptionId={muscleType}
         />
       </Spacing>
       <Spacing space={20}>
@@ -112,6 +119,15 @@ export function ModalAddEdit({
           placeholder="Введите наименование"
           label="Наименование упражнения"
           onChange={(e) => setValue("name", e.target.value)}
+        />
+      </Spacing>
+      <Spacing space={20}>
+        <TextArea
+          {...register("comment")}
+          className={styles.field_input}
+          placeholder="Введите комментарий"
+          label="Комментарий"
+          onChange={(e) => setValue("comment", e.target.value)}
         />
       </Spacing>
       <Spacing space={8}>
@@ -127,6 +143,7 @@ export function ModalAddEdit({
               <Input
                 {...register(`sets.${index}.weight`)}
                 className={styles.field_input}
+                type="number"
                 label={index === 0 ? "Вес" : ""}
                 onChange={(e) => handleChangeField(`sets.${index}.weight`, e)}
               />

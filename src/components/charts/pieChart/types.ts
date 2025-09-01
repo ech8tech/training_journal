@@ -4,5 +4,5 @@ export type PieChartModel = {
 };
 
 export type PieChartProps = {
-  data: PieChartModel[];
+  data?: PieChartModel[];
 };

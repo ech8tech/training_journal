@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { omit } from "lodash";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { generatePath, useNavigate, useParams } from "react-router-dom";
 
 import { routes } from "@app/routesConfig";
@@ -29,10 +29,11 @@ import * as styles from "./Journal.scss";
 export default function Journal() {
   const navigate = useNavigate();
   const params = useParams<{ muscleGroup: MuscleGroup }>();
-  const [isDoneIds, setIsDoneIds] = useState<string[]>([]);
+  const [openedIds, setOpenedIds] = useState<string[]>([]);
   const muscleGroup = params.muscleGroup!;
 
-  const { data, isLoading } = useGetExercisesByMuscleGroup(muscleGroup);
+  const { data, isLoading, getExercises } =
+    useGetExercisesByMuscleGroup(muscleGroup);
   const { createSession } = useCreateSession();
   const { deleteSession } = useDeleteSession();
 
@@ -45,6 +46,14 @@ export default function Journal() {
     navigate(to);
   };
 
+  const handleOpen = (id: string) => {
+    if (openedIds?.includes(id)) {
+      setOpenedIds((prev) => prev.filter((openedId) => openedId !== id));
+    } else {
+      setOpenedIds((prev) => [...prev, id]);
+    }
+  };
+
   const { modal, handleOpenModal } = useModalAddEdit();
 
   const handleCreateSession = async (exerciseId: string, sets?: SetDto[]) => {
@@ -52,11 +61,14 @@ export default function Journal() {
       date: dayjs().format(DATE_FORMAT),
       exerciseId,
       // при создании сессий мы отправляем НОВЫЕ подходы
-      sets: sets?.map((s) => omit(s, ["id"])),
+      sets: sets?.map((s) => {
+        if (s.sessionId) return omit(s, ["id"]);
+        else return s;
+      }),
     });
 
     if (createdSession?.data?.length) {
-      setIsDoneIds((prevState) => [...prevState, exerciseId]);
+      await getExercises();
     }
   };
 
@@ -64,20 +76,9 @@ export default function Journal() {
     const deletedSession = await deleteSession(exerciseId);
 
     if (deletedSession?.data?.exerciseId) {
-      setIsDoneIds((prevState) => prevState?.filter((id) => id !== exerciseId));
+      await getExercises();
     }
   };
-
-  useEffect(() => {
-    if (data?.length) {
-      const ids = data.reduce((acc: string[], exercise) => {
-        if (exercise?.isDone) return [...acc, exercise.id];
-        return acc;
-      }, []);
-
-      setIsDoneIds(ids);
-    }
-  }, [data]);
 
   if (isLoading) {
     return <Spinner isFullPage />;
@@ -98,8 +99,7 @@ export default function Journal() {
       {!data?.length ? (
         <Title size="h3">Добавьте упражнения на эту группу мышц</Title>
       ) : (
-        data?.map((item, index) => {
-          const isDone = isDoneIds?.includes(item.id);
+        data?.map(({ isDone, ...item }, index) => {
           const hasSets = !!item?.sets?.length;
 
           return (
@@ -108,6 +108,9 @@ export default function Journal() {
               space={index !== data.length - 1 ? SPACE_CONTAINER : 0}
             >
               <Accordion
+                id={item.id}
+                isOpen={openedIds.includes(item.id)}
+                onOpen={handleOpen}
                 title={item.name}
                 iconPrimary={Muscles[item.muscleType].icon}
                 iconSecondary={
@@ -145,10 +148,7 @@ export default function Journal() {
                             "editExercise",
                             {
                               exerciseId: item.id,
-                              name: item.name,
-                              muscleType: item.muscleType,
-                              muscleGroup: item.muscleGroup,
-                              sets: item?.sets,
+                              ...item,
                             },
                           )
                         }
@@ -162,35 +162,9 @@ export default function Journal() {
                   }
                   bodyEmpty={
                     !item?.sets?.length ? (
-                      <>
-                        {/*<div className={styles.header}>*/}
-                        {/*  <Text className={styles.header_title}>*/}
-                        {/*    Редактировать (Добавьте подходы)*/}
-                        {/*  </Text>*/}
-                        {/*  <Button*/}
-                        {/*    type="ghost"*/}
-                        {/*    className={styles.buttonIcon}*/}
-                        {/*    icon={<IconEdit />}*/}
-                        {/*    onClick={() =>*/}
-                        {/*      handleOpenModal(*/}
-                        {/*        "Редактирование упражнения",*/}
-                        {/*        "Сохранить",*/}
-                        {/*        "editExercise",*/}
-                        {/*        {*/}
-                        {/*          exerciseId: item.id,*/}
-                        {/*          name: item.name,*/}
-                        {/*          muscleType: item.muscleType,*/}
-                        {/*          muscleGroup: item.muscleGroup,*/}
-                        {/*          sets: item?.sets,*/}
-                        {/*        },*/}
-                        {/*      )*/}
-                        {/*    }*/}
-                        {/*  />*/}
-                        {/*</div>*/}
-                        <Title className={styles.header_description} size="h5">
-                          Добавьте подходы к этому упражнению
-                        </Title>
-                      </>
+                      <Title className={styles.header_description} size="h5">
+                        Добавьте подходы к этому упражнению
+                      </Title>
                     ) : null
                   }
                   columns={[
@@ -211,10 +185,7 @@ export default function Journal() {
                         hasSets ? "addSession" : "editExercise",
                         {
                           exerciseId: item.id,
-                          name: item.name,
-                          muscleType: item.muscleType,
-                          muscleGroup: item.muscleGroup,
-                          sets: item?.sets,
+                          ...item,
                         },
                       );
                     },

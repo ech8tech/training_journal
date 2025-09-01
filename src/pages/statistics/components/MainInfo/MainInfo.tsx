@@ -70,7 +70,7 @@ export function MainInfo() {
         <div>
           <IconFull />
         </div>
-        <div className={styles.profile}>
+        <div>
           <Spacing space={8}>
             <Text>Имя: {name}</Text>
           </Spacing>

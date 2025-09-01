@@ -9,12 +9,11 @@ import { Select } from "@components/select";
 import { Spacing } from "@components/spacing";
 import { Spinner } from "@components/spinner/Spinner";
 import { Title } from "@components/title";
-import { dayjs } from "@configs/dayjs";
 import { MuscleGroup } from "@constants/muscles";
 import { SPACE_CONTAINER } from "@constants/spacing";
 
 import { MainInfo } from "./components/MainInfo";
-import { useGetExercises, useGetPieChart } from "./hooks";
+import { useGetMuscleGroups, useGetPieChart } from "./hooks";
 import { Period, StatisticsFormProps } from "./types";
 import { getDateConfig, getMuscleOptions } from "./utils";
 
@@ -23,17 +22,13 @@ export default function Statistics() {
     defaultValues: {
       period: "month",
       calendar: getDateConfig("month"),
-      muscleGroup: MuscleGroup.SHOULDERS,
     },
   });
 
   const { muscleGroup, period, calendar } = watch();
 
-  const { data: exercises, isLoading: isLoadingExercises } = useGetExercises();
-  // const { data: scatterplotData, getScatterplot } = useGetScatterplot({
-  //   ...calendar,
-  //   muscleGroup,
-  // });
+  const { data: muscleGroups, isLoading: isLoadingMuscleGroups } =
+    useGetMuscleGroups();
 
   const { data: pieChartData, getPieChart } = useGetPieChart({
     ...calendar,
@@ -45,17 +40,20 @@ export default function Statistics() {
     setValue("calendar", getDateConfig(period));
   };
 
-  const handleResetCalendar = () => {
-    setValue("period", "month");
-    setValue("calendar", getDateConfig("month"));
-  };
-
   useEffect(() => {
     // getScatterplot();
-    getPieChart();
+    if (muscleGroup && calendar) {
+      getPieChart();
+    }
   }, [muscleGroup, calendar?.dateStart, calendar?.dateEnd]);
 
-  if (isLoadingExercises) {
+  useEffect(() => {
+    if (muscleGroups?.length) {
+      setValue("muscleGroup", muscleGroups[0]);
+    }
+  }, [muscleGroups]);
+
+  if (isLoadingMuscleGroups) {
     return (
       <PageLayout>
         <Spinner isFullPage />
@@ -76,7 +74,7 @@ export default function Statistics() {
           <Select
             name={register("muscleGroup").name}
             control={control}
-            options={getMuscleOptions(exercises)}
+            options={getMuscleOptions(muscleGroups)}
             onChange={(option) =>
               setValue("muscleGroup", option?.id as MuscleGroup)
             }
@@ -95,28 +93,19 @@ export default function Statistics() {
               value: calendar?.dateEnd || "",
             }}
             onClickChips={(id) => handleSetPeriod(id as Period)}
-            onResetCalendar={handleResetCalendar}
             activeChipsId={period}
           />
         </Spacing>
         <PieChart data={pieChartData} />
         {/*<Scatterplot data={scatterplotData} />*/}
       </Spacing>
-      <Spacing space={SPACE_CONTAINER}>
-        <Spacing space={16}>
-          <Title size="h3">
-            График занятий за{" "}
-            {calendar?.dateStart
-              ? `${dayjs(calendar.dateStart).format("MMMM")}`
-              : `${dayjs().format("MMMM")}`}
-          </Title>
-        </Spacing>
+      <div>
         <Schedule
           calendarStart={calendar?.dateStart}
           calendarEnd={calendar?.dateEnd}
           period={period}
         />
-      </Spacing>
+      </div>
     </PageLayout>
   );
 }

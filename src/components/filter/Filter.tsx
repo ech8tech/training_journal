@@ -1,5 +1,3 @@
-import IconDelete from "@assets/icons/other/IconDelete.svg";
-import { Button } from "@components/buttons";
 import { Chips } from "@components/chips";
 import { Input } from "@components/input";
 import { Spacing } from "@components/spacing/Spacing";
@@ -13,7 +11,6 @@ export function Filter({
   configDateEnd,
   activeChipsId,
   onClickChips,
-  onResetCalendar,
 }: FilterProps) {
   return (
     <>
@@ -29,12 +26,6 @@ export function Filter({
           className={styles.date}
           label="Конец периода"
           type="date"
-        />
-        <Button
-          isDisabled={!configDateStart.value || !configDateEnd.value}
-          onClick={onResetCalendar}
-          type="danger"
-          icon={<IconDelete />}
         />
       </Spacing>
       <div className={styles.filter}>

@@ -62,6 +62,7 @@
     "workbox-webpack-plugin": "^7.3.0"
   },
   "dependencies": {
+    "@rc-component/trigger": "^3.5.2",
     "@react-input/mask": "^2.0.4",
     "@tanstack/react-query": "^5.67.3",
     "axios": "^1.8.2",
@@ -70,6 +71,7 @@
     "dayjs": "^1.11.13",
     "js-cookie": "^3.0.5",
     "lodash": "^4.17.21",
+    "rc-trigger": "^5.3.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",

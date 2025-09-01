@@ -87,7 +87,6 @@ export default function Profile() {
           control={control}
           onChange={(option) => setValue("sex", option?.id)}
           options={optionsSex}
-          defaultOptionId={sex}
         />
       </Spacing>
     </PageLayout>

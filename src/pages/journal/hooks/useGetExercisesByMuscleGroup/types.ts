@@ -5,9 +5,11 @@ import { ApiData } from "@typings/api";
 export type ExerciseData = {
   id: string;
   name: string;
+  sessionId: string | null;
   muscleType: MuscleType;
   muscleGroup: MuscleGroup;
   isDone: boolean;
+  comment?: string;
   sets?: SetDto[];
 };
 

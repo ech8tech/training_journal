@@ -8,8 +8,10 @@
   grid-template-columns: repeat(7, 1fr);
   gap: spacing.$gap_24;
   justify-items: center;
+  position: relative;
 
   .day {
+    position: relative;
     background-color: colors.$primary;
     width: spacing.space(30);
     height: spacing.space(30);
@@ -24,6 +26,7 @@
     }
 
     &__passed {
+      cursor: pointer;
       background-color: colors.$primary_contrast;
     }
 
@@ -75,4 +78,28 @@ $rows: 7;
       background-color: colors.$text_secondary;
     }
   }
+}
+
+.popupLabel {
+  font-weight: 600;
+}
+
+.badges {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 0;
+  top: -7px;
+}
+
+.badge {
+  width: spacing.space(5);
+  height: spacing.space(5);
+  border-radius: common.$circle_border_radius;
+}
+
+.muscleGroup {
+  display: flex;
+  align-items: center;
+  gap: spacing.$gap_4;
 }

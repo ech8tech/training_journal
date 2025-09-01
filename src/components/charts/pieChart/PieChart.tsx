@@ -2,6 +2,7 @@ import * as d3 from "d3";
 import { useEffect, useRef } from "react";
 
 import { colorFromNameHSL } from "@components/charts/pieChart/utils";
+import { Title } from "@components/title";
 
 import { PieChartModel, PieChartProps } from "./types";
 
@@ -18,7 +19,7 @@ export function PieChart({ data = [] }: PieChartProps) {
   const isNotEnoughData = data?.length <= 1;
 
   useEffect(() => {
-    if (!ref.current || isNotEnoughData) return;
+    if (isNotEnoughData) return;
 
     const svg = d3
       .select(ref.current)
@@ -236,6 +237,10 @@ export function PieChart({ data = [] }: PieChartProps) {
       }
     };
   }, [data]);
+
+  if (isNotEnoughData) {
+    return <Title size="h4">Недостаточно данных для показа графика</Title>;
+  }
 
   return <svg ref={ref} />;
 }

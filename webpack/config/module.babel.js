@@ -11,6 +11,15 @@ export function getModule(isProduction) {
         },
       },
       {
+        test: /\.(css)$/,
+        exclude: /\.module\.(css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader", // ← без modules
+          "sass-loader",
+        ],
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           isProduction ? MiniCssExtractPlugin.loader : "style-loader",

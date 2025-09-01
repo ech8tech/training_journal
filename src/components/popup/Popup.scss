@@ -1,0 +1,28 @@
+@use "@styles/colors";
+@use "@styles/common";
+@use "@styles/mixins";
+@use "@styles/spacing";
+@use "@styles/zIndex";
+
+.content {
+  padding: spacing.$space_8;
+  border-radius: common.$base_border_radius;
+  background-color: colors.$base_foreground;
+}
+
+.arrow {
+  box-shadow: unset !important;
+  &::after {
+    content: "";
+    z-index: 102;
+    width: 8px;
+    height: 8px;
+    position: absolute;
+    left: -4px;
+    top: -4px;
+    transform: rotate(45deg) skew(1deg, 1deg);
+    background: colors.$base_foreground;
+    border-radius: unset !important;
+    box-shadow: unset !important;
+  }
+}

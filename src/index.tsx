@@ -1,4 +1,5 @@
 import "dayjs/locale/ru";
+import "@rc-component/trigger/assets/index.css";
 import dayjs from "dayjs";
 import { createRoot } from "react-dom/client";
 

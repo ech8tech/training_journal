@@ -1,36 +1,32 @@
 import cn from "classnames";
 import dayjs from "dayjs";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
+import { Popup } from "@components/popup";
 import { Spacing } from "@components/spacing";
 import { Spinner } from "@components/spinner/Spinner";
 import { Text } from "@components/text";
 import { Title } from "@components/title";
-import { DAYS_IN_YEAR } from "@constants/dayjs";
 import { DATE_FORMAT } from "@constants/format";
+import { MuscleGroupColor, MuscleGroupName } from "@constants/muscles";
 
 import { useGetSchedule } from "./hooks";
 import * as styles from "./Schedule.scss";
 import { ScheduleProps } from "./types";
 
-export function Schedule({
-  calendarStart,
-  calendarEnd,
-  period,
-}: ScheduleProps) {
+export function Schedule({ calendarStart, calendarEnd }: ScheduleProps) {
   const { data, isLoading, error, getStatistics } = useGetSchedule(
     calendarStart,
     calendarEnd,
-    period,
   );
 
+  const [openId, setOpen] = useState<string | null>(null);
+
   useEffect(() => {
-    if (calendarStart || calendarEnd || period) {
+    if (calendarStart || calendarEnd) {
       getStatistics();
     }
-  }, [calendarStart, calendarEnd, period]);
-
-  if (!data?.dates?.length) return null;
+  }, [calendarStart, calendarEnd]);
 
   if (isLoading) {
     return <Spinner />;
@@ -40,23 +36,27 @@ export function Schedule({
     return <Title size="h5">Ошибка загрузки статистики</Title>;
   }
 
-  const dates = data.dates;
-
-  // if (dates?.length <= 1) return null;
+  const dates = Object.keys(data);
 
   const dateStart = dayjs(calendarStart);
+  const dateEnd = dayjs(calendarEnd);
   const daysInMonth = dateStart.daysInMonth();
+
   const startOfMonth = dateStart.startOf("month");
+  const endOfMonth = dateEnd.endOf("month");
 
-  const diff =
-    dates?.length <= 1
-      ? 0
-      : dayjs(dates[dates.length - 1]).diff(dayjs(dates[0]), "day");
+  const monthStart = dateStart.startOf("month").format("MMMM");
+  const monthEnd = dateEnd.startOf("month").format("MMMM");
 
-  const length = diff > daysInMonth ? DAYS_IN_YEAR : daysInMonth;
-  // const length = getLengthStatistics(diff);
+  const title =
+    monthStart === monthEnd ? monthStart : `${monthStart} - ${monthEnd}`;
+
+  const diffDays = endOfMonth.diff(startOfMonth, "day") + 1;
+
+  const length = diffDays > daysInMonth ? diffDays : daysInMonth;
 
   const days = Array.from({ length }, (_, i) => ({
+    data: data[startOfMonth.add(i, "day").format(DATE_FORMAT)],
     day: startOfMonth.add(i, "day").format("D"),
     date: startOfMonth.add(i, "day").format(DATE_FORMAT),
     isPassed: dates.includes(startOfMonth.add(i, "day").format(DATE_FORMAT)),
@@ -66,10 +66,17 @@ export function Schedule({
     isFuture: dayjs().isBefore(startOfMonth.add(i, "day"), "day"),
   }));
 
+  const TitleComponent = (
+    <Spacing space={16}>
+      <Title size="h3">График занятий за {title}</Title>
+    </Spacing>
+  );
+
   if (days.length > daysInMonth) {
     return (
       <>
-        <Spacing space={16} className={styles.heatmap}>
+        {TitleComponent}
+        <div className={styles.heatmap}>
           {days.map((day, idx) => (
             <div
               key={idx}
@@ -83,29 +90,77 @@ export function Schedule({
               <Text size="sm">{day.day}</Text>
             </div>
           ))}
-        </Spacing>
-        {/*<Legend />*/}
+        </div>
       </>
     );
   }
 
   return (
     <>
-      <Spacing space={16} className={styles.calendar}>
-        {days.map((day) => (
-          <div
-            key={day.date}
-            className={cn(styles.day, {
-              [styles.day__passed]: day.isPassed,
-              [styles.day__current]: day.isCurrent,
-              [styles.day__future]: day.isFuture,
-              [styles.day__half]: day.isPassed && day.isCurrent,
-            })}
-          >
-            {day.day}
-          </div>
-        ))}
-      </Spacing>
+      {TitleComponent}
+      <div className={styles.calendar}>
+        {days.map((day) => {
+          const hasDate = !!day.data?.length;
+
+          return (
+            <Popup
+              key={day.date}
+              id={day.date}
+              isOpen={day.date === openId}
+              onOpen={setOpen}
+              content={
+                <div>
+                  <Text className={styles.popupLabel}>Выполнено:</Text>
+                  {day.data?.map((item) => {
+                    const [muscleGroup, count] = item;
+                    return (
+                      <Text
+                        className={styles.muscleGroup}
+                        size="sm"
+                        key={muscleGroup}
+                      >
+                        <div
+                          className={styles.badge}
+                          style={{
+                            backgroundColor: MuscleGroupColor[muscleGroup],
+                          }}
+                        />
+                        {MuscleGroupName[muscleGroup]} - ({count})
+                      </Text>
+                    );
+                  })}
+                </div>
+              }
+            >
+              <div
+                onClick={hasDate ? () => setOpen(day.date) : undefined}
+                className={cn(styles.day, {
+                  [styles.day__passed]: day.isPassed,
+                  [styles.day__current]: day.isCurrent,
+                  [styles.day__future]: day.isFuture,
+                  [styles.day__half]: day.isPassed && day.isCurrent,
+                })}
+              >
+                {day.day}
+                <div className={styles.badges}>
+                  {day.data?.map((item) => {
+                    const [muscleGroup] = item;
+                    return (
+                      <div
+                        key={muscleGroup}
+                        className={styles.badge}
+                        style={{
+                          backgroundColor: MuscleGroupColor[muscleGroup],
+                        }}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            </Popup>
+          );
+        })}
+      </div>
       {/*<Legend />*/}
     </>
   );

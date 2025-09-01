@@ -14,7 +14,6 @@ import { ProgressFormProps } from "./types";
 import { getDateConfig } from "./utils";
 
 export default function Progress() {
-  // const [data, setData] = useState<LineChartData[]>([]);
   const navigate = useNavigate();
 
   const { register, watch, resetField, setValue } = useForm<ProgressFormProps>({
@@ -35,11 +34,6 @@ export default function Progress() {
   const handleSetPeriod = (period: Period) => {
     setValue("period", period);
     setValue("calendar", getDateConfig(period));
-  };
-
-  const handleResetCalendar = () => {
-    setValue("period", "month");
-    setValue("calendar", getDateConfig("month"));
   };
 
   const handleBack = () => {
@@ -79,7 +73,6 @@ export default function Progress() {
             },
           }}
           onClickChips={(id) => handleSetPeriod(id as Period)}
-          onResetCalendar={handleResetCalendar}
           activeChipsId={period}
         />
       </Spacing>
