@@ -7,8 +7,8 @@ export default {
   // Source folder
   src: path.resolve(__dirname, "../../src"),
 
-  // Production ready build
-  build: path.resolve(__dirname, "../../build"),
+  // Production ready dist
+  dist: path.resolve(__dirname, "../../dist"),
 
   // Static files that get copied to build folder
   public: path.resolve(__dirname, "../../public"),

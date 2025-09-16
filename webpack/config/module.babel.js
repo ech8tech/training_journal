@@ -1,6 +1,17 @@
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-export function getModule(isProduction) {
+export function getModule() {
+  const isProduction = process.env.NODE_ENV === "production";
+
+  console.log(isProduction);
+
+  console.log(
+    "####################",
+    process.env.NODE_ENV,
+    process.env.PORT,
+    process.env.API_URL,
+  );
+
   return {
     rules: [
       {
@@ -9,6 +20,15 @@ export function getModule(isProduction) {
         use: {
           loader: "babel-loader",
         },
+      },
+      {
+        test: /\.(css)$/,
+        exclude: /\.module\.(css)$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader", // ← без modules
+          "sass-loader",
+        ],
       },
       {
         test: /\.s[ac]ss$/i,

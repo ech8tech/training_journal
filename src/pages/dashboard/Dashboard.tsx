@@ -12,6 +12,7 @@ import { Spacing } from "@components/spacing";
 import { Spinner } from "@components/spinner/Spinner";
 import { Text } from "@components/text";
 import { Title } from "@components/title";
+import { END_DAY_OF_MONTH, START_DAY_OF_MONTH } from "@constants/dayjs";
 import { SPACE_CONTAINER } from "@constants/spacing";
 import { useGetProfile } from "@hooks/useGetProfile";
 import { getWeekDays } from "@pages/dashboard/utils";
@@ -105,7 +106,10 @@ export default function Dashboard() {
         />
       </Spacing>
       <div>
-        <Schedule dates={[]} />
+        <Schedule
+          calendarStart={START_DAY_OF_MONTH}
+          calendarEnd={END_DAY_OF_MONTH}
+        />
       </div>
     </PageLayout>
   );

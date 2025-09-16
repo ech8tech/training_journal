@@ -12,10 +12,13 @@ export type ModalAddEditFormProps = {
   name: string;
   muscleType: MuscleType;
   muscleGroup: MuscleGroup;
+  comment?: string;
+  sessionId: string | null;
   sets?: {
     id?: string;
     order: number;
     reps: number;
     weight: number;
+    sessionId: string | null;
   }[];
 };

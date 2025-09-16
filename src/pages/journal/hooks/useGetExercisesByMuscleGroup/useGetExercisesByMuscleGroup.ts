@@ -17,7 +17,10 @@ export function useGetExercisesByMuscleGroup(
   });
 
   return {
-    data: useMemo(() => data?.data, [data]),
+    data: useMemo(
+      () => data?.data?.sort((a, b) => a.name.localeCompare(b.name)),
+      [data],
+    ),
     error,
     isLoading: isFetching,
     getExercises: refetch,

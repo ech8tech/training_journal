@@ -12,5 +12,4 @@ export type FilterProps = {
   };
   activeChipsId?: string;
   onClickChips(id: string): void;
-  onResetCalendar(): void;
 };

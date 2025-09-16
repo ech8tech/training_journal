@@ -1,6 +1,5 @@
 import cn from "classnames";
 import React, { useEffect, useRef, useState } from "react";
-import { createPortal } from "react-dom";
 import { Controller, FieldValues } from "react-hook-form";
 
 import IconArrow from "@assets/icons/other/IconArrow.svg";
@@ -19,15 +18,12 @@ export function Select<T extends FieldValues>({
   placeholder,
   onChange,
   control,
-  defaultOptionId,
 }: SelectProps<T>) {
-  const defaultOption = options.find((option) => option.id === defaultOptionId);
+  const findOption = (id: string) => options.find((option) => option.id === id);
 
-  const [selected, setSelected] = useState(defaultOption);
   const [isOpened, setIsOpened] = useState(false);
   const refSelect = useRef<HTMLDivElement>(null);
   const refOptions = useRef<HTMLDivElement>(null);
-  const [coords, setCoords] = useState<Partial<DOMRect>>();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (!(event.target instanceof Node)) return;
@@ -50,23 +46,14 @@ export function Select<T extends FieldValues>({
     option: Option,
   ) => {
     event.stopPropagation();
-    setSelected(option);
     setIsOpened(false);
     onChange(option);
   };
 
   const handleReset = (event: MouseEvent | React.MouseEvent) => {
     event.stopPropagation();
-    setSelected(undefined);
     onChange(undefined);
   };
-
-  useEffect(() => {
-    if (refSelect?.current) {
-      const { width, height, x, y } = refSelect.current.getBoundingClientRect();
-      setCoords({ x, y: y + height, width });
-    }
-  }, []);
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
@@ -81,6 +68,8 @@ export function Select<T extends FieldValues>({
       name={name}
       control={control}
       render={({ field }) => {
+        const selected = findOption(field.value);
+
         return (
           <div className={className}>
             {label && (
@@ -112,33 +101,26 @@ export function Select<T extends FieldValues>({
                 </div>
               </div>
 
-              {isOpened &&
-                createPortal(
-                  <div
-                    ref={refOptions}
-                    className={styles.options}
-                    onMouseDown={(e) => e.stopPropagation()}
-                    style={{
-                      top: `${coords?.y}px`,
-                      left: `${coords?.x}px`,
-                      width: `${coords?.width}px`,
-                    }}
-                  >
-                    {options.map((option) => (
-                      <div
-                        onClick={(event) => handleSelect(event, option)}
-                        className={cn(styles.option, {
-                          [styles.option__selected]: field.value === option.id,
-                        })}
-                        key={option.id}
-                      >
-                        {getSvgElement(option?.icon, 20, 20)}
-                        <Text size="md">{option.name}</Text>
-                      </div>
-                    ))}
-                  </div>,
-                  document.getElementById("select-root")!,
-                )}
+              {isOpened && (
+                <div
+                  ref={refOptions}
+                  className={styles.options}
+                  onMouseDown={(e) => e.stopPropagation()}
+                >
+                  {options.map((option) => (
+                    <div
+                      onClick={(event) => handleSelect(event, option)}
+                      className={cn(styles.option, {
+                        [styles.option__selected]: field.value === option.id,
+                      })}
+                      key={option.id}
+                    >
+                      {getSvgElement(option?.icon, 20, 20)}
+                      <Text size="md">{option.name}</Text>
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         );

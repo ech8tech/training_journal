@@ -17,7 +17,7 @@ export function Table<T>({
   return (
     <div className={cn(styles.container, className)}>
       {bodyEmpty ? (
-        <div className={styles.bodyEmpty}>{bodyEmpty}</div>
+        <div>{bodyEmpty}</div>
       ) : (
         <>
           {header && <div className={styles.header}>{header}</div>}

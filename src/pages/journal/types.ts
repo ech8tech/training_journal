@@ -3,4 +3,5 @@ export type SetDto = {
   order: number;
   reps: number;
   weight: number;
+  sessionId: string | null;
 };

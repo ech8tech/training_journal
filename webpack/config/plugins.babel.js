@@ -2,12 +2,12 @@ import CopyWebpackPlugin from "copy-webpack-plugin";
 import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import MiniCssExtractPlugin from "mini-css-extract-plugin";
-import { BundleAnalyzerPlugin } from "webpack-bundle-analyzer";
+import webpack from "webpack";
 
 import PKG from "../../package.json";
 import paths from "./paths.babel";
 
-export function getPlugins(isStats) {
+export function getPlugins() {
   return [
     new HtmlWebpackPlugin({
       title: PKG.description,
@@ -24,7 +24,7 @@ export function getPlugins(isStats) {
       patterns: [
         {
           from: paths.public,
-          to: paths.build,
+          to: paths.dist,
           // Игнорируем index.html, чтобы не перезаписывать его плагином HtmlWebpackPlugin
           globOptions: {
             ignore: ["**/index.html"],
@@ -32,7 +32,9 @@ export function getPlugins(isStats) {
         },
       ],
     }),
-    isStats ? new BundleAnalyzerPlugin() : undefined,
-    // new CompressionPlugin(),
+    new webpack.DefinePlugin({
+      "process.env.API_URL": JSON.stringify(process.env.API_URL),
+    }),
+    // isStats ? new BundleAnalyzerPlugin() : undefined,
   ];
 }

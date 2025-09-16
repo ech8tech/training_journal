@@ -4,5 +4,6 @@ import { SetDto } from "@pages/journal/types";
 export type EditExerciseDto = {
   name: string;
   muscleType: MuscleType;
+  comment?: string;
   sets?: SetDto[];
 };

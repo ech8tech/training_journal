@@ -2,13 +2,23 @@ import axios, { AxiosError, AxiosRequestConfig } from "axios";
 
 import { ApiError } from "@typings/api";
 
+// export const apiConf = axios.create({
+//   baseURL: "http://localhost:9001/api",
+//   withCredentials: true,
+// });
+//
+// export const apiConfRefreshToken = axios.create({
+//   baseURL: "http://localhost:9001/api",
+//   withCredentials: true,
+// });
+
 export const apiConf = axios.create({
-  baseURL: "http://localhost:9001/api",
+  baseURL: process.env.API_URL,
   withCredentials: true,
 });
 
 export const apiConfRefreshToken = axios.create({
-  baseURL: "http://localhost:9001/api",
+  baseURL: process.env.API_URL,
   withCredentials: true,
 });
 

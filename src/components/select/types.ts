@@ -14,7 +14,6 @@ export type SelectProps<T extends FieldValues> = {
   control: Control<T>;
   placeholder: string;
   className?: string;
-  defaultOptionId?: string;
   label?: string;
   onChange(option?: Option): void;
 };

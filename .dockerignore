@@ -1,0 +1,12 @@
+node_modules
+dist
+build
+.out
+.cache
+coverage
+.git
+.gitignore
+Dockerfile*
+docker-compose*.yml
+*.log
+*.tmp

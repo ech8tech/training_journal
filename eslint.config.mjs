@@ -22,6 +22,7 @@ export default [
       "unused-imports": unusedImports,
     },
     rules: {
+      "@typescript-eslint/no-explicit-any": "warn",
       "no-trailing-spaces": "error",
       "no-undef": "warn",
       semi: ["error", "always"],

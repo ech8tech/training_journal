@@ -7,9 +7,8 @@ import {
   START_DAY_OF_WEEK,
   START_DAY_OF_YEAR,
 } from "@constants/dayjs";
-import { MuscleGroupName } from "@constants/muscles";
+import { MuscleGroup, MuscleGroupName } from "@constants/muscles";
 
-import { ExerciseData } from "./hooks";
 import { Period } from "./types";
 
 export function getDateConfig(period: Period) {
@@ -22,8 +21,7 @@ export function getDateConfig(period: Period) {
   return config[period];
 }
 
-export function getMuscleOptions(exercises: ExerciseData[] = []): Option[] {
-  const muscleGroups = [...new Set(exercises.map((d) => d.muscleGroup))];
+export function getMuscleOptions(muscleGroups: MuscleGroup[] = []): Option[] {
   return muscleGroups.map((muscleGroup) => ({
     id: muscleGroup,
     name: MuscleGroupName[muscleGroup],
