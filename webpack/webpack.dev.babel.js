@@ -1,8 +1,8 @@
 import paths from "./config/paths.babel";
 import common from "./webpack.common.babel.js";
 
-export default (env, argv) => {
-  const config = common(env, argv);
+export default () => {
+  const config = common();
 
   return {
     ...config,
@@ -12,10 +12,19 @@ export default (env, argv) => {
       static: paths.public,
       historyApiFallback: true,
       hot: true,
-      port: 9000,
+      port: process.env.PORT || 9000,
       client: {
         overlay: false,
       },
+      host: "0.0.0.0",
+      // proxy: [
+      //   {
+      //     context: ["/api"],
+      //     target: `http://backend:${process.env.PORT}`,
+      //     changeOrigin: true,
+      //     secure: false,
+      //   },
+      // ],
     },
   };
 };

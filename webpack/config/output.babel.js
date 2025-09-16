@@ -8,7 +8,7 @@ export function getOutput(isProduction) {
     chunkFilename: isProduction
       ? "js/[name].[contenthash].js"
       : "js/[name].bundle.js",
-    path: paths.build,
+    path: paths.dist,
     publicPath: "/",
     clean: true,
   };
