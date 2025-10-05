@@ -2,7 +2,7 @@
 FROM node:20-alpine AS development
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --no-audit --no-fund
 COPY . .
 EXPOSE 9000
 # Вынес host/port в команду compose, но можно и так:
@@ -12,7 +12,7 @@ CMD ["npm","run","start","--","--host","0.0.0.0","--port","9000"]
 FROM node:20-alpine AS build
 WORKDIR /app
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --no-audit --no-fund
 COPY . .
 RUN npm run build
 
