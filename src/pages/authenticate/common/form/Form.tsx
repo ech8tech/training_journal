@@ -18,7 +18,7 @@ export function AuthenticateForm({
   const isSignIn = signType === "signIn";
 
   const handleAuthGoogle = () => {
-    window.location.href = `http://localhost:8080/api/auth/google`;
+    window.location.href = '/api/auth/google';
   };
 
   return (
