@@ -1,14 +1,10 @@
-version: "3.8"
-
 networks:
   app_net:
     external: true
 
 services:
   frontend:
-    build:
-      context: .
-      target: production
+    image: frontend:${DOCKER_TAG:-prod}
     container_name: frontend
     environment:
       NODE_ENV: production
@@ -16,6 +12,6 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./nginx/certs:/etc/nginx/certs:ro
+      - /etc/letsencrypt:/etc/letsencrypt:ro
     networks: [app_net]
     restart: unless-stopped
