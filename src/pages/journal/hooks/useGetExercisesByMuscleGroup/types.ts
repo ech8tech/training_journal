@@ -13,4 +13,4 @@ export type ExerciseData = {
   sets?: SetDto[];
 };
 
-export type ExercisesApiData = ApiData<ExerciseData[]>;
+export type ExercisesModel = ApiData<ExerciseData[]>;

@@ -1,5 +1,4 @@
 import "./App.scss";
-import Cookies from "js-cookie";
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 import { SignIn, SignUp } from "@pages/authenticate";
@@ -11,6 +10,7 @@ import { Statistics } from "@pages/statistics";
 import { ToastProvider } from "@providers/toast";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+import { useCheckIsLogged } from "./hooks/useCheckIsLogged";
 import { routes } from "./routesConfig";
 
 const queryClient = new QueryClient({
@@ -22,23 +22,17 @@ const queryClient = new QueryClient({
   },
 });
 
-export function App() {
-  const isLogged = Cookies.get("Authentication");
-
-  let RoutesComponent;
+function RoutesComponent() {
+  const { isLogged } = useCheckIsLogged();
 
   if (isLogged) {
-    RoutesComponent = (
+    return (
       <Routes>
         <Route path={routes.DASHBOARD.path} element={<Dashboard />} />
         <Route path={routes.JOURNAL.path} element={<Journal />} />
-
         <Route path={routes.PROGRESS.path} element={<Progress />} />
-
         <Route path={routes.STATISTICS.path} element={<Statistics />} />
-
         <Route path={routes.PROFILE.path} element={<Profile />} />
-
         <Route
           path="*"
           element={<Navigate to={routes.DASHBOARD.path} replace />}
@@ -46,7 +40,7 @@ export function App() {
       </Routes>
     );
   } else {
-    RoutesComponent = (
+    return (
       <Routes>
         <Route path={routes.AUTHENTICATION.SIGN_IN.path} element={<SignIn />} />
         <Route path={routes.AUTHENTICATION.SIGN_UP.path} element={<SignUp />} />
@@ -57,11 +51,15 @@ export function App() {
       </Routes>
     );
   }
+}
 
+export function App() {
   return (
     <BrowserRouter>
       <QueryClientProvider client={queryClient}>
-        <ToastProvider>{RoutesComponent}</ToastProvider>
+        <ToastProvider>
+          <RoutesComponent />
+        </ToastProvider>
       </QueryClientProvider>
     </BrowserRouter>
   );

@@ -12,7 +12,7 @@ export default () => {
       static: paths.public,
       historyApiFallback: true,
       hot: true,
-      port: process.env.PORT || 9000,
+      port: process.env.PORT || 3000,
       client: {
         overlay: false,
       },

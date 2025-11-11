@@ -10,4 +10,8 @@ export const apiAuth = {
   signUp: (userDto: UserDto) => {
     return apiConf.post<UserModel>("auth/sign_up", userDto);
   },
+
+  checkIsLogged: () => {
+    return apiConf.get<boolean>("auth/check_is_logged");
+  },
 };
