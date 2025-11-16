@@ -2,9 +2,8 @@ import { useMemo } from "react";
 
 import { MuscleGroup } from "@constants/muscles";
 import { apiJournal } from "@pages/journal/api";
+import { ExercisesModel } from "@pages/journal/hooks/useGetExercisesByMuscleGroup/types";
 import { useQuery } from "@tanstack/react-query";
-
-import { ExercisesModel } from "./types";
 
 export function useGetExercisesByMuscleGroup(
   muscleGroup: MuscleGroup,

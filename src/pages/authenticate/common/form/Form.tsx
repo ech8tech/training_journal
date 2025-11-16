@@ -13,7 +13,7 @@ export function AuthenticateForm({
   buttonConfigMain,
   buttonsConfig = [],
 }: FormProps<AuthenticateFormProps>) {
-  const { register, setValue } = form;
+  const { register } = form;
 
   const isSignIn = signType === "signIn";
 

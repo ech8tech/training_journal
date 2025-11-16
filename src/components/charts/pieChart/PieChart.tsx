@@ -196,9 +196,9 @@ export function PieChart({ data = [] }: PieChartProps) {
     fo.transition()
       .delay((_, i) => i * 120 + 150)
       .duration(250)
-      .style("opacity", 0.95)
+      .style("opacity", 1)
       .on("end interrupt", function () {
-        d3.select(this).style("opacity", 0.95);
+        d3.select(this).style("opacity", 1);
       });
 
     // HTML внутри foreignObject: перенос слов и обрезка по высоте
