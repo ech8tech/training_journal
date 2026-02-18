@@ -18,8 +18,8 @@ export default function Progress() {
 
   const { register, watch, resetField, setValue } = useForm<ProgressFormProps>({
     defaultValues: {
-      period: "month",
-      calendar: getDateConfig("month"),
+      period: "year",
+      calendar: getDateConfig("year"),
     },
   });
 
