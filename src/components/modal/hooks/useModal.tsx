@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
 import { Modal } from "../Modal";
@@ -14,6 +14,21 @@ export function useModal() {
   const openModal = (props: ModalProps) => {
     setModalProps(props);
   };
+
+  useEffect(() => {
+    if (!modalProps) {
+      document.body.style.overflow = "";
+      return;
+    }
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [modalProps]);
+  
 
   const modal =
     modalProps &&
