@@ -2,15 +2,14 @@ import { useMemo } from "react";
 
 import { MuscleGroup } from "@constants/muscles";
 import { apiJournal } from "@pages/journal/api";
+import { ExercisesModel } from "@pages/journal/hooks/useGetExercisesByMuscleGroup/types";
 import { useQuery } from "@tanstack/react-query";
-
-import { ExercisesApiData } from "./types";
 
 export function useGetExercisesByMuscleGroup(
   muscleGroup: MuscleGroup,
   isEnable: boolean = true,
 ) {
-  const { data, isFetching, error, refetch } = useQuery<ExercisesApiData>({
+  const { data, isFetching, error, refetch } = useQuery<ExercisesModel>({
     queryKey: ["GET_USER_EXERCISES_BY_MUSCLE_GROUP"],
     queryFn: () => apiJournal.getExercisesByMuscleGroup(muscleGroup),
     enabled: isEnable,

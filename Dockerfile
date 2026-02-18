@@ -4,9 +4,9 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm ci --no-audit --no-fund
 COPY . .
-EXPOSE 9000
+EXPOSE 3000
 # Вынес host/port в команду compose, но можно и так:
-CMD ["npm","run","start","--","--host","0.0.0.0","--port","9000"]
+CMD ["npm","run","start","--","--host","0.0.0.0","--port","3000"]
 
 # ---------- Build (production bundle) ----------
 FROM node:20-alpine AS build

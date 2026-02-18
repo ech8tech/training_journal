@@ -29,7 +29,7 @@ export function Schedule({ calendarStart, calendarEnd }: ScheduleProps) {
   }, [calendarStart, calendarEnd]);
 
   if (isLoading) {
-    return <Spinner />;
+    return <Spinner centered />;
   }
 
   if (error) {

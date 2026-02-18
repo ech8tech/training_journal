@@ -4,10 +4,8 @@ import { useModal } from "@components/modal/hooks/useModal";
 import { MuscleGroup } from "@constants/muscles";
 import { useGetExercisesByMuscleGroup } from "@pages/journal/hooks";
 
-import {
-  ModalAddEdit,
-  ModalAddEditFormProps,
-} from "../../components/modalAddEdit";
+import { ModalAddEdit } from "../../ModalAddEdit";
+import { ModalAddEditFormProps } from "../../types";
 
 export function useModalAddEdit() {
   const params = useParams<{ muscleGroup: MuscleGroup }>();

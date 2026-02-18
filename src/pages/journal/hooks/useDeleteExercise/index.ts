@@ -1,0 +1,1 @@
+export { useDeleteExercise } from "./useDeleteExercise";

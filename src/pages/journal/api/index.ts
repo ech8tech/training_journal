@@ -24,4 +24,8 @@ export const apiJournal = {
   deleteSession: (exerciseId: string) => {
     return apiConf.delete(`/session/delete/${exerciseId}`);
   },
+
+  deleteExercise: (exerciseId: string) => {
+    return apiConf.delete(`/exercise/delete/${exerciseId}`);
+  },
 };

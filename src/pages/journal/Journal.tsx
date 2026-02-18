@@ -5,6 +5,7 @@ import { generatePath, useNavigate, useParams } from "react-router-dom";
 
 import { routes } from "@app/routesConfig";
 import IconCircleTick from "@assets/icons/other/IconCircleTick.svg";
+import IconDelete from "@assets/icons/other/IconDelete.svg";
 import IconEdit from "@assets/icons/other/IconEdit.svg";
 import IconGraph from "@assets/icons/other/IconGraph.svg";
 import IconPlus from "@assets/icons/other/IconPlus.svg";
@@ -19,11 +20,15 @@ import { Title } from "@components/title";
 import { DATE_FORMAT } from "@constants/format";
 import { MuscleGroup, MuscleGroupName, Muscles } from "@constants/muscles";
 import { SPACE_CONTAINER } from "@constants/spacing";
-import { useCreateSession } from "@pages/journal/hooks/useCreateSession";
-import { useDeleteSession } from "@pages/journal/hooks/useDeleteSession";
 import { SetDto } from "@pages/journal/types";
 
-import { useGetExercisesByMuscleGroup, useModalAddEdit } from "./hooks";
+import { useModalAddEdit } from "./components/modalAddEdit";
+import { useModalDelete } from "./components/modalDelete";
+import {
+  useCreateSession,
+  useDeleteSession,
+  useGetExercisesByMuscleGroup,
+} from "./hooks";
 import * as styles from "./Journal.scss";
 
 export default function Journal() {
@@ -32,10 +37,10 @@ export default function Journal() {
   const [openedIds, setOpenedIds] = useState<string[]>([]);
   const muscleGroup = params.muscleGroup!;
 
-  const { data, isLoading, getExercises } =
-    useGetExercisesByMuscleGroup(muscleGroup);
   const { createSession } = useCreateSession();
   const { deleteSession } = useDeleteSession();
+  const { data, isLoading, getExercises } =
+    useGetExercisesByMuscleGroup(muscleGroup);
 
   const handleBack = () => {
     navigate(-1);
@@ -54,7 +59,10 @@ export default function Journal() {
     }
   };
 
-  const { modal, handleOpenModal } = useModalAddEdit();
+  const { modal: modalAddEdit, handleOpenModal: openModalAddEdit } =
+    useModalAddEdit();
+  const { modal: modalDelete, handleOpenModal: openDeleteModal } =
+    useModalDelete();
 
   const handleCreateSession = async (exerciseId: string, sets?: SetDto[]) => {
     const createdSession = await createSession({
@@ -90,7 +98,7 @@ export default function Journal() {
         icon: <IconPlus />,
         text: "Добавить упражнение",
         onClick: () => {
-          handleOpenModal("Добавление упражнения", "Добавить", "addExercise");
+          openModalAddEdit("Добавление упражнения", "Добавить", "addExercise");
         },
       }}
       onBack={handleBack}
@@ -142,7 +150,7 @@ export default function Journal() {
                         className={styles.buttonIcon}
                         icon={<IconEdit />}
                         onClick={() =>
-                          handleOpenModal(
+                          openModalAddEdit(
                             "Редактирование упражнения",
                             "Сохранить",
                             "editExercise",
@@ -157,6 +165,11 @@ export default function Journal() {
                         type="ghost"
                         icon={<IconGraph />}
                         onClick={() => handleNavigateToProgress(item.id)}
+                      />
+                      <Button
+                        type="ghost"
+                        icon={<IconDelete />}
+                        onClick={() => openDeleteModal(item.id)}
                       />
                     </>
                   }
@@ -177,7 +190,7 @@ export default function Journal() {
                     isDisabled: isDone,
                     icon: hasSets ? <IconPlus /> : <IconEdit />,
                     onClick: () => {
-                      handleOpenModal(
+                      openModalAddEdit(
                         hasSets
                           ? "Добавление сессии"
                           : "Редактирование упражнения",
@@ -197,7 +210,8 @@ export default function Journal() {
         })
       )}
 
-      {modal}
+      {modalAddEdit}
+      {modalDelete}
     </PageLayout>
   );
 }

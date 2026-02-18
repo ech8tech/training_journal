@@ -43,8 +43,6 @@ export function LineChart({
       sets: d.sets,
     }));
 
-    console.log(parsed);
-
     // const minRate = d3.min(parsed, (d) => d.commonRate) || 1;
     // const maxRate = d3.max(parsed, (d) => d.commonRate) || 1;
     //
