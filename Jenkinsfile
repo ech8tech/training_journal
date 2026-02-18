@@ -223,6 +223,15 @@ pipeline {
                         rm -f *.tar.gz || true
                     '''
 
+                    info("🧹 Clean up local...")
+                    sh '''
+                        IMAGE_NAME="${FRONTEND_IMAGE}:${DOCKER_TAG}"
+                        docker images --format "{{.Repository}}:{{.Tag}}" \
+                            | grep "^${FRONTEND_IMAGE}:" \
+                            | grep -v "$IMAGE_NAME" \
+                            | xargs -r docker rmi
+                    '''
+
                     // Clean up remote server (only if deployment was successful)
                     info("🧹 Clean up remote server...")
                     sshagent(credentials: ['vps-ssh-key']) {
