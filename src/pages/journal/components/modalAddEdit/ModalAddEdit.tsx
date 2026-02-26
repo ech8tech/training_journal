@@ -17,11 +17,10 @@ import { SPACE_INNER } from "@constants/spacing";
 import { useCreateExercise } from "@pages/journal/hooks/useCreateExercise";
 import { useCreateSession } from "@pages/journal/hooks/useCreateSession";
 import { useEditExercise } from "@pages/journal/hooks/useEditExercise";
-import { SetDto } from "@pages/journal/types";
 
 import * as styles from "./ModalAddEdit.scss";
 import { ModalAddEditFormProps, ModalAddEditProps } from "./types";
-import { getMuscleOptions } from "./utils";
+import { getMuscleOptions, getNormalizeValue } from "./utils";
 
 export function ModalAddEdit({
   buttonText,
@@ -53,7 +52,10 @@ export function ModalAddEdit({
     path: Path<ModalAddEditFormProps>,
     e: ChangeEvent<HTMLInputElement>,
   ) => {
-    setValue(path, +e.target.value);
+    const raw = e.target.value.replace(",", ".");
+
+    // Храним строку, чтобы не ломать ввод промежуточных значений вроде "32." на iOS
+    setValue(path, raw as any);
   };
 
   const handleSubmit = async () => {
@@ -65,6 +67,8 @@ export function ModalAddEdit({
         ...payload,
         sets: values.sets.map((set, index) => ({
           ...set,
+          reps: getNormalizeValue(set.reps),
+          weight: getNormalizeValue(set.weight),
           order: index + 1,
         })),
       };
@@ -76,23 +80,26 @@ export function ModalAddEdit({
         exerciseId: values.exerciseId,
         // при создании сессий мы отправляем НОВЫЕ подходы
         sets: payload?.sets?.map((set) => {
-          if (set?.sessionId) return omit(set, ["id"]);
-          else return set;
+          const normalized = {
+            ...set,
+            reps: getNormalizeValue(set.reps),
+            weight: getNormalizeValue(set.weight),
+          };
+
+          if (set?.sessionId) return omit(normalized, ["id"]);
+          else return normalized;
         }),
       });
       return;
     }
 
     if (isEditExerciseMode) {
-      payload.sets = payload?.sets?.map((set, index) => ({
-        ...set,
-        order: index + 1,
-        sessionId: values.sessionId,
-      }));
-
-      await editExercise({ exerciseId: values.exerciseId, payload });
+      await editExercise({
+        exerciseId: values.exerciseId,
+        payload: payload as any,
+      });
     } else {
-      await createExercise(payload);
+      await createExercise(payload as any);
     }
 
     onClose();
@@ -138,13 +145,16 @@ export function ModalAddEdit({
                 {...register(`sets.${index}.reps`)}
                 className={styles.field_input}
                 label={index === 0 ? "Подходы" : ""}
+                type="text"
+                inputMode="decimal"
                 onChange={(e) => handleChangeField(`sets.${index}.reps`, e)}
               />
               <Input
                 {...register(`sets.${index}.weight`)}
                 className={styles.field_input}
-                type="number"
+                type="text"
                 label={index === 0 ? "Вес" : ""}
+                inputMode="decimal"
                 onChange={(e) => handleChangeField(`sets.${index}.weight`, e)}
               />
 
@@ -162,7 +172,7 @@ export function ModalAddEdit({
           text="Добавить подход"
           icon={<IconPlus />}
           type="ghost"
-          onClick={() => append({} as SetDto)}
+          onClick={() => append({} as any)}
         />
       </Spacing>
       <div className={styles.controls}>

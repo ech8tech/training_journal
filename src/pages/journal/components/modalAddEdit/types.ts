@@ -17,8 +17,8 @@ export type ModalAddEditFormProps = {
   sets?: {
     id?: string;
     order: number;
-    reps: number;
-    weight: number;
+    reps: number | string;
+    weight: number | string;
     sessionId: string | null;
   }[];
 };

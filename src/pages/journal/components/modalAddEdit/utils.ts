@@ -16,3 +16,9 @@ export function getMuscleOptions(muscleGroupType: MuscleGroup): Option[] {
 
   return options;
 }
+
+export function getNormalizeValue(value: string | number) {
+  return value === "" || value == null
+    ? 0
+    : Number(String(value).replace(",", ".")) 
+}
